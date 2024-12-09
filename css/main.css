@@ -1,0 +1,419 @@
+/* Base Styles & Typography */
+@font-face {
+    font-family: 'glacial_indifferencebold';
+    src: url('../fonts/glacialindifference-bold-webfont.woff2') format('woff2'),
+         url('../fonts/glacialindifference-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  :root {
+    --primary-color: #000;
+    --accent-color: #f53434;
+    --text-color: #000000;
+    --bg-color: #ffffff;
+  }
+  
+  /* Reset & Base Styles */
+  html, body {
+    height: 100%;
+    -webkit-text-size-adjust: none;
+    font-family: YakuHanJP, "Work Sans", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Layout Structure */
+  .wrap {
+    min-height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 260px;
+  }
+  
+/*******************头部css样式******************/
+
+  /* 头部基础样式 */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    width: 100%;
+    background: #fff;
+  }
+  
+  /* 头部容器*/
+  header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+  }
+  
+  /* Logo样式 */
+  header h1 {
+    font-size: 65px;
+    font-family:"Brush Script MT";
+    text-transform: uppercase;
+    color: #000;
+    margin: 0px 50px;
+  }
+
+  /* 头部图标样式 */
+  .sns-nav {
+    display: flex;
+    justify-content: space-around;
+    list-style: none; /* 去除默认的列表样式 */
+    padding: 0;
+    margin: 0;
+}
+
+.sns-nav li {
+    display: inline-block; /* 横向排列 */
+    margin-right: 10px; /* 每个图标之间的间距 */
+}
+
+.sns-nav a {
+    color: #333; /* 图标颜色 */
+    font-size: 24px; /* 图标大小 */
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+  /* 导航菜单样式 */
+  .menu-nav {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+  }
+  
+  .menu-nav li {
+    display: inline-block;
+    padding: 0 0 0 20px;
+    font-family: 'glacial_indifferencebold', 'Roboto';
+  }
+  
+  .menu-nav li a {
+    display: block;
+    padding: 5px 0;
+    font-size: 15px;
+    line-height: 1;
+    color: #000;
+    transition: color 0.2s ease;
+  }
+
+
+  /*滑动时顶部的效果*/
+  body.down header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    width: 100%;
+    background: #ffffff;
+}
+
+  body.down header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+}
+
+ body.down header h1 {
+    font-size: 30px;
+    font-family:"Brush Script MT";
+    text-transform: uppercase;
+    color: #000;
+    margin: 0px 50px;
+  }
+
+  body.down header .sns-nav{
+    display: none;
+  }
+
+/* 悬停效果 */
+.menu-nav li a:hover {
+    color: #f53434;
+}
+
+.sns-nav a:hover {
+    color: #ff0000;
+}
+
+/*******************第二块css样式:展示我主要的三部分的博客导航（ai游戏和建模等）******************/
+
+  /* Hero Section */
+  .Top {
+    position:relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    padding-bottom: 20px;
+  }
+
+  .top_image_section{
+    position: absolute;
+    height: 100%;
+    width: 33.33%;
+    top: 0;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .section1 { left: 0; }
+  .section2 { left: 33.33%; }
+  .section3 { left: 66.66%; }
+  
+  .top_image {
+    width: 100%;
+    display: block;
+  }
+
+  .section_text{
+    color: rgba(255, 255, 255, 0.979);
+    font-family:'Roboto', 'SF Pro Display', Arial, sans-serif;
+    font-size: 8rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+  }
+
+  .section1:hover { background-color: rgba(248, 57, 9, 0.815);  cursor: pointer;}
+  .section2:hover { background-color: rgba(26, 233, 119, 0.815); cursor: pointer;}
+  .section3:hover { background-color: rgba(23, 137, 245, 0.815); cursor: pointer;}
+
+  .top_image_section:hover .section_text { opacity: 1; }
+
+
+/*******************第二块css样式:展示我主要的三部分的博客导航（ai游戏和建模等）******************/
+
+
+
+/*******************第三块css样式:最近正在做的事（News）******************/
+  .section--info {
+    padding: 50px 0px 50px 30px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    justify-content: space-around;
+  }
+  
+  .block--news {
+    width: 100%;
+    max-width: 100%s;
+    margin-right: 11%;
+  }
+  
+  .block-tit {
+    font-family: 'glacial_indifferencebold', 'Roboto';
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    padding-bottom: 10px;
+  }
+  
+  /* List Styles */
+  .list--information li:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+  .list--information a {
+    display: block;
+    color: inherit;
+    padding: 0;
+    position: relative;
+  }
+  
+  .list--information .date {
+    font-family: 'glacial_indifferencebold', 'Roboto';
+    line-height: 1;
+    display: inline-block;
+    margin: 0 0 5px;
+  }
+
+  .list__more{
+    font-family: 'glacial_indifferencebold', 'Roboto';
+    font-size: 1rem;
+    font-weight: bold;
+    a:hover { color: rgb(255, 51, 0)}
+    padding-top:10px;
+  }
+/*******************第三块css样式:最近正在做的事（News）******************/
+
+
+
+
+
+
+/*******************第四部分css样式:一些视频（video）******************/
+  /* Hover Effects */
+ /* Video Section Styles */
+.section-tit{
+  font-family: 'glacial_indifferencebold', 'Roboto';
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  padding-bottom: 10px;
+  padding-top: 50px;
+}
+
+.section--video {
+  padding: 0px 0;
+}
+
+.video-container {
+  position: relative;
+  max-width: 100%;
+  margin: 5px;
+  padding: 0 50px;
+}
+
+.video-wrapper {
+  position: relative;
+  max-width: 100%px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.video-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.list--video {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.list--video::-webkit-scrollbar {
+  display: none;
+}
+
+.video-item {
+  flex: 0 0 calc(33.333% - 14px);
+  min-width: 300px;
+}
+
+.video-item iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.178);
+  color: rgb(255, 0, 0);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.nav-btn.prev {
+  left: 0;
+}
+
+.nav-btn.next {
+  right: 0;
+}
+
+.slick-dots li:not(:first-child) {
+  display: none !important;
+}
+
+@media (max-width: 960px) {
+  .video-item {
+      flex: 0 0 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .video-item {
+      flex: 0 0 100%;
+  }
+}
+/*******************第四部分css样式:一些视频（video）******************/
+
+
+  
+
+  
+
+  
+  /* Footer */
+  footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  footer .sns-nav {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  footer .sns-nav li {
+    display: inline-block;
+    margin: 0 18px;
+  }
+  
+  footer .copyright {
+    text-align: center;
+    padding-bottom: 40px;
+    font-family: 'glacial_indifferencebold', 'Roboto';
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 960px) {
+    header h1 {
+      width: 110px;
+    }
+    
+    .menu-nav li a {
+      font-size: 14px;
+    }
+    
+    .section--info {
+      width: 100%;
+      display: block;
+      padding: 120px 10% 0;
+    }
+    
+    .block--news {
+      width: 100%;
+      margin: 0 auto 60px;
+    }
+  }
+  
+  /* Utility Classes */
+  .sp {
+    display: none !important;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .sp {
+      display: block !important;
+    }
+    
+    .pc {
+      display: none !important;
+    }
+  }

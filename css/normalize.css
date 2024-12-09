@@ -1,0 +1,309 @@
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+ html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+  }
+  
+  /* Sections
+     ========================================================================== */
+  
+  body {
+    margin: 0;
+  }
+  
+  main {
+    display: block;
+  }
+  
+  /* Base Elements
+     ========================================================================== */
+  
+  h1, h2, h3, h4, h5, h6,
+  p, ol, ul, li, dl, dt, dd,
+  blockquote, figure, fieldset,
+  legend, textarea, pre, iframe,
+  hr {
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+  }
+  
+  /* Lists
+     ========================================================================== */
+  
+  ul {
+    list-style: none;
+  }
+  
+  /* Form Elements
+     ========================================================================== */
+  
+  button,
+  input,
+  select,
+  textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+  }
+  
+  button,
+  input {
+    overflow: visible;
+  }
+  
+  button,
+  select {
+    text-transform: none;
+  }
+  
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    -webkit-appearance: button;
+  }
+  
+  button::-moz-focus-inner,
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  
+  button:-moz-focusring,
+  [type="button"]:-moz-focusring,
+  [type="reset"]:-moz-focusring,
+  [type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  
+  /* Media Elements
+     ========================================================================== */
+  
+  img,
+  embed,
+  iframe,
+  object,
+  audio,
+  video {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  img {
+    border-style: none;
+    vertical-align: bottom;
+  }
+  
+  iframe {
+    border: 0;
+  }
+  
+  /* Tables
+     ========================================================================== */
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  td,
+  th {
+    padding: 0;
+    text-align: left;
+  }
+  
+  /* Typography
+     ========================================================================== */
+  
+  i {
+    font-style: normal;
+  }
+  
+  /* Selection
+     ========================================================================== */
+  
+  ::selection {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  ::-moz-selection {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  /* Box Model
+     ========================================================================== */
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  
+  /* Links
+     ========================================================================== */
+  
+  a {
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  /* Accessibility
+     ========================================================================== */
+  
+  [hidden] {
+    display: none;
+  }
+  
+  [aria-hidden="true"] {
+    display: none;
+  }
+  
+  [aria-hidden="false"] {
+    display: block;
+  }
+  
+  /* Forms
+     ========================================================================== */
+  
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  }
+  
+  /* Clearfix
+     ========================================================================== */
+  
+  .clearfix::after {
+    display: table;
+    content: "";
+    clear: both;
+  }
+  
+  /* Placeholder
+     ========================================================================== */
+  
+  ::-webkit-input-placeholder {
+    color: #cccccc;
+  }
+  
+  ::-moz-placeholder {
+    color: #cccccc;
+    opacity: 1;
+  }
+  
+  :-ms-input-placeholder {
+    color: #cccccc;
+  }
+  
+  :-moz-placeholder {
+    color: #cccccc;
+  }
+  
+  /* Fixed Ratio
+     ========================================================================== */
+  
+  .ratio {
+    position: relative;
+    width: 100%;
+  }
+  
+  .ratio::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+  }
+  
+  .ratio--16x9::before {
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  }
+  
+  .ratio--4x3::before {
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+  }
+  
+  /* Utilities
+     ========================================================================== */
+  
+  .u-hidden {
+    display: none !important;
+  }
+  
+  .u-visuallyHidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  /* Print
+     ========================================================================== */
+  
+  @media print {
+    *,
+    *::before,
+    *::after {
+      background: transparent !important;
+      color: #000 !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+  
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+  
+    pre,
+    blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+  
+    img {
+      max-width: 100% !important;
+      page-break-inside: avoid;
+    }
+  
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+  
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+  }

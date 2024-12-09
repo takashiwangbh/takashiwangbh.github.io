@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'glacial_indifferencebold', 'Roboto';
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header a {
+            text-decoration: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2c4350;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 80px auto 20px;
+            padding: 20px;
+        }
+
+        .article-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .article-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            gap: 20px;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .article-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2c4350;
+        }
+
+        .article-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .article-content {
+            flex: 1;
+        }
+
+        .article-preview {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .article-card {
+                flex-direction: column;
+            }
+            
+            .article-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><a href="./index.html">WANG Binghao Blogs</a></h1>
+    </header>
+
+    <main class="content">
+        <a href="https://blog.csdn.net/HZBCc/article/details/127705728?spm=1001.2014.3001.5501" class="article-link">
+            <div class="article-card">
+                <img class="article-image" src="../image/blog1.png" alt="3D Model">
+                <div class="article-content">
+                    <h2 class="article-title">Realize virtual simulation technology of 3D model appearing in scanned pictures</h2>
+                    <div class="article-preview"></div>
+                </div>
+            </div>
+        </a>
+    </main>
+</body>
+</html>

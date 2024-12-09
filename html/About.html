@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Homepage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-top: 40px;
+        }
+
+        .content {
+            flex: 2;
+        }
+
+        .profile-image {
+            flex: 1;
+        }
+
+        .profile-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .location {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column-reverse;
+            }
+
+            .profile-image {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="./index.html"><h1>WANG Binghao</h1></a>
+    <div class="location">Japan University of Aizu</div>
+
+    <div class="container">
+        <div class="content">
+            <p>
+                I am from Guizhou Province, China. I studied in Tianjin, China for university and in Fukushima Prefecture, Japan for graduate studies. My main research direction is emotional rendering. In professional courses, I learned a lot of computer knowledge, including programming, computer networks, deep learning, VR and AR, etc. I also learned some art-related knowledge, including animation, video shooting, graphic design, etc. I love learning, but there is really no end to all kinds of knowledge, so I am very busy most of the time. In addition to these professional courses, I used to work in a TV station, running around the front line of the city to interview and edit into news, so I am familiar with the workflow of news. I also play many kinds of musical instruments, including piano, violin, saxophone, guitar, harmonica, etc. I have been learning music since I was a child. I think the emotion of music is more important than the skills. Of course, I also like taking pictures. I will take a picture before every meal. I have traveled to many places in China and Japan. Every time I go to a place, I will take a lot of photos. I like to record the little moments in life. I also like skateboarding. I have suffered many injuries of different sizes during skateboarding, but it is in the pain that I have completed those impossible challenges. I used to be a skateboard coach.
+            </p>
+        </div>
+
+        <div class="profile-image">
+            <img src="../image/about.jpg" alt="Profile Photo">
+        </div>
+    </div>
+</body>
+</html>
