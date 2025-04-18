@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Layout</title>
+    <style>
+        /* Reset some default styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #3a3a3a;
+            color: white;
+        }
+
+        .h1{
+            font-size: 24px;
+            color: #b8cec7;
+            margin: 50px 50px;
+            
+        }
+        
+        .h1 a{
+            color: #ff6969;
+        }
+
+        .container {
+            max-width: auto;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .block {
+            margin-bottom: 40px;
+        }
+
+        .block h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #FFD700;
+        }
+
+        .content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgb(255, 255, 255);
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="h1">
+        I used shader code in Unity to reproduce some classic art effects. The following is a demonstration of the effects.
+        This series is based on the book "Unity Shader 入门精要" by Feng Lele and its reference code library. I wrote the code to reproduce the effects in the book and added detailed comments to the shader code in the code block, which is easy for readers to understand.
+        I wrote a blog for each chapter of this series and posted it on <a href="https://blog.csdn.net/HZBCc?type=blog" target="_blank"> my blog platform</a>
+        All the codes of this project are at <a href="https://github.com/takashiwangbh/Unity-shader-effect-reproduction/tree/main" target="_blank">Code repository</a>
+    </h1>
+    <div class="container">
+        <section class="block">
+            <h2>False Color</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects1.png" alt="">
+            </div>
+        </section>
+        
+        <section class="block">
+            <h2>Basic Lighting</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects2.png" alt="">
+            </div>
+        </section>
+        
+        <section class="block">
+            <h2>Basic Texture</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects3.png" alt="">
+            </div>
+        </section>
+
+        <section class="block">
+            <h2>Transparency</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects4.png" alt="">
+            </div>
+        </section>
+
+        <section class="block">
+            <h2>Complex lighting</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects5.png" alt="">
+            </div>
+        </section>
+
+        <section class="block">
+            <h2>Complex Texture</h2>
+            <div class="content">
+                <img src="../image/Use shader code in Unity to reproduce  art effects6.png" alt="">
+            </div>
+        </section>
+        
+    </div>
+</body>
+</html>
