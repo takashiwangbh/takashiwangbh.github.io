@@ -1,5 +1,7 @@
 $(function(){
-    //loading 
+    // ========================================
+    // LOADING
+    // ========================================
     var referrer = document.referrer;
     var host = location.host;
     if (referrer.indexOf(host) == -1){
@@ -10,68 +12,176 @@ $(function(){
         $('body').addClass('already');
     }
 
-    //scroll 
-    $(window).on('scroll', function() {
-        if ($(this).scrollTop() > 0) {
+    // ========================================
+    // SMOOTH SCROLL HEADER EFFECT
+    // ========================================
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateHeader() {
+        if (window.scrollY > 50) {
             $('body').addClass('down');
         } else {
             $('body').removeClass('down');
         }
+        ticking = false;
+    }
+
+    $(window).on('scroll', function() {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+        }
     });
 
-    // 视频水平滚动导航
+    // ========================================
+    // INTERSECTION OBSERVER FOR ANIMATIONS
+    // ========================================
+    
+    // Video items animation
+    const videoItems = document.querySelectorAll('.video-item');
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const delay = Array.from(videoItems).indexOf(entry.target) * 150;
+                setTimeout(() => {
+                    entry.target.classList.add('video-visible');
+                    entry.target.classList.remove('video-hidden');
+                }, delay);
+            }
+        });
+    }, { 
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    videoItems.forEach(item => {
+        item.classList.add('video-hidden');
+        videoObserver.observe(item);
+        
+        // Add corner decorations
+        item.innerHTML += `
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+        `;
+    });
+
+    // News items animation
+    const newsItems = document.querySelectorAll('.list--information li');
+    const newsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const delay = Array.from(newsItems).indexOf(entry.target) * 100;
+                setTimeout(() => {
+                    entry.target.classList.add('news-visible');
+                    entry.target.classList.remove('news-hidden');
+                }, delay);
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
+    });
+
+    newsItems.forEach(item => {
+        item.classList.add('news-hidden');
+        newsObserver.observe(item);
+    });
+
+    // ========================================
+    // VIDEO NAVIGATION
+    // ========================================
     const videoContainer = $('.list--video');
-    const scrollAmount = videoContainer.width() / 3; // 每次滚动三分之一宽度
+    
+    // Get the width of one video item for smooth scrolling
+    function getScrollAmount() {
+        const itemWidth = $('.video-item').outerWidth(true);
+        return itemWidth || videoContainer.width() / 2;
+    }
 
-    // 添加导航按钮
-    videoContainer.wrap('<div class="video-wrapper"></div>');
-    const wrapper = $('.video-wrapper');
-
-
-    // 点击按钮滚动
     $('.nav-btn.prev').on('click', function() {
         videoContainer.animate({
-            scrollLeft: '-=' + scrollAmount
-        }, 300);
+            scrollLeft: '-=' + getScrollAmount()
+        }, 400, 'swing');
     });
 
     $('.nav-btn.next').on('click', function() {
         videoContainer.animate({
-            scrollLeft: '+=' + scrollAmount
-        }, 300);
+            scrollLeft: '+=' + getScrollAmount()
+        }, 400, 'swing');
     });
 
-    // 使视频项水平排列
-    videoContainer.css({
-        'display': 'flex',
-        'overflow-x': 'auto',
-        'scroll-behavior': 'smooth',
-        'gap': '20px',
-        'padding': '20px 0'
+    // ========================================
+    // HERO PARALLAX (subtle, Apple-style)
+    // ========================================
+    let parallaxTicking = false;
+    
+    function updateParallax() {
+        const scrolled = window.scrollY;
+        const heroHeight = $('.Top').height();
+        
+        if (scrolled < heroHeight) {
+            const parallaxValue = scrolled * 0.3;
+            $('.top_image').css({
+                'transform': `translateY(${parallaxValue}px) scale(1.1)`
+            });
+        }
+        parallaxTicking = false;
+    }
+
+    $(window).on('scroll', function() {
+        if (!parallaxTicking) {
+            window.requestAnimationFrame(updateParallax);
+            parallaxTicking = true;
+        }
     });
 
-    // 设置每个视频项的宽度
-    $('.list--video > div').css({
-        'flex': '0 0 calc(33.333% - 14px)',
-        'min-width': '300px'
+    // ========================================
+    // MOUSE TILT EFFECT ON VIDEO ITEMS
+    // ========================================
+    $('.video-item').on('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 30;
+        const rotateY = (centerX - x) / 30;
+        
+        $(this).find('iframe').css({
+            'transform': `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+        });
     });
 
-    // 响应式处理
+    $('.video-item').on('mouseleave', function() {
+        $(this).find('iframe').css({
+            'transform': 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
+            'transition': 'transform 0.4s ease'
+        });
+    });
+
+    // ========================================
+    // RESPONSIVE HANDLING
+    // ========================================
     function handleResize() {
-        if (window.innerWidth <= 600) {
-            $('.list--video > div').css('flex', '0 0 100%');
-        } else if (window.innerWidth <= 960) {
-            $('.list--video > div').css('flex', '0 0 calc(50% - 10px)');
+        const width = window.innerWidth;
+        if (width <= 768) {
+            $('.video-item').css('flex', '0 0 100%');
         } else {
-            $('.list--video > div').css('flex', '0 0 calc(33.333% - 14px)');
+            $('.video-item').css('flex', '0 0 calc(50% - 1rem)');
         }
     }
 
-    // 监听窗口大小变化
     $(window).on('resize', handleResize);
     handleResize();
 
-    //banner轮播（保持不变）
+    // ========================================
+    // SLICK BANNER (if exists)
+    // ========================================
     var sliderImg = $('.list--bnr li').length;
     if(sliderImg > 1){
         $('.list--bnr').slick({

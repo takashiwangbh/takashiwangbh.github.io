@@ -3,167 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Layout</title>
+    <title>Shader Art Effects - Binghao WANG</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset some default styling */
+        /* === CSS Variables === */
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-elevated: #1a1a1d;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            
+            --text-primary: #fafafa;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.45);
+            
+            --accent-primary: #e85d04;
+            --accent-secondary: #f48c06;
+            --accent-glow: rgba(232, 93, 4, 0.4);
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #3a3a3a;
-            color: white;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
         }
 
-        .h1{
-            font-size: 24px;
-            color: #b8cec7;
-            margin: 50px 50px;
-            
-        }
-        
-        .h1 a{
-            color: #ff6969;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(232, 93, 4, 0.06), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(244, 140, 6, 0.04), transparent);
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .container {
-            max-width: auto;
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        /* Header */
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 11, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .page-header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1rem 2rem;
         }
 
+        .page-header h1 {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header h1 a {
+            border: none;
+        }
+
+        .back-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-glass);
+            border: none;
+        }
+
+        /* Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        /* Intro Section */
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Block sections */
         .block {
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
         }
 
         .block h2 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: #FFD700;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .block h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), transparent);
         }
 
         .content {
-            background-color: #222;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgb(255, 255, 255);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: grid;
+            gap: 1.5rem;
+            transition: all var(--transition-smooth);
+        }
+
+        .content:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
         }
 
         .content img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
-            border-radius: 5px;
+            border-radius: 12px;
+            transition: transform var(--transition-smooth);
+        }
+
+        .content img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-hover);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        ::selection {
+            background: var(--accent-primary);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 100px 1rem 2rem;
+            }
+            
+            .intro {
+                padding: 1.5rem;
+            }
+            
+            .block h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1 class="h1">
-        I used shader code in Unity to reproduce some classic art effects. The following is a demonstration of the effects.
-        This series is based on the book "Unity Shader 入门精要" by Feng Lele and its reference code library. I wrote the code to reproduce the effects in the book and added detailed comments to the shader code in the code block, which is easy for readers to understand.
-        I wrote a blog for each chapter of this series and posted it on <a href="https://blog.csdn.net/HZBCc?type=blog" target="_blank"> my blog platform</a>
-        All the codes of this project are at <a href="https://github.com/takashiwangbh/Unity-shader-effect-reproduction/tree/main" target="_blank">Code repository</a>
-    </h1>
+    <header class="page-header">
+        <div class="page-header-inner">
+            <h1><a href="../index.html">Binghao WANG</a></h1>
+            <a href="../html/Art.html" class="back-link">← Back to Art</a>
+        </div>
+    </header>
+
     <div class="container">
+        <div class="intro">
+            <p>
+                I used shader code in Unity to reproduce some classic art effects. The following is a demonstration of the effects.
+                This series is based on the book "Unity Shader 入门精要" by Feng Lele and its reference code library. I wrote the code to reproduce the effects in the book and added detailed comments to the shader code in the code block, which is easy for readers to understand.
+                I wrote a blog for each chapter of this series and posted it on <a href="https://blog.csdn.net/HZBCc?type=blog" target="_blank">my blog platform</a>.
+                All the codes of this project are at <a href="https://github.com/takashiwangbh/Unity-shader-effect-reproduction/tree/main" target="_blank">Code repository</a>.
+            </p>
+        </div>
+
         <section class="block">
             <h2>False Color</h2>
             <div class="content">
-                <img src="../image/Use shader code in Unity to reproduce  art effects1.png" alt="">
+                <img src="../image/Use shader code in Unity to reproduce  art effects1.png" alt="False Color Effect">
             </div>
         </section>
         
         <section class="block">
             <h2>Basic Lighting</h2>
             <div class="content">
-                <img src="../image/Use shader code in Unity to reproduce  art effects2.png" alt="">
+                <img src="../image/Use shader code in Unity to reproduce  art effects2.png" alt="Basic Lighting Effect">
             </div>
         </section>
         
         <section class="block">
             <h2>Basic Texture</h2>
             <div class="content">
-                <img src="../image/Use shader code in Unity to reproduce  art effects3.png" alt="">
+                <img src="../image/Use shader code in Unity to reproduce  art effects3.png" alt="Basic Texture Effect">
             </div>
         </section>
 
         <section class="block">
             <h2>Transparency</h2>
             <div class="content">
-                <img src="../image/Use shader code in Unity to reproduce  art effects4.png" alt="">
+                <img src="../image/Use shader code in Unity to reproduce  art effects4.png" alt="Transparency Effect">
             </div>
         </section>
 
         <section class="block">
-            <h2>Complex lighting</h2>
+            <h2>Complex Lighting</h2>
             <div class="content">
-                <img src="../image/Use shader code in Unity to reproduce  art effects5.png" alt="">
+                <img src="../image/Use shader code in Unity to reproduce  art effects5.png" alt="Complex Lighting Effect">
             </div>
         </section>
 
         <section class="block">
             <h2>Complex Texture</h2>
             <div class="content">
-                <img src="../image/Complex Texture1.png" alt="">
-                <img src="../image/Complex Texture2.png" alt="">
-                <img src="../image/Complex Texture3.png" alt="">
+                <img src="../image/Complex Texture1.png" alt="Complex Texture 1">
+                <img src="../image/Complex Texture2.png" alt="Complex Texture 2">
+                <img src="../image/Complex Texture3.png" alt="Complex Texture 3">
             </div>
         </section>
 
         <section class="block">
-            <h2>animation</h2>
+            <h2>Animation</h2>
             <div class="content">
-                <img src="../image/anmation1.gif" alt="">
-                <img src="../image/animation2.gif" alt="">
-                <img src="../image/animation3.gif" alt="">
-                <img src="../image/animation4.gif" alt="">
+                <img src="../image/anmation1.gif" alt="Animation Effect 1">
+                <img src="../image/animation2.gif" alt="Animation Effect 2">
+                <img src="../image/animation3.gif" alt="Animation Effect 3">
+                <img src="../image/animation4.gif" alt="Animation Effect 4">
             </div>
         </section>
         
         <section class="block">
             <h2>Image Processing</h2>
             <div class="content">
-                <img src="../image/image processing1.png" alt="">
-                <img src="../image/image processing2.png" alt="">
-                <img src="../image/image processing3.png" alt="">
-                <img src="../image/image processing4.png" alt="">
-                <img src="../image/image processing5.png" alt="">
+                <img src="../image/image processing1.png" alt="Image Processing 1">
+                <img src="../image/image processing2.png" alt="Image Processing 2">
+                <img src="../image/image processing3.png" alt="Image Processing 3">
+                <img src="../image/image processing4.png" alt="Image Processing 4">
+                <img src="../image/image processing5.png" alt="Image Processing 5">
             </div>
         </section>
 
         <section class="block">
             <h2>Depth and Normal Textures</h2>
             <div class="content">
-                <img src="../image/Motion Blur.gif" alt="">
-                <img src="../image/edge.png" alt="">
-                <img src="../image/fog.png" alt="">
+                <img src="../image/Motion Blur.gif" alt="Motion Blur">
+                <img src="../image/edge.png" alt="Edge Detection">
+                <img src="../image/fog.png" alt="Fog Effect">
             </div>
         </section>
 
         <section class="block">
-            <h2>Non-photorealistic rendering</h2>
+            <h2>Non-photorealistic Rendering</h2>
             <div class="content">
-                <img src="../image/style.png" alt="">
+                <img src="../image/style.png" alt="NPR Style">
             </div>
         </section>
 
         <section class="block">
             <h2>Noise</h2>
             <div class="content">
-                <img src="../image/Noise1.gif" alt="">
-                <img src="../image/Noise2.gif" alt="">
-                <img src="../image/Noise3.gif" alt="">
+                <img src="../image/Noise1.gif" alt="Noise Effect 1">
+                <img src="../image/Noise2.gif" alt="Noise Effect 2">
+                <img src="../image/Noise3.gif" alt="Noise Effect 3">
             </div>
         </section>
 
         <section class="block">
             <h2>Surface Shader</h2>
             <div class="content">
-                <img src="../image/Surface Shader1.png" alt="">
-                <img src="../image/Surface Shader2.png" alt="">
+                <img src="../image/Surface Shader1.png" alt="Surface Shader 1">
+                <img src="../image/Surface Shader2.png" alt="Surface Shader 2">
             </div>
         </section>
 
         <section class="block">
             <h2>PBS</h2>
             <div class="content">
-                <img src="../image/PBS.png" alt="">
+                <img src="../image/PBS.png" alt="PBS Rendering">
             </div>
         </section>
     </div>

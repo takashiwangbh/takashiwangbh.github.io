@@ -1,112 +1,59 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目展示</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #cfcfcf;
-        }   
-        
-        .inner{
-            display: flex;
-            justify-self: center;
-            top: 0;
-            left: 0;
-            z-index: 500;
-            width: 100%;
-            background: #ffdbe9;
-        }
-
-        .inner a{
-            color: #000000;
-            text-decoration: none;
-        }
-
-        .project {
-            margin-bottom: 50px;
-            background: rgb(255, 255, 255);
-        }
-
-        .project-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .project-content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .project-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .project-description {
-            font-size: 16px;
-            color: #666;
-            line-height: 1.8;
-        }
-    </style>
+    <title>Art Projects - Binghao WANG</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
 <body>
-
-                <div class="inner">
-                    <h1><a href="../index.html" title="logo">
-                        Binghao WANG
-                    </a></h1>
-                    </div>
-
-
-
-    <div class="project">
-    <!-- 项目3 -->
-        <div class="project-content">
-            <h2 class="project-title">PBR Rendering</h2>
-            <p class="project-description">
-                PBR (Physically Based Rendering)is a rendering method based on physical principles. It generates more realistic visual effects by simulating real-world lighting, reflection, and material properties (such as metalness and roughness).I have made some PBR renderings in Unity, and you can see that the results are quite realistic. The purpose of PBR rendering is to render as realistically as possible.
-            </p>
-            <img src="../image/PBR.png" alt="项目2" class="project-image">
+    <header class="page-header">
+        <div class="page-header-inner">
+            <h1><a href="../index.html">Binghao WANG</a></h1>
+            <a href="../index.html" class="back-link">← Back to Home</a>
         </div>
-    </div>
+    </header>
 
-    <div class="project">
-    <!-- 项目2 -->
-        <div class="project-content">
-            <h2 class="project-title">Use shader code in Unity to reproduce  art effects</h2>
-            <p class="project-description">
-                According to more than ten different themes, I used shader to reproduce several special art effects. I wrote bolg, and various art effects are displayed at the <a href="../Blog/Use shader code in Unity to reproduce  art effects.html" target="_blank">Display Blog</a>
-            </p>
-            <img src="../image/Art3.png" alt="项目2" class="project-image">
+    <main class="page-content">
+        <h1 class="page-title">Art Projects</h1>
+        
+        <div class="project-list">
+            <article class="project-card">
+                <div class="project-card-content">
+                    <h2 class="project-card-title">PBR Rendering</h2>
+                    <p class="project-card-description">
+                        PBR (Physically Based Rendering) is a rendering method based on physical principles. It generates more realistic visual effects by simulating real-world lighting, reflection, and material properties (such as metalness and roughness). I have made some PBR renderings in Unity, and you can see that the results are quite realistic. The purpose of PBR rendering is to render as realistically as possible.
+                    </p>
+                </div>
+                <img src="../image/PBR.png" alt="PBR Rendering">
+            </article>
+
+            <article class="project-card">
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Use shader code in Unity to reproduce art effects</h2>
+                    <p class="project-card-description">
+                        According to more than ten different themes, I used shader to reproduce several special art effects. I wrote a blog, and various art effects are displayed at the <a href="../Blog/Use shader code in Unity to reproduce  art effects.html" target="_blank">Display Blog</a>.
+                    </p>
+                </div>
+                <img src="../image/Art3.png" alt="Shader Art Effects">
+            </article>
+
+            <article class="project-card">
+                <div class="project-card-content">
+                    <h2 class="project-card-title">House interior modeling using 3Dmax</h2>
+                    <p class="project-card-description">
+                        In 3Dmax, I learned and used the modeling of furniture, lighting of the whole house, cameras, etc., and finally made a model of a living room and bedroom. The rendering results also look more realistic.
+                    </p>
+                </div>
+                <img src="../image/Art1.png" alt="3D Interior Design">
+            </article>
         </div>
-    </div>
-
-
-    <div class="project">
-    <!-- 项目1 -->
-        <div class="project-content">
-            <h2 class="project-title">House interior modeling using 3Dmax</h2>
-            <p class="project-description">
-                In 3Dmax, I learned and used the modeling of furniture, lighting of the whole house, cameras, etc., and finally made a model of a living room and bedroom. The rendering results also look more realistic.
-            </p>
-            <img src="../image/Art1.png" alt="项目2" class="project-image">
-        </div>
-    </div>
-    
+    </main>
 </body>
 </html>

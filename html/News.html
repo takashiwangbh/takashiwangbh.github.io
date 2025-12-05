@@ -3,183 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binghao's Blog</title>
-    <style>
-        /* 全局样式 */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1E88A8;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        /* 左侧导航栏 */
-        .sidebar {
-            width: 250px;
-            background-color: #91B493;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .sidebar h2 {
-            text-align: center;
-            font-size: 20px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* 右侧内容区域 */
-        .content {
-            margin-left: 270px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* 新闻卡片 */
-        .news-card {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .news-card:hover {
-            transform: translateY(-3px);
-        }
-
-        /* 图片 */
-        .news-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* 文字 */
-        .news-card p {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        /* 时间戳 */
-        .timestamp {
-            display: block;
-            text-align: right;
-            font-size: 12px;
-            color: #888;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 1000px) {
-            .sidebar {
-                display: none;
-            }
-            .content {
-                margin-left: 0;
-                width: 100%;
-            }
-        }
-    </style>
+    <title>News - Binghao WANG</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
 <body>
-    <!-- 左侧导航栏 -->
-    <aside class="sidebar">
-        <h2>Binghao's News</h2>
-        <ul>
-            <li><a href="#news8">Go to Kasukabe</a></li>
-            <li><a href="#news7">Casual drawing</a></li>
-            <li><a href="#news6">Chinese New Year</a></li>
-            <li><a href="#news5">Unity game jam</a></li>
-            <li><a href="#news4">Sensoji Temple Lottery</a></li>
-            <li><a href="#news3">Christmas party</a></li>
-            <li><a href="#news2">Go to Odaiba</a></li>
-            <li><a href="#news1">First Personal Homepage</a></li>
-        </ul>
-    </aside>
-
-    <!-- 主要内容区域 -->
-    <main class="content">
-
-        <div id="news7" class="news-card">
-            <img src="../image/news8.png" alt="New Year 2025">
-            <p> Travel to Kansai area (Kyoto, Osaka, Nara) during Golden Week</p>
-            <span class="timestamp">2025-05-06</span>
+    <header class="page-header">
+        <div class="page-header-inner">
+            <h1><a href="../index.html">Binghao WANG</a></h1>
+            <a href="../index.html" class="back-link">← Back to Home</a>
         </div>
+    </header>
 
-        <div id="news8" class="news-card">
-            <img src="../image/news7.png" alt="New Year 2025">
-            <p> I got a week off and I went to Kasukabe (クレヨンしんちゃん's hometown)</p>
-            <span class="timestamp">2025-02-22</span>
+    <main class="page-content">
+        <h1 class="page-title">News</h1>
+        
+        <div class="news-layout">
+            <aside class="news-sidebar">
+                <h2>Quick Navigation</h2>
+                <ul>
+                    <li><a href="#news9">Travel to Kansai</a></li>
+                    <li><a href="#news8">Go to Kasukabe</a></li>
+                    <li><a href="#news7">Casual drawing</a></li>
+                    <li><a href="#news6">Chinese New Year</a></li>
+                    <li><a href="#news5">Unity game jam</a></li>
+                    <li><a href="#news4">Sensoji Temple Lottery</a></li>
+                    <li><a href="#news3">Christmas party</a></li>
+                    <li><a href="#news2">Go to Odaiba</a></li>
+                    <li><a href="#news1">First Personal Homepage</a></li>
+                </ul>
+            </aside>
+
+            <div class="news-main">
+                <article id="news9" class="news-card">
+                    <img src="../image/news8.png" alt="Kansai Travel">
+                    <div class="news-card-content">
+                        <p>Travel to Kansai area (Kyoto, Osaka, Nara) during Golden Week</p>
+                        <span class="timestamp">2025-05-06</span>
+                    </div>
+                </article>
+
+                <article id="news8" class="news-card">
+                    <img src="../image/news7.png" alt="Kasukabe">
+                    <div class="news-card-content">
+                        <p>I got a week off and I went to Kasukabe (クレヨンしんちゃん's hometown)</p>
+                        <span class="timestamp">2025-02-22</span>
+                    </div>
+                </article>
+
+                <article id="news7" class="news-card">
+                    <img src="../image/news6.png" alt="Drawing">
+                    <div class="news-card-content">
+                        <p>I got home early from the lab today. I was bored at home so I opened my iPad and drew for a while. I haven't drawn on my iPad for a long time. I drew characters from Pop Mart.</p>
+                        <span class="timestamp">2025-02-04</span>
+                    </div>
+                </article>
+
+                <article id="news6" class="news-card">
+                    <img src="../image/news5.jpg" alt="Chinese New Year">
+                    <div class="news-card-content">
+                        <p>Today is the Chinese New Year. Every festive season makes me miss my family more. My family sent me their New Year's Eve dinner by wechat, but I am still busy doing experiments in the laboratory. This is the first Spring Festival that I have not spent with my family. I may not be able to go back in the short term, but I miss them all the time.</p>
+                        <span class="timestamp">2025-01-28</span>
+                    </div>
+                </article>
+
+                <article id="news5" class="news-card">
+                    <img src="../image/news4.5.jpg" alt="Unity Game Jam">
+                    <div class="news-card-content">
+                        <p>I participated in Unity's official game jam (creating a game within a week) and won a medal. I hope I can improve my ability and imagination and win better awards in the next game jam.</p>
+                        <span class="timestamp">2025-01-16</span>
+                    </div>
+                </article>
+
+                <article id="news4" class="news-card">
+                    <img src="../image/new4.png" alt="Sensoji Temple">
+                    <div class="news-card-content">
+                        <p>On the New Year's Day, I went to Sensoji Temple to draw a fortune, and it was a good fortune. I really hope that the coming year will be smooth.</p>
+                        <span class="timestamp">2025-01-01</span>
+                    </div>
+                </article>
+
+                <article id="news3" class="news-card">
+                    <img src="../image/new3.png" alt="Christmas Party">
+                    <div class="news-card-content">
+                        <p>Today is the Christmas party held in advance in the lab. We played games and ate together. Because the lab also has a lot of research in the field of games, whenever there is a party, everyone will sit together and play games, which is very interesting.</p>
+                        <span class="timestamp">2024-12-14</span>
+                    </div>
+                </article>
+
+                <article id="news2" class="news-card">
+                    <img src="../image/news2.jpg" alt="Odaiba">
+                    <div class="news-card-content">
+                        <p>I came to Odaiba in Tokyo. This is my third time here. There is the Statue of Liberty in Japan and a very large Gundam model. The most important thing is that it is really beautiful. I think this is the most beautiful place in Tokyo.</p>
+                        <span class="timestamp">2024-12-07</span>
+                    </div>
+                </article>
+
+                <article id="news1" class="news-card">
+                    <img src="../image/News1.png" alt="Personal Homepage">
+                    <div class="news-card-content">
+                        <p>I created my own website, where I will update my projects, and my chatter. This is the beginning of my website.</p>
+                        <span class="timestamp">2024-11-20</span>
+                    </div>
+                </article>
+            </div>
         </div>
-
-
-        <div id="news6" class="news-card">
-            <img src="../image/news5.jpg" alt="New Year 2025">
-            <p> Today is the Chinese New Year. Every festive season makes me miss my family more. My family sent me their New Year’s Eve dinner by wechat, but I am still busy doing experiments in the laboratory. This is the first Spring Festival that I have not spent with my family. I may not be able to go back in the short term, but I miss them all the time. </p>
-            <span class="timestamp">2025-01-28</span>
-        </div>
-
-        <div id="news5" class="news-card">
-            <img src="../image/news4.5.jpg" alt="New Year 2025">
-            <p> I participated in Unity's official game jam (creating a game within a week) and won a medal. I hope I can improve my ability and imagination and win better awards in the next game jam. </p>
-            <span class="timestamp">2025-01-16</span>
-        </div>
-
-        <div id="news4" class="news-card">
-            <img src="../image/new4.png" alt="New Year 2025">
-            <p> On the New Year's Day, I went to Sensoji Temple to draw a fortune, and it was a good fortune. I really hope that the coming year will be smooth. </p>
-            <span class="timestamp">2025-01-01</span>
-        </div>
-
-        <div id="news3" class="news-card">
-            <img src="../image/new3.png" alt="New Year 2025">
-            <p> Today is the Christmas party held in advance in the lab. We played games and ate together. Because the lab also has a lot of research in the field of games, whenever there is a party, everyone will sit together and play games, which is very interesting. </p>
-            <span class="timestamp">2024-12-14</span>
-        </div>
-
-        <div id="news2" class="news-card">
-            <img src="../image/news2.jpg" alt="New Year 2025">
-            <p> I  came to Odaiba in Tokyo. This is my third time here. There is the Statue of Liberty in Japan and a very large Gundam model. The most important thing is that it is really beautiful. I think this is the most beautiful place in Tokyo.</p>
-            <span class="timestamp">2024-12-7</span>
-        </div>
-
-        <div id="news1" class="news-card">
-            <img src="../image/News1.png" alt="New Year 2025">
-            <p> I created my own website, where I will update my  projects, and my chatter. This is the beginning of my website.</p>
-            <span class="timestamp">2024-11-20</span>
-        </div>
-
     </main>
 </body>
 </html>

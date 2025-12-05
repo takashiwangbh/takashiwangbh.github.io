@@ -1,419 +1,833 @@
-/* Base Styles & Typography */
-@font-face {
-    font-family: 'glacial_indifferencebold';
-    src: url('../fonts/glacialindifference-bold-webfont.woff2') format('woff2'),
-         url('../fonts/glacialindifference-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  :root {
-    --primary-color: #000;
-    --accent-color: #f53434;
-    --text-color: #000000;
-    --bg-color: #ffffff;
-  }
-  
-  /* Reset & Base Styles */
-  html, body {
-    height: 100%;
-    -webkit-text-size-adjust: none;
-    font-family: YakuHanJP, "Work Sans", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
-    color: var(--text-color);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: 0.05em;
-  }
-  
-  /* Layout Structure */
-  .wrap {
-    min-height: 100%;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 260px;
-  }
-  
-/*******************头部css样式******************/
+/* ========================================
+   ELEVATED DESIGN SYSTEM
+   Modern, Gaming-Inspired, Apple-Smooth
+======================================== */
 
-  /* 头部基础样式 */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 500;
-    width: 100%;
-    background: #fff;
-  }
+/* === CSS Variables === */
+:root {
+  /* Color Palette - Sophisticated Dark Theme */
+  --bg-primary: #0a0a0b;
+  --bg-secondary: #111113;
+  --bg-elevated: #1a1a1d;
+  --bg-glass: rgba(255, 255, 255, 0.03);
   
-  /* 头部容器*/
-  header .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-  }
+  --text-primary: #fafafa;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.45);
   
-  /* Logo样式 */
-  header h1 {
-    font-size: 65px;
-    font-family:"Brush Script MT";
-    text-transform: uppercase;
-    color: #000;
-    margin: 0px 50px;
-  }
-
-  /* 头部图标样式 */
-  .sns-nav {
-    display: flex;
-    justify-content: space-around;
-    list-style: none; /* 去除默认的列表样式 */
-    padding: 0;
-    margin: 0;
+  --accent-primary: #e85d04;
+  --accent-secondary: #f48c06;
+  --accent-glow: rgba(232, 93, 4, 0.4);
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  
+  /* Effects */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px var(--accent-glow);
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.sns-nav li {
-    display: inline-block; /* 横向排列 */
-    margin-right: 10px; /* 每个图标之间的间距 */
+/* === Reset & Base === */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.sns-nav a {
-    color: #333; /* 图标颜色 */
-    font-size: 24px; /* 图标大小 */
-    transition: color 0.2s ease;
-    text-decoration: none;
+/* Apple-style smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-  /* 导航菜单样式 */
-  .menu-nav {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
-  }
-  
-  .menu-nav li {
-    display: inline-block;
-    padding: 0 0 0 20px;
-    font-family: 'glacial_indifferencebold', 'Roboto';
-  }
-  
-  .menu-nav li a {
-    display: block;
-    padding: 5px 0;
-    font-size: 15px;
-    line-height: 1;
-    color: #000;
-    transition: color 0.2s ease;
-  }
-
-
-  /*滑动时顶部的效果*/
-  body.down header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 500;
-    width: 100%;
-    background: #ffffff;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Smooth momentum scrolling */
+  overscroll-behavior: smooth;
 }
 
-  body.down header .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 40px;
+/* Subtle ambient glow - very subtle */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(232, 93, 4, 0.04), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(244, 140, 6, 0.03), transparent);
+  pointer-events: none;
+  z-index: -1;
 }
 
- body.down header h1 {
-    font-size: 30px;
-    font-family:"Brush Script MT";
-    text-transform: uppercase;
-    color: #000;
-    margin: 0px 50px;
-  }
-
-  body.down header .sns-nav{
-    display: none;
-  }
-
-/* 悬停效果 */
-.menu-nav li a:hover {
-    color: #f53434;
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
-.sns-nav a:hover {
-    color: #ff0000;
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/*******************第二块css样式:展示我主要的三部分的博客导航（ai游戏和建模等）******************/
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-  /* Hero Section */
-  .Top {
-    position:relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    padding-bottom: 20px;
-  }
+/* === Layout === */
+.wrap {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 200px;
+  overflow-x: hidden;
+}
 
-  .top_image_section{
-    position: absolute;
-    height: 100%;
-    width: 33.33%;
-    top: 0;
-    transition: background-color 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-  }
+/* ========================================
+   HEADER
+======================================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all var(--transition-smooth);
+}
 
-  .section1 { left: 0; }
-  .section2 { left: 33.33%; }
-  .section3 { left: 66.66%; }
-  
-  .top_image {
-    width: 100%;
-    display: block;
-  }
+header .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
 
-  .section_text{
-    color: rgba(255, 255, 255, 0.979);
-    font-family:'Roboto', 'SF Pro Display', Arial, sans-serif;
-    font-size: 8rem;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 2;
-  }
+/* Logo */
+header h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all var(--transition-smooth);
+}
 
-  .section1:hover { background-color: rgba(248, 57, 9, 0.815);  cursor: pointer;}
-  .section2:hover { background-color: rgba(26, 233, 119, 0.815); cursor: pointer;}
-  .section3:hover { background-color: rgba(23, 137, 245, 0.815); cursor: pointer;}
+header h1 a {
+  display: block;
+}
 
-  .top_image_section:hover .section_text { opacity: 1; }
+header h1:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
 
+/* Navigation */
+.g-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
 
-/*******************第二块css样式:展示我主要的三部分的博客导航（ai游戏和建模等）******************/
+.menu-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
 
-
-
-/*******************第三块css样式:最近正在做的事（News）******************/
-  .section--info {
-    padding: 50px 0px 50px 30px;
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-    justify-content: space-around;
-  }
-  
-  .block--news {
-    width: 100%;
-    max-width: 100%s;
-    margin-right: 11%;
-  }
-  
-  .block-tit {
-    font-family: 'glacial_indifferencebold', 'Roboto';
-    font-size: 2.5rem;
-    font-weight: bold;
-    line-height: 1.3;
-    letter-spacing: 0.06em;
-    padding-bottom: 10px;
-  }
-  
-  /* List Styles */
-  .list--information li:not(:last-child) {
-    margin-bottom: 20px;
-  }
-  
-  .list--information a {
-    display: block;
-    color: inherit;
-    padding: 0;
-    position: relative;
-  }
-  
-  .list--information .date {
-    font-family: 'glacial_indifferencebold', 'Roboto';
-    line-height: 1;
-    display: inline-block;
-    margin: 0 0 5px;
-  }
-
-  .list__more{
-    font-family: 'glacial_indifferencebold', 'Roboto';
-    font-size: 1rem;
-    font-weight: bold;
-    a:hover { color: rgb(255, 51, 0)}
-    padding-top:10px;
-  }
-/*******************第三块css样式:最近正在做的事（News）******************/
-
-
-
-
-
-
-/*******************第四部分css样式:一些视频（video）******************/
-  /* Hover Effects */
- /* Video Section Styles */
-.section-tit{
-  font-family: 'glacial_indifferencebold', 'Roboto';
-  font-size: 2.5rem;
-  font-weight: bold;
-  line-height: 1.3;
+.menu-nav li a {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
-  padding-bottom: 10px;
-  padding-top: 50px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.menu-nav li a:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass);
+}
+
+/* Social Icons */
+.sns-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.sns-nav li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.sns-nav li a:hover {
+  color: var(--accent-primary);
+  background: rgba(232, 93, 4, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Header Scrolled State */
+body.down header {
+  background: rgba(10, 10, 11, 0.95);
+}
+
+body.down header .inner {
+  padding: 0.5rem 2.5rem;
+}
+
+body.down header h1 {
+  font-size: 1.25rem;
+}
+
+body.down header .sns-nav {
+  display: none;
+}
+
+/* ========================================
+   HERO SECTION
+======================================== */
+.Top {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.top_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+  transition: filter var(--transition-smooth), transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.top_image_section {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 33.333%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  overflow: hidden;
+}
+
+.top_image_section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.top_image_section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--accent-primary);
+  transition: width var(--transition-smooth);
+}
+
+.section1 { left: 0; }
+.section2 { left: 33.333%; }
+.section3 { left: 66.666%; }
+
+.section_text {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  transition: all var(--transition-spring);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover Effects */
+.top_image_section:hover::before {
+  opacity: 1;
+}
+
+.top_image_section:hover::after {
+  width: 60%;
+}
+
+.top_image_section:hover .section_text {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.section1:hover {
+  background: linear-gradient(135deg, rgba(232, 93, 4, 0.85) 0%, rgba(244, 140, 6, 0.7) 100%);
+}
+
+.section2:hover {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.85) 0%, rgba(16, 185, 129, 0.7) 100%);
+}
+
+.section3:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(99, 102, 241, 0.7) 100%);
+}
+
+/* ========================================
+   NEWS SECTION - Gaming Style
+======================================== */
+.section--info {
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.block--news {
+  width: 100%;
+}
+
+.block-tit {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+.block-tit::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  border-radius: 2px;
+}
+
+.list--information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.list--information li {
+  position: relative;
+  padding: var(--space-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-smooth);
+  transform: translateX(0);
+  will-change: transform, opacity;
+}
+
+.list--information li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.list--information li:hover {
+  border-color: var(--border-hover);
+  transform: translateX(8px);
+}
+
+.list--information li:hover::before {
+  opacity: 1;
+}
+
+.list--information .date {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.list--information .t {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.list__more {
+  margin-top: var(--space-md);
+}
+
+.list__more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.list__more a:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+/* News animation states */
+.news-hidden {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.news-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   VIDEO SECTION - Clean Gaming Style 🎮
+======================================== */
+
+/* Keyframe Animations */
+@keyframes slideInRotate {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateY(-20deg) translateX(-60px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: #e85d04; }
+  33% { border-color: #22c55e; }
+  66% { border-color: #3b82f6; }
+}
+
+@keyframes scanLine {
+  0% { top: -100%; }
+  100% { top: 100%; }
 }
 
 .section--video {
-  padding: 0px 0;
+  padding: var(--space-lg) var(--space-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Simple clean title */
+.section-tit {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+.section-tit::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  border-radius: 2px;
 }
 
 .video-container {
   position: relative;
-  max-width: 100%;
-  margin: 5px;
-  padding: 0 50px;
+  padding: 0 60px;
 }
 
 .video-wrapper {
-  position: relative;
-  max-width: 100%px;
-  margin: 0 auto;
-  padding: 0 50px;
+  overflow: hidden;
 }
 
-.video-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
+/* Clean video list - exactly 2 videos visible */
 .list--video {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding: var(--space-sm) 0;
+  scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  /* Smooth scroll for the container */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .list--video::-webkit-scrollbar {
   display: none;
 }
 
+/* Video cards with gaming effects - exactly 50% width for 2 visible */
 .video-item {
-  flex: 0 0 calc(33.333% - 14px);
+  --neon-color: #e85d04;
+  flex: 0 0 calc(50% - var(--space-sm));
   min-width: 300px;
+  scroll-snap-align: start;
+  position: relative;
+  animation: slideInRotate 0.7s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  will-change: transform, opacity;
+}
+
+.video-item:nth-child(1) {
+  --neon-color: #e85d04;
+  animation-delay: 0.1s;
+}
+
+.video-item:nth-child(2) {
+  --neon-color: #22c55e;
+  animation-delay: 0.25s;
+}
+
+.video-item:nth-child(3) {
+  --neon-color: #3b82f6;
+  animation-delay: 0.4s;
+}
+
+.video-item:nth-child(4) {
+  --neon-color: #a855f7;
+  animation-delay: 0.55s;
+}
+
+/* Gaming glow border on hover */
+.video-item::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-md) + 2px);
+  border: 2px solid transparent;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.video-item:hover::before {
+  opacity: 1;
+  border-color: var(--neon-color);
+  box-shadow: 0 0 20px var(--neon-color), inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+/* Scan line effect */
+.video-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-color), transparent);
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.video-item:hover::after {
+  opacity: 0.6;
+  animation: scanLine 1.5s linear infinite;
 }
 
 .video-item iframe {
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.video-item:hover iframe {
+  transform: scale(1.02);
+  border-color: var(--neon-color);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px color-mix(in srgb, var(--neon-color) 30%, transparent);
+}
+
+/* Corner decorations */
+.video-item .corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--neon-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.video-item:hover .corner {
+  opacity: 1;
+}
+
+.corner-tl { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+.corner-tr { top: -4px; right: -4px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: -4px; left: -4px; border-right: none; border-top: none; }
+.corner-br { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+/* Video animation states */
+.video-hidden {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-20deg) translateX(-40px) scale(0.9);
+}
+
+.video-visible {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0) translateX(0) scale(1);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Navigation Buttons - Gaming Style */
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.178);
-  color: rgb(255, 0, 0);
-  border: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 2px solid var(--accent-primary);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  font-weight: bold;
   cursor: pointer;
-  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
 }
 
-.nav-btn.prev {
-  left: 0;
+.nav-btn:hover {
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 25px var(--accent-glow);
 }
 
-.nav-btn.next {
-  right: 0;
+.nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
 }
+
+.nav-btn.prev { left: 0; }
+.nav-btn.next { right: 0; }
 
 .slick-dots li:not(:first-child) {
   display: none !important;
 }
 
-@media (max-width: 960px) {
-  .video-item {
-      flex: 0 0 calc(50% - 10px);
+/* ========================================
+   FOOTER
+======================================== */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-lg) var(--space-md);
+  background: linear-gradient(180deg, transparent 0%, var(--bg-secondary) 100%);
+}
+
+footer .sns-nav {
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  gap: var(--space-xs);
+}
+
+footer .sns-nav li a {
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
+  border: 1px solid var(--border-subtle);
+}
+
+footer .copyright {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media screen and (max-width: 960px) {
+  header .inner {
+    padding: 0.6rem 1.25rem;
+  }
+  
+  header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .g-nav {
+    gap: 1rem;
+  }
+  
+  .menu-nav li a {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .sns-nav li a {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .section--info,
+  .section--video {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .video-container {
+    padding: 0 50px;
   }
 }
 
-@media (max-width: 600px) {
-  .video-item {
-      flex: 0 0 100%;
-  }
-}
-/*******************第四部分css样式:一些视频（video）******************/
-
-
-  
-
-  
-
-  
-  /* Footer */
-  footer {
+@media screen and (max-width: 768px) {
+  .top_image_section {
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    height: 33.333%;
+    left: 0 !important;
   }
   
-  footer .sns-nav {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 50px;
+  .section1 { top: 0; }
+  .section2 { top: 33.333%; }
+  .section3 { top: 66.666%; }
+  
+  .section_text {
+    font-size: 2.5rem;
   }
   
-  footer .sns-nav li {
-    display: inline-block;
-    margin: 0 18px;
+  .video-item {
+    flex: 0 0 100%;
   }
   
-  footer .copyright {
-    text-align: center;
-    padding-bottom: 40px;
-    font-family: 'glacial_indifferencebold', 'Roboto';
+  .video-container {
+    padding: 0 40px;
   }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 960px) {
-    header h1 {
-      width: 110px;
-    }
-    
-    .menu-nav li a {
-      font-size: 14px;
-    }
-    
-    .section--info {
-      width: 100%;
-      display: block;
-      padding: 120px 10% 0;
-    }
-    
-    .block--news {
-      width: 100%;
-      margin: 0 auto 60px;
-    }
-  }
-  
-  /* Utility Classes */
+}
+
+/* === Utility Classes === */
+.sp {
+  display: none !important;
+}
+
+@media screen and (max-width: 768px) {
   .sp {
+    display: block !important;
+  }
+  
+  .pc {
     display: none !important;
   }
-  
-  @media screen and (max-width: 768px) {
-    .sp {
-      display: block !important;
-    }
-    
-    .pc {
-      display: none !important;
-    }
-  }
+}
+
+/* === Apple-style Smooth Scrollbar === */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* === Selection === */
+::selection {
+  background: var(--accent-primary);
+  color: var(--text-primary);
+}
