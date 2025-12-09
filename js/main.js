@@ -39,67 +39,74 @@ $(function(){
     // INTERSECTION OBSERVER FOR ANIMATIONS
     // ========================================
     
-    // Video items animation
-    const videoItems = document.querySelectorAll('.video-item');
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const delay = Array.from(videoItems).indexOf(entry.target) * 150;
-                setTimeout(() => {
-                    entry.target.classList.add('video-visible');
-                    entry.target.classList.remove('video-hidden');
-                }, delay);
+    // Check if IntersectionObserver is supported
+    if ('IntersectionObserver' in window) {
+        // Video items animation
+        const videoItems = document.querySelectorAll('.video-item');
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const delay = Array.from(videoItems).indexOf(entry.target) * 150;
+                    setTimeout(() => {
+                        entry.target.classList.add('video-visible');
+                        entry.target.classList.remove('video-hidden');
+                    }, delay);
+                }
+            });
+        }, { 
+            threshold: 0.2,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        videoItems.forEach(item => {
+            item.classList.add('video-hidden');
+            videoObserver.observe(item);
+            
+            // Add corner decorations
+            if (!item.querySelector('.corner')) {
+                item.innerHTML += `
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                `;
             }
         });
-    }, { 
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-    });
 
-    videoItems.forEach(item => {
-        item.classList.add('video-hidden');
-        videoObserver.observe(item);
-        
-        // Add corner decorations
-        item.innerHTML += `
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-        `;
-    });
-
-    // News items animation
-    const newsItems = document.querySelectorAll('.list--information li');
-    const newsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const delay = Array.from(newsItems).indexOf(entry.target) * 100;
-                setTimeout(() => {
-                    entry.target.classList.add('news-visible');
-                    entry.target.classList.remove('news-hidden');
-                }, delay);
-            }
+        // News items animation
+        const newsItems = document.querySelectorAll('.list--information li');
+        const newsObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const delay = Array.from(newsItems).indexOf(entry.target) * 100;
+                    setTimeout(() => {
+                        entry.target.classList.add('news-visible');
+                        entry.target.classList.remove('news-hidden');
+                    }, delay);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -20px 0px'
         });
-    }, { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -30px 0px'
-    });
 
-    newsItems.forEach(item => {
-        item.classList.add('news-hidden');
-        newsObserver.observe(item);
-    });
+        newsItems.forEach(item => {
+            item.classList.add('news-hidden');
+            newsObserver.observe(item);
+        });
+    }
 
     // ========================================
     // VIDEO NAVIGATION
     // ========================================
     const videoContainer = $('.list--video');
     
-    // Get the width of one video item for smooth scrolling
     function getScrollAmount() {
-        const itemWidth = $('.video-item').outerWidth(true);
-        return itemWidth || videoContainer.width() / 2;
+        const item = $('.video-item').first();
+        if (item.length) {
+            return item.outerWidth(true);
+        }
+        return videoContainer.width() * 0.85;
     }
 
     $('.nav-btn.prev').on('click', function() {
@@ -115,54 +122,58 @@ $(function(){
     });
 
     // ========================================
-    // HERO PARALLAX (subtle, Apple-style)
+    // HERO PARALLAX (Desktop only)
     // ========================================
-    let parallaxTicking = false;
-    
-    function updateParallax() {
-        const scrolled = window.scrollY;
-        const heroHeight = $('.Top').height();
+    if (window.innerWidth > 768) {
+        let parallaxTicking = false;
         
-        if (scrolled < heroHeight) {
-            const parallaxValue = scrolled * 0.3;
-            $('.top_image').css({
-                'transform': `translateY(${parallaxValue}px) scale(1.1)`
-            });
+        function updateParallax() {
+            const scrolled = window.scrollY;
+            const heroHeight = $('.Top').height();
+            
+            if (scrolled < heroHeight) {
+                const parallaxValue = scrolled * 0.3;
+                $('.top_image').css({
+                    'transform': `translateY(${parallaxValue}px) scale(1.1)`
+                });
+            }
+            parallaxTicking = false;
         }
-        parallaxTicking = false;
+
+        $(window).on('scroll', function() {
+            if (!parallaxTicking) {
+                window.requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+            }
+        });
     }
 
-    $(window).on('scroll', function() {
-        if (!parallaxTicking) {
-            window.requestAnimationFrame(updateParallax);
-            parallaxTicking = true;
-        }
-    });
-
     // ========================================
-    // MOUSE TILT EFFECT ON VIDEO ITEMS
+    // MOUSE TILT EFFECT ON VIDEO ITEMS (Desktop only)
     // ========================================
-    $('.video-item').on('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 30;
-        const rotateY = (centerX - x) / 30;
-        
-        $(this).find('iframe').css({
-            'transform': `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+    if (window.innerWidth > 768) {
+        $('.video-item').on('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 30;
+            const rotateY = (centerX - x) / 30;
+            
+            $(this).find('iframe').css({
+                'transform': `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+            });
         });
-    });
 
-    $('.video-item').on('mouseleave', function() {
-        $(this).find('iframe').css({
-            'transform': 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
-            'transition': 'transform 0.4s ease'
+        $('.video-item').on('mouseleave', function() {
+            $(this).find('iframe').css({
+                'transform': 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
+                'transition': 'transform 0.4s ease'
+            });
         });
-    });
+    }
 
     // ========================================
     // RESPONSIVE HANDLING
@@ -170,7 +181,7 @@ $(function(){
     function handleResize() {
         const width = window.innerWidth;
         if (width <= 768) {
-            $('.video-item').css('flex', '0 0 100%');
+            $('.video-item').css('flex', '0 0 85%');
         } else {
             $('.video-item').css('flex', '0 0 calc(50% - 1rem)');
         }
@@ -178,6 +189,22 @@ $(function(){
 
     $(window).on('resize', handleResize);
     handleResize();
+
+    // ========================================
+    // TOUCH SUPPORT FOR HERO SECTIONS
+    // ========================================
+    if ('ontouchstart' in window) {
+        $('.top_image_section').on('touchstart', function() {
+            $(this).addClass('touch-active');
+        });
+        
+        $('.top_image_section').on('touchend', function() {
+            const $this = $(this);
+            setTimeout(function() {
+                $this.removeClass('touch-active');
+            }, 300);
+        });
+    }
 
     // ========================================
     // SLICK BANNER (if exists)

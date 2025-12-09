@@ -3,17 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>WANG Binghao Blog</title>
     
     <!-- Meta Tags -->
-    <meta name="description" content="Official website of Artist Name">
+    <meta name="description" content="Official website of Binghao WANG - AI, Game Development, and Art">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Artist Official Site">
-    <meta property="og:site_name" content="Artist Official Site">
-    
-	
-
+    <meta property="og:title" content="Binghao WANG - Portfolio">
+    <meta property="og:site_name" content="Binghao WANG">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,131 +20,224 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/click.css">
-    <link rel="stylesheet" href="./css/normalize.css">
-
 </head>
 
 <body class="page--home">
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <nav class="g-nav">
+            <ul class="menu-nav">
+                <li class="sp"><a href="/" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="./html/News.html">News</a></li>
+                <li><a href="https://drive.google.com/file/d/1P2JM0Vvap53gNmecMQm0R-YgmBZJ5HhQ/view?usp=drive_link" target="_blank">CV</a></li>
+                <li><a href="./html/Bolg.html">Blog</a></li>
+                <li><a href="./html/About.html">About</a></li>
+                <li><a href="./html/Contacts.html">Contacts</a></li>
+            </ul>
+            
+            <ul class="sns-nav">
+                <li><a href="https://github.com/takashiwangbh" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="mailto:takashiwangbh@gmail.com"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/binghaowang/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/takashisyasinn" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank"><i class="fa fa-youtube"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="wrap">
         <!-- Header -->
         <header>
             <div class="inner">
-                <h1><a href="./index.html" title="logo">
-					Binghao WANG
-                </a></h1>
+                <h1><a href="./index.html">Binghao WANG</a></h1>
+                
+                <!-- Desktop Navigation -->
                 <div class="drawer">
                     <nav class="g-nav">
                         <ul class="menu-nav">
-                            <li class="sp"><a href="/">Home</a></li>
-                            <li><a href="./html/News.html" target="_blank">News</a></li>
-                            <li><a href="https://drive.google.com/file/d/1P2JM0Vvap53gNmecMQm0R-YgmBZJ5HhQ/view?usp=drive_link" target="_blank">Curriculum_Vitae</a></li>
-
-                            <li><a href="./html/Bolg.html" target="_blank">Blog</a></li>
-                            <li><a href="./html/About.html" target="_blank">About</a></li>
-                            <li><a href="./html/Contacts.html" target="_blank">Contacts</a></li>
+                            <li><a href="./html/News.html">News</a></li>
+                            <li><a href="https://drive.google.com/file/d/1P2JM0Vvap53gNmecMQm0R-YgmBZJ5HhQ/view?usp=drive_link" target="_blank">CV</a></li>
+                            <li><a href="./html/Bolg.html">Blog</a></li>
+                            <li><a href="./html/About.html">About</a></li>
+                            <li><a href="./html/Contacts.html">Contacts</a></li>
                         </ul>
                         
                         <ul class="sns-nav">
-							<li><a href="https://github.com/takashiwangbh" target="my github"><i class="fa fa-github"></i></a></li>
-							<li><a href="mailto:takashiwangbh@gmail.com" target="give me a email"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="https://www.linkedin.com/in/binghaowang/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-							<li><a href="https://www.instagram.com/takashisyasinn?igsh=ZTN2dmluZ3gyMzNk " target="my life share"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="some video"><i class="fa fa-youtube"></i></a></li>
-						</ul>
+                            <li><a href="https://github.com/takashiwangbh" target="_blank"><i class="fa fa-github"></i></a></li>
+                            <li><a href="mailto:takashiwangbh@gmail.com"><i class="fa fa-envelope"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/binghaowang/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://www.instagram.com/takashisyasinn" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                        </ul>
                     </nav>
                 </div>
-                <div class="drawer__btn sp">
+                
+                <!-- Mobile Hamburger Button -->
+                <div class="drawer__btn" onclick="toggleMobileMenu()">
                     <span></span><span></span><span></span>
                 </div>
             </div>
         </header>
 
-
-
-
         <!-- Main Visual -->
         <div class="Top">
-            <img src="./image/fotor-ai-.jpg" alt="Artist Name" class="top_image">
-            <a class="top_image_section section1" href="./html/AI.html" target="_blank"><span class="section_text">AI</span></a>
-            <a class="top_image_section section2" href="./html/Game.html" target="_blank""><span class="section_text">GAME</span></a>
-            <a class="top_image_section section3" href="./html/Art.html" target="_blank""><span class="section_text">ART</span></a>
+            <img src="./image/fotor-ai-.jpg" alt="Binghao WANG" class="top_image">
+            <a class="top_image_section section1" href="./html/AI.html"><span class="section_text">AI</span></a>
+            <a class="top_image_section section2" href="./html/Game.html"><span class="section_text">GAME</span></a>
+            <a class="top_image_section section3" href="./html/Art.html"><span class="section_text">ART</span></a>
         </div>
-
-
-
 
         <!-- News Section -->
         <section class="section--info">
             <div class="block--news">
                 <h2 class="block-tit">NEWS</h2>
-                <ul class="list--information">
-                    <li class="new">
-                        <a>
-                            <p class="date">2025.05.06</p>
-                            <p class="t">Travel to Kansai area (Kyoto, Osaka, Nara) during Golden Week</p>
-                        </a>
-                    </li>
-
-                    <li class="new">
-                        <a>
-                            <p class="date">2025.02.22</p>
-                            <p class="t">I got a week off and I went to Kasukabe (クレヨンしんちゃん's hometown)</p>
-                        </a>
-                    </li>
-
-                    <li class="new">
-                        <a>
-                            <p class="date">2025.02.04</p>
-                            <p class="t">I got home early from the lab today. I was bored at home so I opened my iPad and drew for a while. I haven't drawn on my iPad for a long time. I drew characters from Pop Mart.</p>
-                        </a>
+                <ul class="list--information" id="news-list">
+                    <!-- 自動從 News.html 載入前三條 -->
+                    <li class="new loading">
+                        <a><p class="t">Loading...</p></a>
                     </li>
                 </ul>
-                <p class="list__more"><a href="./html/News.html" target="_blank">VIEW MORE</a></p>
+                <p class="list__more"><a href="./html/News.html">VIEW MORE</a></p>
             </div>
+        </section>
 
-
-
+        <!-- Tools Section -->
+        <section class="section--projects">
+            <h2 class="section-tit">TOOLS</h2>
+            <p class="section-desc">Small utilities I made for fun</p>
+            <div class="projects-grid">
+                <a href="#" class="project-card" target="_blank">
+                    <div class="project-icon">🎨</div>
+                    <h3 class="project-name">Color Picker</h3>
+                    <p class="project-desc">A simple color picker tool</p>
+                </a>
+                <a href="#" class="project-card" target="_blank">
+                    <div class="project-icon">📝</div>
+                    <h3 class="project-name">Note App</h3>
+                    <p class="project-desc">Quick note taking app</p>
+                </a>
+                <a href="#" class="project-card" target="_blank">
+                    <div class="project-icon">⏱️</div>
+                    <h3 class="project-name">Timer</h3>
+                    <p class="project-desc">Pomodoro timer tool</p>
+                </a>
+            </div>
+        </section>
 
         <!-- Video Section -->
         <section class="section--video">
             <h2 class="section-tit">VIDEO</h2>
             <div class="video-container">
-                <button class="nav-btn prev">&lt;</button>
+                <button class="nav-btn prev" aria-label="Previous">&lt;</button>
                 <div class="video-wrapper">
                     <div class="list--video">
                         <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/VHqfpb8KR4E" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/VHqfpb8KR4E" frameborder="0" allowfullscreen loading="lazy"></iframe>
                         </div>
                         <div class="video-item">
-                            <iframe src="https://www.youtube.com/embed/LkJIZImhxpo" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/LkJIZImhxpo" frameborder="0" allowfullscreen loading="lazy"></iframe>
                         </div>
-                    
                     </div>
                 </div>
-                <button class="nav-btn next">&gt;</button>
+                <button class="nav-btn next" aria-label="Next">&gt;</button>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
             <ul class="sns-nav">
-                <li><a href="https://github.com/takashiwangbh" target="my github"><i class="fa fa-github"></i></a></li>
-                <li><a href="mailto:takashiwangbh@gmail.com" target="give me a email"><i class="fa fa-envelope"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/binghaowang/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://www.instagram.com/takashisyasinn?igsh=ZTN2dmluZ3gyMzNk " target="my life share"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="some video"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="https://github.com/takashiwangbh" target="_blank" aria-label="GitHub"><i class="fa fa-github"></i></a></li>
+                <li><a href="mailto:takashiwangbh@gmail.com" aria-label="Email"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/binghaowang/" target="_blank" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/takashisyasinn" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank" aria-label="YouTube"><i class="fa fa-youtube"></i></a></li>
             </ul>
             <p class="copyright"><small>&copy; WangBinghao_page</small></p>
         </footer>
     </div>
 
-
     <!-- Scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"></script>
-	<script src="./js/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"></script>
+    <script src="./js/main.js"></script>
+    
+    <!-- Mobile Menu Script -->
+    <script>
+        function toggleMobileMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+        
+        function closeMobileMenu() {
+            document.body.classList.remove('menu-open');
+        }
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // 自動載入 News.html 的前三條新聞
+        (function() {
+            fetch('./html/News.html')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newsCards = doc.querySelectorAll('.news-card');
+                    const newsList = document.getElementById('news-list');
+                    
+                    newsList.innerHTML = '';
+                    
+                    const count = Math.min(3, newsCards.length);
+                    for (let i = 0; i < count; i++) {
+                        const card = newsCards[i];
+                        const timestamp = card.querySelector('.timestamp');
+                        const content = card.querySelector('.news-card-content p');
+                        const title = card.dataset.title || '';
+                        
+                        if (timestamp && content) {
+                            // 格式化日期
+                            const dateRaw = timestamp.textContent;
+                            const dateParts = dateRaw.split('-');
+                            const dateFormatted = dateParts.length === 3 
+                                ? `${dateParts[1]}.${dateParts[2]}` 
+                                : dateRaw.replace(/-/g, '.');
+                            const year = dateParts[0] || '';
+                            const text = content.textContent;
+                            
+                            const li = document.createElement('li');
+                            li.className = 'new';
+                            li.innerHTML = `
+                                <a href="./html/News.html">
+                                    <p class="date"><span class="year">${year}</span>${dateFormatted}</p>
+                                    <div class="news-content">
+                                        <h3 class="news-title">${title}</h3>
+                                        <p class="t">${text}</p>
+                                    </div>
+                                </a>
+                            `;
+                            newsList.appendChild(li);
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load news:', err);
+                    document.getElementById('news-list').innerHTML = `
+                        <li class="new">
+                            <a href="./html/News.html">
+                                <div class="news-content">
+                                    <h3 class="news-title">View All News</h3>
+                                    <p class="t">Click to see the latest updates</p>
+                                </div>
+                            </a>
+                        </li>
+                    `;
+                });
+        })();
+    </script>
 </body>
 </html>

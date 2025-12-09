@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>News - Binghao WANG</title>
     
     <!-- Google Fonts -->
@@ -16,7 +16,7 @@
     <header class="page-header">
         <div class="page-header-inner">
             <h1><a href="../index.html">Binghao WANG</a></h1>
-            <a href="../index.html" class="back-link">← Back to Home</a>
+            <a href="../index.html" class="back-link">← Back</a>
         </div>
     </header>
 
@@ -24,23 +24,31 @@
         <h1 class="page-title">News</h1>
         
         <div class="news-layout">
+            <!-- 側邊欄會由 JavaScript 自動生成 -->
             <aside class="news-sidebar">
                 <h2>Quick Navigation</h2>
-                <ul>
-                    <li><a href="#news9">Travel to Kansai</a></li>
-                    <li><a href="#news8">Go to Kasukabe</a></li>
-                    <li><a href="#news7">Casual drawing</a></li>
-                    <li><a href="#news6">Chinese New Year</a></li>
-                    <li><a href="#news5">Unity game jam</a></li>
-                    <li><a href="#news4">Sensoji Temple Lottery</a></li>
-                    <li><a href="#news3">Christmas party</a></li>
-                    <li><a href="#news2">Go to Odaiba</a></li>
-                    <li><a href="#news1">First Personal Homepage</a></li>
+                <ul id="news-nav">
+                    <!-- 自動生成 -->
                 </ul>
             </aside>
 
             <div class="news-main">
-                <article id="news9" class="news-card">
+                <!-- 
+                    使用方式：
+                    1. 每篇新聞用 <article class="news-card" data-title="索引標題">
+                    2. data-title 就是側邊欄顯示的標題
+                    3. ID 會自動生成
+                -->
+
+                 <article class="news-card" data-title="Incoming PhD student">
+                    <img src="../image/hokaiidao.jpg" alt="Incoming PhD student">
+                    <div class="news-card-content">
+                        <p>I passed the PhD entrance examination of the Graduate School of Information Science and Technology at Hokkaido University.</p>
+                        <span class="timestamp">2025-09-05</span>
+                    </div>
+                </article>
+
+                <article class="news-card" data-title="Travel to Kansai">
                     <img src="../image/news8.png" alt="Kansai Travel">
                     <div class="news-card-content">
                         <p>Travel to Kansai area (Kyoto, Osaka, Nara) during Golden Week</p>
@@ -48,31 +56,24 @@
                     </div>
                 </article>
 
-                <article id="news8" class="news-card">
-                    <img src="../image/news7.png" alt="Kasukabe">
-                    <div class="news-card-content">
-                        <p>I got a week off and I went to Kasukabe (クレヨンしんちゃん's hometown)</p>
-                        <span class="timestamp">2025-02-22</span>
-                    </div>
-                </article>
 
-                <article id="news7" class="news-card">
+                <article class="news-card" data-title="Casual drawing">
                     <img src="../image/news6.png" alt="Drawing">
                     <div class="news-card-content">
-                        <p>I got home early from the lab today. I was bored at home so I opened my iPad and drew for a while. I haven't drawn on my iPad for a long time. I drew characters from Pop Mart.</p>
+                        <p>In daily life, scribbling is also a great way to pass the time.</p>
                         <span class="timestamp">2025-02-04</span>
                     </div>
                 </article>
 
-                <article id="news6" class="news-card">
+                <article class="news-card" data-title="Chinese New Year">
                     <img src="../image/news5.jpg" alt="Chinese New Year">
                     <div class="news-card-content">
-                        <p>Today is the Chinese New Year. Every festive season makes me miss my family more. My family sent me their New Year's Eve dinner by wechat, but I am still busy doing experiments in the laboratory. This is the first Spring Festival that I have not spent with my family. I may not be able to go back in the short term, but I miss them all the time.</p>
+                        <p>Today is the Chinese New Year.At every festival, the feeling of missing home is intensified.</p>
                         <span class="timestamp">2025-01-28</span>
                     </div>
                 </article>
 
-                <article id="news5" class="news-card">
+                <article class="news-card" data-title="Unity game jam">
                     <img src="../image/news4.5.jpg" alt="Unity Game Jam">
                     <div class="news-card-content">
                         <p>I participated in Unity's official game jam (creating a game within a week) and won a medal. I hope I can improve my ability and imagination and win better awards in the next game jam.</p>
@@ -80,15 +81,15 @@
                     </div>
                 </article>
 
-                <article id="news4" class="news-card">
+                <article class="news-card" data-title="Sensoji Temple">
                     <img src="../image/new4.png" alt="Sensoji Temple">
                     <div class="news-card-content">
-                        <p>On the New Year's Day, I went to Sensoji Temple to draw a fortune, and it was a good fortune. I really hope that the coming year will be smooth.</p>
+                        <p>On the New Year's Day, I went to Sensoji Temple to draw a fortune, and it was a good fortune.</p>
                         <span class="timestamp">2025-01-01</span>
                     </div>
                 </article>
 
-                <article id="news3" class="news-card">
+                <article class="news-card" data-title="Christmas party">
                     <img src="../image/new3.png" alt="Christmas Party">
                     <div class="news-card-content">
                         <p>Today is the Christmas party held in advance in the lab. We played games and ate together. Because the lab also has a lot of research in the field of games, whenever there is a party, everyone will sit together and play games, which is very interesting.</p>
@@ -96,7 +97,7 @@
                     </div>
                 </article>
 
-                <article id="news2" class="news-card">
+                <article class="news-card" data-title="Go to Odaiba">
                     <img src="../image/news2.jpg" alt="Odaiba">
                     <div class="news-card-content">
                         <p>I came to Odaiba in Tokyo. This is my third time here. There is the Statue of Liberty in Japan and a very large Gundam model. The most important thing is that it is really beautiful. I think this is the most beautiful place in Tokyo.</p>
@@ -104,7 +105,7 @@
                     </div>
                 </article>
 
-                <article id="news1" class="news-card">
+                <article class="news-card" data-title="First Homepage">
                     <img src="../image/News1.png" alt="Personal Homepage">
                     <div class="news-card-content">
                         <p>I created my own website, where I will update my projects, and my chatter. This is the beginning of my website.</p>
@@ -114,5 +115,67 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // 自動生成索引
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsCards = document.querySelectorAll('.news-card');
+            const navList = document.getElementById('news-nav');
+            
+            newsCards.forEach((card, index) => {
+                // 自動生成 ID
+                const id = 'news-' + (newsCards.length - index);
+                card.id = id;
+                
+                // 獲取標題（從 data-title 或文字內容前20字）
+                let title = card.dataset.title;
+                if (!title) {
+                    const text = card.querySelector('p').textContent;
+                    title = text.substring(0, 25) + (text.length > 25 ? '...' : '');
+                }
+                
+                // 創建導航項
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#' + id;
+                a.textContent = title;
+                
+                // 點擊時平滑滾動
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById(id).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+                
+                li.appendChild(a);
+                navList.appendChild(li);
+            });
+            
+            // 滾動時高亮當前項
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.id;
+                    const navLink = navList.querySelector(`a[href="#${id}"]`);
+                    
+                    if (entry.isIntersecting) {
+                        // 移除所有 active 類
+                        navList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                        // 添加 active 類到當前項
+                        if (navLink) navLink.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            
+            newsCards.forEach(card => observer.observe(card));
+        });
+    </script>
 </body>
 </html>
