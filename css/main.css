@@ -837,46 +837,38 @@ body.down header .sns-nav {
 }
 
 /* ========================================
-   PROJECTS SECTION - Full Screen Grid
+   TOOLS SECTION - Game HUD Style
 ======================================== */
 .section--projects {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: var(--space-xl) var(--space-md);
   position: relative;
-  background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(15, 15, 18, 1) 50%, var(--bg-primary) 100%);
-}
-
-.section--projects::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 80px;
-  background: linear-gradient(180deg, transparent, var(--border-subtle), transparent);
+  background: transparent;
 }
 
 .section--projects .section-tit {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 400;
-  letter-spacing: 0.3em;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
   color: var(--text-primary);
   text-align: center;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(232, 93, 4, 0.5);
 }
 
 .section--projects .section-desc {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   text-align: center;
   margin-bottom: var(--space-xl);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
 /* Projects Grid */
@@ -885,7 +877,7 @@ body.down header .sns-nav {
   grid-template-columns: 1fr;
   gap: var(--space-md);
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 
 @media screen and (min-width: 600px) {
@@ -901,20 +893,27 @@ body.down header .sns-nav {
   }
 }
 
-/* Project Card */
+/* Game Style Card */
 .project-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: var(--space-xl) var(--space-lg);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  align-items: flex-start;
+  padding: 2.5rem 2rem;
+  background: rgba(15, 15, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 200px; /* 固定高度 */
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    100% calc(100% - 20px), 
+    calc(100% - 20px) 100%, 
+    0 100%
+  ); /* 右下角切角 */
   opacity: 0;
   transform: translateY(30px);
   animation: projectReveal 0.8s ease forwards;
@@ -931,106 +930,142 @@ body.down header .sns-nav {
   }
 }
 
-/* Card Glow Effect */
+/* 裝飾線條 - 左邊框 */
 .project-card::before {
   content: '';
   position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+/* 裝飾 - 角落標記 */
+.project-corner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--border-subtle);
+  border-right: 2px solid var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+/* 背景掃描線 */
+.project-scanline {
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(232, 93, 4, 0.08) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* Card Border Glow */
-.project-card::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-8px);
-  border-color: transparent;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(232, 93, 4, 0.1);
-}
-
-.project-card:hover::before {
-  opacity: 1;
-}
-
-.project-card:hover::after {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 3px
+  );
+  pointer-events: none;
   opacity: 0.5;
 }
 
-/* Project Icon */
-.project-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-md);
-  transition: transform 0.4s ease;
+/* 序號裝飾 */
+.project-index {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 }
 
-@media screen and (min-width: 769px) {
-  .project-icon {
-    font-size: 3rem;
-  }
-}
-
-.project-card:hover .project-icon {
-  transform: scale(1.15) rotate(5deg);
-}
-
-/* Project Name */
+/* 標題 */
 .project-name {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 0.5rem 0;
-  text-align: center;
-  transition: color 0.3s ease;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
 }
 
-@media screen and (min-width: 769px) {
-  .project-name {
-    font-size: 1.25rem;
-  }
+/* 描述 */
+.project-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+  max-width: 90%;
+}
+
+/* Hover Effects */
+.project-card:hover {
+  background: rgba(232, 93, 4, 0.05);
+  border-color: rgba(232, 93, 4, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.project-card:hover::before {
+  background: var(--accent-primary);
+  width: 6px;
+  box-shadow: 0 0 15px var(--accent-primary);
+}
+
+.project-card:hover .project-corner {
+  border-color: var(--accent-primary);
+  width: 20px;
+  height: 20px;
+}
+
+.project-card:hover .project-index {
+  color: rgba(232, 93, 4, 0.2);
+  transform: scale(1.2);
 }
 
 .project-card:hover .project-name {
   color: var(--accent-secondary);
-}
-
-/* Project Description */
-.project-desc {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-  line-height: 1.5;
-  transition: color 0.3s ease;
-}
-
-@media screen and (min-width: 769px) {
-  .project-desc {
-    font-size: 0.85rem;
-  }
+  transform: translateX(10px);
+  text-shadow: 0 0 10px rgba(232, 93, 4, 0.5);
 }
 
 .project-card:hover .project-desc {
   color: var(--text-secondary);
+  transform: translateX(10px);
+}
+
+/* Glitch animation on hover */
+.project-card:hover .project-name::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  color: var(--accent-primary);
+  clip: rect(0, 0, 0, 0);
+  animation: glitch-anim 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 30px, 0); transform: translate(-2px, -2px); }
+  20% { clip: rect(50px, 9999px, 60px, 0); transform: translate(2px, 2px); }
+  40% { clip: rect(20px, 9999px, 80px, 0); transform: translate(-2px, 2px); }
+  60% { clip: rect(90px, 9999px, 100px, 0); transform: translate(2px, -2px); }
+  80% { clip: rect(40px, 9999px, 60px, 0); transform: translate(-2px, -2px); }
+  100% { clip: rect(70px, 9999px, 90px, 0); transform: translate(2px, 2px); }
 }
 
 /* ========================================
