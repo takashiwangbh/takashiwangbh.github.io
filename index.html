@@ -211,7 +211,6 @@
                         const title = card.dataset.title || '';
                         
                         if (timestamp && content) {
-                            // 格式化日期
                             const dateRaw = timestamp.textContent;
                             const dateParts = dateRaw.split('-');
                             const dateFormatted = dateParts.length === 3 
@@ -219,11 +218,12 @@
                                 : dateRaw.replace(/-/g, '.');
                             const year = dateParts[0] || '';
                             const text = content.textContent;
+                            const linkId = card.id || '';
                             
                             const li = document.createElement('li');
                             li.className = 'new';
                             li.innerHTML = `
-                                <a href="./html/News.html">
+                                <a href="./html/News.html#${linkId}">
                                     <p class="date"><span class="year">${year}</span>${dateFormatted}</p>
                                     <div class="news-content">
                                         <h3 class="news-title">${title}</h3>
@@ -240,6 +240,7 @@
                     document.getElementById('news-list').innerHTML = `
                         <li class="new">
                             <a href="./html/News.html">
+                                <p class="date">--</p>
                                 <div class="news-content">
                                     <h3 class="news-title">View All News</h3>
                                     <p class="t">Click to see the latest updates</p>

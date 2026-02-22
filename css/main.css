@@ -837,6 +837,86 @@ body.down header .sns-nav {
 }
 
 /* ========================================
+   NEWS - Text Only Variation (Full Width Block)
+======================================== */
+.list--information li.news-item-wrapper--text-only {
+  display: block;
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-primary);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+  z-index: 2; /* Cover timeline line if needed, or sit on top */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.list--information li.news-item-wrapper--text-only:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset layout for internal link */
+.list--information li.news-item-wrapper--text-only a {
+  display: block;
+  text-decoration: none;
+}
+
+/* Hide timeline decorations */
+.list--information li.news-item-wrapper--text-only .date::before,
+.list--information li.news-item-wrapper--text-only .date::after {
+  display: none;
+}
+
+/* Inner Layout */
+.list--information li.news-item-wrapper--text-only .news-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Header Row (Title + Date) */
+.list--information li.news-item-wrapper--text-only .news-content {
+  padding-left: 0;
+  order: 2;
+}
+
+.list--information li.news-item-wrapper--text-only .date {
+  order: 1;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list--information li.news-item-wrapper--text-only .date .year {
+  display: inline;
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.list--information li.news-item-wrapper--text-only .news-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.list--information li.news-item-wrapper--text-only .t {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  -webkit-line-clamp: 3; /* Allow more lines */
+}
+
+/* ========================================
    TOOLS SECTION - Game HUD Style
 ======================================== */
 .section--projects {
