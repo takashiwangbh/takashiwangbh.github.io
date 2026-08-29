@@ -413,8 +413,8 @@ body.down header .sns-nav {
 .Top {
   position: relative;
   width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
+  height: 100vh;
+  height: 100svh;
   min-height: 0;
   overflow: hidden;
 }
@@ -422,9 +422,15 @@ body.down header .sns-nav {
 .top_image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center 15%;
   filter: none;
+}
+
+@media screen and (max-width: 768px) {
+  .top_image {
+    object-position: 70% center;
+  }
 }
 
 /* Mobile: Stack vertically */
