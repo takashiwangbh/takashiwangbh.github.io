@@ -77,7 +77,7 @@ $(function(){
             if (scrolled < heroHeight) {
                 const parallaxValue = scrolled * 0.3;
                 $('.top_image').css({
-                    'transform': `translateY(${parallaxValue}px) scale(1.1)`
+                    'transform': `translateY(${parallaxValue}px)`
                 });
             }
             parallaxTicking = false;
