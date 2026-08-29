@@ -65,33 +65,6 @@ $(function(){
     }
 
     // ========================================
-    // HERO PARALLAX (Desktop only)
-    // ========================================
-    if (window.innerWidth > 768) {
-        let parallaxTicking = false;
-        
-        function updateParallax() {
-            const scrolled = window.scrollY;
-            const heroHeight = $('.Top').height();
-            
-            if (scrolled < heroHeight) {
-                const parallaxValue = scrolled * 0.3;
-                $('.top_image').css({
-                    'transform': `translateY(${parallaxValue}px)`
-                });
-            }
-            parallaxTicking = false;
-        }
-
-        $(window).on('scroll', function() {
-            if (!parallaxTicking) {
-                window.requestAnimationFrame(updateParallax);
-                parallaxTicking = true;
-            }
-        });
-    }
-
-    // ========================================
     // TOUCH SUPPORT FOR HERO SECTIONS
     // ========================================
     if ('ontouchstart' in window) {
