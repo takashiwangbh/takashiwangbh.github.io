@@ -41,38 +41,6 @@ $(function(){
     
     // Check if IntersectionObserver is supported
     if ('IntersectionObserver' in window) {
-        // Video items animation
-        const videoItems = document.querySelectorAll('.video-item');
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const delay = Array.from(videoItems).indexOf(entry.target) * 150;
-                    setTimeout(() => {
-                        entry.target.classList.add('video-visible');
-                        entry.target.classList.remove('video-hidden');
-                    }, delay);
-                }
-            });
-        }, { 
-            threshold: 0.2,
-            rootMargin: '0px 0px -30px 0px'
-        });
-
-        videoItems.forEach(item => {
-            item.classList.add('video-hidden');
-            videoObserver.observe(item);
-            
-            // Add corner decorations
-            if (!item.querySelector('.corner')) {
-                item.innerHTML += `
-                    <div class="corner corner-tl"></div>
-                    <div class="corner corner-tr"></div>
-                    <div class="corner corner-bl"></div>
-                    <div class="corner corner-br"></div>
-                `;
-            }
-        });
-
         // News items animation
         const newsItems = document.querySelectorAll('.list--information li');
         const newsObserver = new IntersectionObserver((entries) => {
@@ -95,31 +63,6 @@ $(function(){
             newsObserver.observe(item);
         });
     }
-
-    // ========================================
-    // VIDEO NAVIGATION
-    // ========================================
-    const videoContainer = $('.list--video');
-    
-    function getScrollAmount() {
-        const item = $('.video-item').first();
-        if (item.length) {
-            return item.outerWidth(true);
-        }
-        return videoContainer.width() * 0.85;
-    }
-
-    $('.nav-btn.prev').on('click', function() {
-        videoContainer.animate({
-            scrollLeft: '-=' + getScrollAmount()
-        }, 400, 'swing');
-    });
-
-    $('.nav-btn.next').on('click', function() {
-        videoContainer.animate({
-            scrollLeft: '+=' + getScrollAmount()
-        }, 400, 'swing');
-    });
 
     // ========================================
     // HERO PARALLAX (Desktop only)
@@ -147,48 +90,6 @@ $(function(){
             }
         });
     }
-
-    // ========================================
-    // MOUSE TILT EFFECT ON VIDEO ITEMS (Desktop only)
-    // ========================================
-    if (window.innerWidth > 768) {
-        $('.video-item').on('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 30;
-            const rotateY = (centerX - x) / 30;
-            
-            $(this).find('iframe').css({
-                'transform': `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
-            });
-        });
-
-        $('.video-item').on('mouseleave', function() {
-            $(this).find('iframe').css({
-                'transform': 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
-                'transition': 'transform 0.4s ease'
-            });
-        });
-    }
-
-    // ========================================
-    // RESPONSIVE HANDLING
-    // ========================================
-    function handleResize() {
-        const width = window.innerWidth;
-        if (width <= 768) {
-            $('.video-item').css('flex', '0 0 85%');
-        } else {
-            $('.video-item').css('flex', '0 0 calc(50% - 1rem)');
-        }
-    }
-
-    $(window).on('resize', handleResize);
-    handleResize();
 
     // ========================================
     // TOUCH SUPPORT FOR HERO SECTIONS
