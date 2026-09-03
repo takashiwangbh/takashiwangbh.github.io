@@ -468,6 +468,10 @@ img {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.news-card--unity img {
+  object-position: center 68%;
+}
+
 .news-card-content {
   padding: 1rem;
 }
