@@ -532,13 +532,15 @@ body.down header .sns-nav {
   text-shadow: 0 3px 24px rgba(14, 18, 16, 0.45);
 }
 
-/* Original hover/touch effects */
+/* Hover/touch effects: glass fades away, leaving the label visible. */
 .top_image_section:is(:hover, :focus-visible, :active, .touch-active)::before {
   opacity: 1;
+  animation: heroFrostFade 2s ease-in-out forwards;
 }
 
 .top_image_section:is(:hover, :focus-visible, :active, .touch-active)::after {
   width: 50%;
+  animation: heroLineFade 2s ease-in-out forwards;
 }
 
 .top_image_section:is(:hover, :focus-visible, :active, .touch-active) .section_text {
@@ -553,6 +555,79 @@ body.down header .sns-nav {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.14),
     inset 0 0 80px var(--panel-glow);
+  animation: heroGlassFade 2s ease-in-out forwards;
+}
+
+@keyframes heroGlassFade {
+  0% {
+    background-color: var(--panel-tint);
+    -webkit-backdrop-filter: blur(4px) saturate(88%);
+    backdrop-filter: blur(4px) saturate(88%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+      inset 0 0 80px var(--panel-glow);
+  }
+
+  100% {
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(0) saturate(100%);
+    backdrop-filter: blur(0) saturate(100%);
+    box-shadow: inset 0 0 0 1px transparent;
+  }
+}
+
+@keyframes heroFrostFade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes heroLineFade {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  16% {
+    width: 50%;
+    opacity: 1;
+  }
+
+  70% {
+    width: 50%;
+    opacity: 0.85;
+  }
+
+  100% {
+    width: 50%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top_image_section:is(:hover, :focus-visible, :active, .touch-active) {
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(0) saturate(100%);
+    backdrop-filter: blur(0) saturate(100%);
+    box-shadow: inset 0 0 0 1px transparent;
+    animation: none;
+  }
+
+  .top_image_section:is(:hover, :focus-visible, :active, .touch-active)::before,
+  .top_image_section:is(:hover, :focus-visible, :active, .touch-active)::after {
+    opacity: 0;
+    animation: none;
+  }
+
+  .top_image_section:is(:hover, :focus-visible, :active, .touch-active)
+    .section_text {
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ========================================
