@@ -22,7 +22,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/main.css?v=20260903-5">
+    <link rel="stylesheet" href="./css/main.css?v=20260905-1">
     <link rel="stylesheet" href="./css/click.css">
 </head>
 
@@ -112,7 +112,39 @@
                         </a>
                     </div>
 
+                    <div class="github-contributions">
+                        <div class="github-contributions__header">
+                            <span>CONTRIBUTION ACTIVITY</span>
+                            <span class="github-contributions__status"><i aria-hidden="true"></i>UPDATED DAILY</span>
+                        </div>
+                        <div class="github-contributions__viewport" tabindex="0" aria-label="Scrollable GitHub contribution graph">
+                            <img
+                                id="github-contribution-graph"
+                                class="github-contributions__graph"
+                                src="./image/github-contributions.svg"
+                                width="524"
+                                height="105"
+                                loading="lazy"
+                                decoding="async"
+                                alt="One year of GitHub contribution activity. Only relative activity levels are shown; repository details are hidden."
+                            >
+                        </div>
+                    </div>
+
                     <ul class="github-repositories" id="github-repositories" aria-live="polite">
+                        <li class="github-repository">
+                            <a href="https://github.com/takashiwangbh/SafeSight" target="_blank" rel="noopener noreferrer">
+                                <div class="github-repository__top">
+                                    <h3>SafeSight</h3>
+                                    <span aria-hidden="true">↗</span>
+                                </div>
+                                <p class="github-repository__description">Explore the source code and project details on GitHub.</p>
+                                <div class="github-repository__meta">
+                                    <span><i class="github-language-dot" style="--repo-color: #88a5c7"></i>Python</span>
+                                    <span>Updated Aug 2026</span>
+                                </div>
+                            </a>
+                        </li>
                         <li class="github-repository">
                             <a href="https://github.com/takashiwangbh/Unity-shader-effect-reproduction" target="_blank" rel="noopener noreferrer">
                                 <div class="github-repository__top">
@@ -123,32 +155,6 @@
                                 <div class="github-repository__meta">
                                     <span><i class="github-language-dot" style="--repo-color: #83aa9c"></i>ShaderLab</span>
                                     <span>Updated Jun 2025</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="github-repository">
-                            <a href="https://github.com/takashiwangbh/deep-learning-code-reproduction" target="_blank" rel="noopener noreferrer">
-                                <div class="github-repository__top">
-                                    <h3>deep-learning-code-reproduction</h3>
-                                    <span aria-hidden="true">↗</span>
-                                </div>
-                                <p class="github-repository__description">Code reproductions of classic deep-learning papers.</p>
-                                <div class="github-repository__meta">
-                                    <span><i class="github-language-dot" style="--repo-color: #88a5c7"></i>Python</span>
-                                    <span>Updated Apr 2025</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="github-repository">
-                            <a href="https://github.com/takashiwangbh/VSIAUG" target="_blank" rel="noopener noreferrer">
-                                <div class="github-repository__top">
-                                    <h3>VSIAUG</h3>
-                                    <span aria-hidden="true">↗</span>
-                                </div>
-                                <p class="github-repository__description">Virtual-world sign-language augmentation based on inverse kinematics.</p>
-                                <div class="github-repository__meta">
-                                    <span>Project</span>
-                                    <span>Updated Apr 2025</span>
                                 </div>
                             </a>
                         </li>
@@ -255,12 +261,16 @@
         (function() {
             const githubUser = 'takashiwangbh';
             const repositoryList = document.getElementById('github-repositories');
+            const contributionGraph = document.getElementById('github-contribution-graph');
+
+            if (contributionGraph) {
+                contributionGraph.src = './image/github-contributions.svg?v=' + new Date().toISOString().slice(0, 10);
+            }
 
             // 首頁要展示的倉庫：修改名稱或順序即可更換卡片
             const selectedRepositoryNames = [
-                'Unity-shader-effect-reproduction',
-                'deep-learning-code-reproduction',
-                'VSIAUG'
+                'SafeSight',
+                'Unity-shader-effect-reproduction'
             ];
 
             const languageColors = {
