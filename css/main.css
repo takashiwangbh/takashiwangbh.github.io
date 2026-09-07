@@ -1054,6 +1054,18 @@ body.down header .sns-nav {
   max-width: none;
 }
 
+.github-contributions__note {
+  margin: 0.65rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(121, 174, 139, 0.12);
+  color: var(--text-muted);
+  font-size: 0.64rem;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.025em;
+  opacity: 0.82;
+}
+
 .github-repositories {
   display: grid;
   gap: 0.85rem;
