@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal photography collection by Binghao WANG, documenting places and ordinary moments across China and Japan.">
+    <title>Personal Photography — Binghao WANG</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=Outfit:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/photography.css">
+</head>
+<body>
+    <div class="photo-site">
+        <header class="photo-header">
+            <a class="photo-brand" href="../index.html">Binghao WANG</a>
+            <nav class="photo-nav" aria-label="Photography navigation">
+                <a href="./Art.html">Art Projects</a>
+                <a href="../index.html">Home</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="collection-heading" aria-labelledby="collection-title">
+                <h1 id="collection-title">Personal Photography</h1>
+                <div class="collection-status">
+                    <span id="photo-count"></span>
+                    <span aria-hidden="true">·</span>
+                    <span>Newest first</span>
+                </div>
+            </section>
+
+            <section class="photo-archive" aria-label="Photography collection, newest first">
+                <div class="photo-grid" id="photo-grid"></div>
+                <noscript>
+                    <p class="empty-archive">JavaScript is required to display this photography collection.</p>
+                </noscript>
+            </section>
+        </main>
+
+        <footer class="photo-footer">
+            <span>© 2026 Binghao WANG</span>
+            <a href="./Art.html">Back to Art Projects</a>
+        </footer>
+    </div>
+
+    <dialog class="photo-dialog" id="photo-dialog">
+        <div class="dialog-shell">
+            <button class="dialog-close" type="button" aria-label="Close photograph">Close ×</button>
+            <img id="dialog-image" src="" alt="">
+            <div class="dialog-caption">
+                <p id="dialog-title"></p>
+                <div class="dialog-metadata" id="dialog-metadata"></div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="../js/photography.js"></script>
+</body>
+</html>
