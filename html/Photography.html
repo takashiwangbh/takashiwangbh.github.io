@@ -8,8 +8,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;450;500;600&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/photography.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;450;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/photography.css?v=20261021-gallery">
 </head>
 <body>
     <div class="photo-site">
@@ -23,9 +23,9 @@
 
         <main>
             <section class="collection-heading" aria-labelledby="collection-title">
-                <h1 id="collection-title">Personal Photography</h1>
+                <h1 id="collection-title"><span>Personal</span><em>Photography</em></h1>
                 <div class="collection-status">
-                    <span id="photo-count"></span>
+                    <span id="photo-count" aria-live="polite">Loading photographs…</span>
                     <span aria-hidden="true">·</span>
                     <span>Newest first</span>
                 </div>
@@ -45,7 +45,7 @@
         </footer>
     </div>
 
-    <dialog class="photo-dialog" id="photo-dialog">
+    <dialog class="photo-dialog" id="photo-dialog" aria-labelledby="dialog-title">
         <div class="dialog-shell">
             <button class="dialog-close" type="button" aria-label="Close photograph">Close ×</button>
             <img id="dialog-image" src="" alt="">
@@ -56,7 +56,8 @@
         </div>
     </dialog>
 
-    <script src="../js/photography.js"></script>
+    <script src="../js/photographs-data.js"></script>
+    <script src="../js/photography.js?v=20261021-gallery"></script>
     <script src="../js/main.js" defer></script>
 </body>
 </html>

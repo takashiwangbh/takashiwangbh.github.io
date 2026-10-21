@@ -3,6 +3,24 @@
   'use strict';
   const siteRoot = new URL('../', document.currentScript.src);
   const local = path => new URL(path, siteRoot).href;
+  const photographyFeature = document.querySelector('.photography-feature');
+  if (photographyFeature && Array.isArray(window.PHOTOGRAPHS)) {
+    const photographs = window.PHOTOGRAPHS;
+    const count = photographyFeature.querySelector('#photography-feature-count');
+    if (count) count.textContent = `${photographs.length} PHOTOGRAPHS`;
+    const cover = photographyFeature.querySelector('.photography-feature__image');
+    const newest = photographs[0];
+    if (cover && newest && typeof newest.src === 'string' && newest.src) {
+      try {
+        cover.src = new URL(newest.src, local('html/Photography.html')).href;
+        cover.alt = newest.alt || newest.title || 'Personal photograph';
+        if (Number.isInteger(newest.width) && newest.width > 0) cover.width = newest.width;
+        if (Number.isInteger(newest.height) && newest.height > 0) cover.height = newest.height;
+        cover.addEventListener('error', () => { cover.hidden = true; }, { once: true });
+        cover.hidden = false;
+      } catch { /* Leave the cover hidden when its URL is unavailable. */ }
+    }
+  }
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const navigation = [
     ['News', 'html/News.html'], ['CV', 'files/cv-english-until-2026-05.pdf'],

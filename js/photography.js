@@ -1,56 +1,7 @@
 (function () {
   "use strict";
 
-  const photographs = [
-    {
-      src: "../image/news8.png",
-      width: 1319,
-      height: 650,
-      alt: "A travel collage from Kyoto, Osaka, and Nara",
-      title: "Kansai, in fragments",
-      place: "Kyoto · Osaka · Nara, Japan",
-      date: "2025-05-06",
-      iso: null,
-      shutter: null,
-      aperture: null
-    },
-    {
-      src: "../image/news7.png",
-      width: 1279,
-      height: 1968,
-      alt: "A visit to Kasukabe Station in Saitama",
-      title: "A stop in Kasukabe",
-      place: "Kasukabe, Saitama, Japan",
-      date: "2025-02-22",
-      iso: null,
-      shutter: null,
-      aperture: null
-    },
-    {
-      src: "../image/new4.png",
-      width: 1279,
-      height: 1867,
-      alt: "A New Year's fortune drawn at Sensoji Temple",
-      title: "New Year's fortune",
-      place: "Sensō-ji, Tokyo, Japan",
-      date: "2025-01-01",
-      iso: null,
-      shutter: null,
-      aperture: null
-    },
-    {
-      src: "../image/news2.jpg",
-      width: 2275,
-      height: 1279,
-      alt: "The waterfront and Rainbow Bridge seen from Odaiba",
-      title: "Odaiba after light",
-      place: "Odaiba, Tokyo, Japan",
-      date: "2024-12-07",
-      iso: null,
-      shutter: null,
-      aperture: null
-    }
-  ];
+  const photographs = window.PHOTOGRAPHS;
 
   const grid = document.getElementById("photo-grid");
   const count = document.getElementById("photo-count");
@@ -59,8 +10,8 @@
   const dialogTitle = document.getElementById("dialog-title");
   const dialogMetadata = document.getElementById("dialog-metadata");
   const dialogClose = dialog.querySelector(".dialog-close");
+  const dialogShell = dialog.querySelector(".dialog-shell");
   let lastFocusedCard = null;
-  let layoutFrame = null;
 
   function displayValue(value) {
     return value || "—";
@@ -71,142 +22,127 @@
       ["ISO", photo.iso],
       ["Shutter", photo.shutter],
       ["Aperture", photo.aperture],
-      ["Date", photo.date],
-      ["Place", photo.place, "photo-meta--place"]
+      ["Date", photo.date]
     ];
   }
 
-  function metadataMarkup(photo) {
-    return metadataFields(photo).map(([label, value, modifier]) => `
-      <span class="photo-meta${modifier ? ` ${modifier}` : ""}">
-        <span class="photo-meta-label">${label}</span>
-        <span class="photo-meta-value">${displayValue(value)}</span>
-      </span>
-    `).join("");
+  function metadataContent(photo) {
+    const fragment = document.createDocumentFragment();
+
+    metadataFields(photo).forEach(([label, value]) => {
+      const field = document.createElement("span");
+      const fieldLabel = document.createElement("span");
+      const fieldValue = document.createElement("span");
+      field.className = "photo-meta";
+      fieldLabel.className = "photo-meta-label";
+      fieldLabel.textContent = label;
+      fieldValue.className = "photo-meta-value";
+      fieldValue.textContent = displayValue(value);
+      field.append(fieldLabel, fieldValue);
+      fragment.appendChild(field);
+    });
+
+    return fragment;
   }
 
   function openDialog(photo) {
     lastFocusedCard = document.activeElement;
-    dialogImage.src = photo.src;
+    dialogImage.src = photo.fullSrc || photo.src;
     dialogImage.alt = photo.alt;
     dialogTitle.textContent = photo.title;
-    dialogMetadata.innerHTML = metadataMarkup(photo);
+    dialogMetadata.replaceChildren(metadataContent(photo));
     dialog.showModal();
   }
 
-  function createPhotoCard(photo, index) {
+  function createPhotoCard(photo, index, total) {
     const item = document.createElement("article");
     const button = document.createElement("button");
+    const image = document.createElement("img");
+    const caption = document.createElement("div");
+    const number = document.createElement("span");
 
     item.className = "photo-item";
-    item.dataset.date = photo.date;
+    item.dataset.date = photo.date || "";
+    item.dataset.orientation = photo.height > photo.width ? "portrait" : "landscape";
     button.className = "photo-card";
     button.type = "button";
     button.setAttribute(
       "aria-label",
-      `Open photograph ${index + 1}: ${photo.title}, photographed ${photo.date} in ${photo.place}`
+      `Open photograph ${index + 1}: ${photo.title}${photo.date ? `, photographed ${photo.date}` : ""}`
     );
-    button.innerHTML = `
-      <img
-        src="${photo.src}"
-        width="${photo.width}"
-        height="${photo.height}"
-        alt="${photo.alt}"
-        ${index < 3 ? "fetchpriority=\"high\"" : "loading=\"lazy\""}
-        decoding="async"
-      >
-      <span class="photo-info" aria-hidden="true">
-        <span class="photo-info-grid">${metadataMarkup(photo)}</span>
-      </span>
-    `;
+    image.src = index < 3 ? photo.fullSrc || photo.src : photo.src;
+    if (photo.fullSrc && Number.isFinite(photo.fullWidth) && photo.fullWidth > photo.width) {
+      image.srcset = `${photo.src} ${photo.width}w, ${photo.fullSrc} ${photo.fullWidth}w`;
+      const desktopWidth = [83, 60, 45, 30, 75, 60, 37, 90, 37, 37, 67, 67][index % 12];
+      image.sizes = `(max-width: 700px) 90vw, (min-width: 2200px) ${Math.round(desktopWidth / 90 * 2000)}px, ${desktopWidth}vw`;
+    }
+    image.width = photo.width;
+    image.height = photo.height;
+    image.alt = photo.alt;
+    image.decoding = "async";
+    if (index < 3) {
+      image.fetchPriority = "high";
+    } else {
+      image.loading = "lazy";
+    }
+    caption.className = "photo-caption";
+    number.className = "photo-index";
+    number.textContent = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+    caption.appendChild(number);
+    if (photo.date) {
+      const date = document.createElement("time");
+      date.className = "photo-date";
+      date.dateTime = photo.date;
+      date.textContent = photo.date.replaceAll("-", ".");
+      caption.appendChild(date);
+    }
+    button.appendChild(image);
     button.addEventListener("click", () => openDialog(photo));
-    button.querySelector("img").addEventListener("load", scheduleLayout);
-    item.appendChild(button);
+    item.append(button, caption);
 
     return item;
   }
 
-  function columnCountFor(width) {
-    if (width < 640) {
-      return 1;
-    }
-
-    if (width < 1040) {
-      return 2;
-    }
-
-    return 3;
-  }
-
-  function layoutMasonry() {
-    const gridWidth = grid.clientWidth;
-
-    if (!gridWidth) {
+  function renderPhotos() {
+    if (!Array.isArray(photographs) || !photographs.length) {
+      const message = document.createElement("p");
+      message.className = "empty-archive";
+      message.textContent = Array.isArray(photographs)
+        ? "No photographs in the collection yet."
+        : "The photography collection could not be loaded. Please try again later.";
+      grid.replaceChildren(message);
+      count.textContent = Array.isArray(photographs) ? "00 photographs" : "Collection unavailable";
       return;
     }
 
-    const gap = gridWidth < 640 ? 3 : 6;
-    const columns = columnCountFor(gridWidth);
-    const columnWidth = (gridWidth - gap * (columns - 1)) / columns;
-    const columnHeights = new Array(columns).fill(0);
-    const items = Array.from(grid.children);
-
-    items.forEach((item) => {
-      item.style.width = `${columnWidth}px`;
-
-      const shortestHeight = Math.min(...columnHeights);
-      const column = columnHeights.indexOf(shortestHeight);
-      const x = column * (columnWidth + gap);
-      const y = shortestHeight;
-
-      item.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      columnHeights[column] = y + item.offsetHeight + gap;
-    });
-
-    grid.style.height = `${Math.max(...columnHeights, 0) - (items.length ? gap : 0)}px`;
-    grid.classList.add("is-ready");
-  }
-
-  function scheduleLayout() {
-    window.cancelAnimationFrame(layoutFrame);
-    layoutFrame = window.requestAnimationFrame(layoutMasonry);
-  }
-
-  function renderPhotos() {
     const arranged = photographs
       .slice()
-      .sort((first, second) => second.date.localeCompare(first.date));
+      .sort((first, second) => (second.date || "").localeCompare(first.date || ""));
     const fragment = document.createDocumentFragment();
 
     arranged.forEach((photo, index) => {
-      fragment.appendChild(createPhotoCard(photo, index));
+      fragment.appendChild(createPhotoCard(photo, index, arranged.length));
     });
 
     grid.replaceChildren(fragment);
     count.textContent = `${String(arranged.length).padStart(2, "0")} photographs`;
-    scheduleLayout();
   }
 
   dialogClose.addEventListener("click", () => dialog.close());
 
   dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) {
+    if (event.target === dialog || event.target === dialogShell) {
       dialog.close();
     }
   });
 
   dialog.addEventListener("close", () => {
-    dialogImage.src = "";
+    dialogImage.removeAttribute("src");
 
     if (lastFocusedCard) {
-      lastFocusedCard.focus();
+      lastFocusedCard.focus({ preventScroll: true });
     }
   });
 
-  window.addEventListener("resize", scheduleLayout, { passive: true });
   renderPhotos();
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(scheduleLayout);
-  }
 }());
