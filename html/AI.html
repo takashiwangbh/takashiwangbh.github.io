@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;450;500;600&amp;family=Instrument+Serif:ital@0;1&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="../css/pages.css">
 </head>
@@ -19,6 +19,14 @@
             <a href="../index.html" class="back-link">← Back to Home</a>
         </div>
     </header>
+
+    <nav class="project-categories" aria-label="Project categories">
+        <div class="project-categories-inner">
+            <a href="./AI.html" aria-current="page">AI</a>
+            <a href="./Game.html">GAME</a>
+            <a href="./Art.html">ART</a>
+        </div>
+    </nav>
 
     <main class="page-content">
         <h1 class="page-title">AI Projects</h1>
@@ -32,7 +40,7 @@
                         "Stanford AI Town" is a Generative Agents project that explores how multiple AI agents with memory, reasoning, and autonomous decision-making capabilities can operate long-term in a virtual environment with complete infrastructure, and "live" and "socialize" in a human-like manner.Based on the Microverse project, I implemented similar functionality on my local server and observed the development of autonomous relationships among NPCs.
                     </p>
                 </div>
-                <img src="../image/Stanford AI Town.png" alt="Sign Language Recognition">
+                <img src="../image/Stanford AI Town.png" alt="Sign Language Recognition" width="1920" height="1098" decoding="async">
             </article>
 
             <article class="project-card">
@@ -42,7 +50,7 @@
                         I present a physically grounded facial expression synthesis framework that integrates the Facial Action Coding System (FACS) with inverse kinematics (IK) to generate anatomically coherent and semantically controllable facial animations. The proposed "Semantic-Kinematic Loop" reconstructs facial expressions by mapping MediaPipe facial landmarks into Action Units (AUs), applying BlendShape-based deformation, and refining facial motion through a topology-aware IK solver that enforces biomechanical constraints across facial regions. In addition, the framework introduces a physics-aware augmentation strategy by perturbing AU activations, IK damping, stiffness, and regional coupling parameters to synthesize diverse yet anatomically valid expression variations. Extensive experiments on the JAFFE dataset demonstrate that the proposed method improves geometric smoothness, structural consistency, and emotion recognition confidence compared to traditional FACS-only and statistical facial modeling approaches such as FLAME and DECA. This article was published in the journal MDPI Electronics.
                     </p>
                 </div>
-                <img src="../image/A16.png" alt="Facial Expression Synthesis">
+                <img src="../image/A16.png" alt="Facial Expression Synthesis" width="2038" height="1182" decoding="async">
             </article>
 
             <article class="project-card">
@@ -52,7 +60,7 @@
                         I present a kinematics-driven data augmentation framework for sign language recognition that employs inverse kinematics (IK) within a 3D simulation environment to generate anatomically coherent gesture sequences. By reconstructing full-body poses from MediaPipe keypoints and introducing multimodal perturbations (e.g., spatial jitter, depth offset, IK sensitivity), our method enriches gesture variability beyond traditional augmentation. Extensive experiments across five deep learning models demonstrate consistent performance gains, particularly with Transformer-based architectures.This article was published in the journal "Algorithms".
                     </p>
                 </div>
-                <img src="../image/AI5.png" alt="Sign Language Recognition">
+                <img src="../image/AI5.png" alt="Sign Language Recognition" width="1248" height="691" decoding="async">
             </article>
 
             <article class="project-card">
@@ -62,7 +70,7 @@
                         AlfWorld is a reinforcement learning environment for training AI to complete tasks in 3D scenes (implemented by Unity) or text environments (TextWorld). I used this project to implement its text interaction and 3D environment interaction, so that AI can be used to control virtual characters to complete some tasks.
                     </p>
                 </div>
-                <img src="../image/AI4.png" alt="AlfWorld Project">
+                <img src="../image/AI4.png" alt="AlfWorld Project" width="1242" height="415" decoding="async">
             </article>
 
             <article class="project-card">
@@ -72,7 +80,7 @@
                         BERT is a deep learning model, specifically a pre-trained natural language processing (NLP) model based on the Transformer architecture. By fine-tuning the classifier layer of BERT on the Chinese and English datasets of sentiment classification to adapt to the task of sentiment analysis, a terminal interactive script is written to call the fine-tuned trained BERT model, so that the emotional state of the sentence can be returned when a sentence is input in the terminal. The details will be explained in the blog.
                     </p>
                 </div>
-                <img src="../image/AI2.png" alt="BERT Sentiment Analysis">
+                <img src="../image/AI2.png" alt="BERT Sentiment Analysis" width="1166" height="602" decoding="async">
             </article>
 
             <article class="project-card">
@@ -82,7 +90,7 @@
                         In this experiment, the optical disc was processed through a series of processes such as grayscale conversion and image enhancement, and then the improved Canny algorithm was used for feature recognition, and then the circularity of the defective part was calculated to determine the defect. A GUI was designed to import images and perform the above operations, and finally 50 workpiece images were used for detection to obtain the accuracy.
                     </p>
                 </div>
-                <img src="../image/AI1.png" alt="Defect Detection">
+                <img src="../image/AI1.png" alt="Defect Detection" width="1331" height="573" decoding="async">
             </article>
 
             <article class="project-card">
@@ -92,9 +100,10 @@
                         This experiment mainly involves sound signal processing. The original yangqin sound is analyzed through FFT transformation, and three methods, namely FIR low-pass filtering, median filtering and wavelet noise reduction, are compared. Finally, FIR low-pass filtering is selected as the best noise reduction solution. The second is application development. An interactive interface with three modules, namely teaching demonstration, electronic yangqin performance and music score selection, is designed. Through callback functions, functions such as animation teaching, performance simulation and music score playback are realized, which digitizes the learning and performance of the traditional yangqin instrument.
                     </p>
                 </div>
-                <img src="../image/AI3.png" alt="Electronic Yangqin">
+                <img src="../image/AI3.png" alt="Electronic Yangqin" width="998" height="664" decoding="async">
             </article>
         </div>
     </main>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>

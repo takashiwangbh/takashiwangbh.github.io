@@ -15,7 +15,8 @@ const contributionLevels = {
   FOURTH_QUARTILE: 4
 };
 
-const colors = ['#1b2220', '#244b38', '#2f6b4b', '#419060', '#63b978'];
+// Empty days stay quiet on the light page; higher activity uses deeper greens.
+const colors = ['#e4e8df', '#b5df94', '#77bd69', '#3e9854', '#216d3c'];
 
 function toUtcDate(value) {
   return new Date(value + 'T00:00:00Z');
@@ -40,7 +41,7 @@ async function loadAuthenticatedContributions() {
   const token = process.env.GH_CONTRIBUTIONS_TOKEN;
 
   if (!token) {
-    throw new Error('GH_CONTRIBUTIONS_TOKEN is required for the private contribution sync.');
+    throw new Error('GH_CONTRIBUTIONS_TOKEN is required. Save an account-owned classic personal access token with read:user in the repository Actions secrets to include private contribution statistics.');
   }
 
   const query = [
@@ -73,7 +74,21 @@ async function loadAuthenticatedContributions() {
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('GitHub rejected GH_CONTRIBUTIONS_TOKEN (HTTP 401). Replace an expired or revoked token with an account-owned classic personal access token with read:user in the repository Actions secrets.');
+    }
     throw new Error('GitHub GraphQL request failed with status ' + response.status + '.');
+  }
+
+  // GitHub excludes private/internal contribution statistics without read:user.
+  // Confirm the scope rather than silently publishing a public-only calendar.
+  // https://docs.github.com/en/graphql/reference/users#contributionscollection
+  const scopes = (response.headers.get('x-oauth-scopes') || '')
+    .split(',')
+    .map(scope => scope.trim());
+
+  if (!scopes.includes('read:user') && !scopes.includes('user')) {
+    throw new Error('Private contribution access could not be verified. GH_CONTRIBUTIONS_TOKEN must be an account-owned classic personal access token with read:user (or user). A website GITHUB_TOKEN or a token without this scope cannot verify account-wide private contribution statistics.');
   }
 
   const payload = await response.json();
@@ -116,8 +131,9 @@ async function loadPublicPreview() {
   });
 }
 
-function renderSvg(rawDays) {
+function renderSvg(rawDays, source = 'unknown') {
   const days = normalizeDays(rawDays);
+  const dataSource = ['authenticated', 'public-preview'].includes(source) ? source : 'unknown';
 
   if (!days.length) {
     throw new Error('No contribution days were returned.');
@@ -193,17 +209,17 @@ function renderSvg(rawDays) {
   );
 
   const legendY = top + 7 * step + 9;
-  const legendStart = width - 76;
+  const legendStart = width - 96;
   const legendSquares = colors.map((color, index) =>
     '<rect x="' + (legendStart + 25 + index * step) + '" y="' + (legendY - 6) +
     '" width="' + cellSize + '" height="' + cellSize + '" rx="1.5" fill="' + color + '"/>'
   );
 
   return [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-labelledby="graph-title graph-description">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-labelledby="graph-title graph-description" data-through="' + days.at(-1).date + '" data-source="' + dataSource + '">',
     '  <title id="graph-title">GitHub contribution activity</title>',
     '  <desc id="graph-description">One year of relative contribution activity. Repository names, commits, and code are not included.</desc>',
-    '  <style>text{fill:#777f7c;font:7px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;letter-spacing:.02em}.day{shape-rendering:geometricPrecision}</style>',
+    '  <style>text{fill:#777f7c;font:7px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;letter-spacing:.02em}.day{shape-rendering:geometricPrecision}rect[fill="#e4e8df"]{stroke:#d2d9cc;stroke-width:.5}</style>',
     '  ' + months.join('\n  '),
     '  ' + dayLabels.join('\n  '),
     '  ' + rectangles.join('\n  '),
@@ -220,10 +236,10 @@ const days = publicPreview
   : await loadAuthenticatedContributions();
 
 await mkdir(dirname(outputPath), { recursive: true });
-await writeFile(outputPath, renderSvg(days), 'utf8');
+await writeFile(outputPath, renderSvg(days, publicPreview ? 'public-preview' : 'authenticated'), 'utf8');
 
 console.log(
   'Generated contribution graph from ' +
-  (publicPreview ? 'the public preview' : 'authenticated private and public activity') +
+  (publicPreview ? 'the public preview' : 'authenticated contribution activity with verified read:user scope') +
   '.'
 );

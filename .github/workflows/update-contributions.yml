@@ -30,7 +30,9 @@ jobs:
       - name: Check out the website
         uses: actions/checkout@v4
 
-      - name: Generate private and public contribution graph
+      # Use an account-owned classic PAT with read:user (or user), stored as an
+      # Actions secret. The repository-scoped GITHUB_TOKEN cannot substitute for it.
+      - name: Generate authenticated contribution graph
         env:
           GH_CONTRIBUTIONS_TOKEN: ${{ secrets.GH_CONTRIBUTIONS_TOKEN }}
         run: node scripts/generate-contributions.mjs

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <title>An open landscape</title>
+  <desc>A quiet powder blue sky above sculptural hills, an oversized pastel arch, floating geometric forms, and a few evergreen trees.</desc>
+  <defs>
+    <clipPath id="scene"><path d="M0 0h1600v1000H0z"/></clipPath>
+    <pattern id="ground-dashes" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-16)">
+      <path d="M0 0h5" stroke="#AEBFC0" stroke-width="1.3" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <g clip-path="url(#scene)">
+    <path fill="#C6DFE9" d="M0 0h1600v1000H0z"/>
+
+    <g class="landscape-sun">
+      <circle cx="1390" cy="174" r="40" fill="#F4F3EE"/>
+      <circle cx="1390" cy="174" r="55" stroke="#F4F3EE" stroke-opacity=".48"/>
+    </g>
+
+    <g class="landscape-cloud" fill="#E7EFF0">
+      <path d="M1138 281c11-13 24-18 40-16 7-18 23-30 43-30 24 0 43 15 49 36 23-3 42 3 56 18h-188z"/>
+      <path d="M1488 427c7-9 17-13 29-12 5-13 18-22 32-22 19 0 34 12 37 29 17-3 32 2 43 13h-141z"/>
+      <path d="M48 576c9-9 20-13 33-12 6-15 20-25 37-25 21 0 38 13 42 31 20-2 37 3 49 15H48z" fill-opacity=".65"/>
+    </g>
+
+    <g class="landscape-orbit" stroke="#5D7390" stroke-width="1.15">
+      <ellipse cx="1123" cy="486" rx="107" ry="38" transform="rotate(-34 1123 486)" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <path d="m1058 532 2-9 8 4" stroke-linejoin="round"/>
+      <circle cx="1190" cy="438" r="5" fill="#5D7390" stroke="none"/>
+    </g>
+
+    <g class="landscape-cube">
+      <path d="m1086 446 34-19 34 19-34 20z" fill="#F4F3EE"/>
+      <path d="m1086 446 34 20v40l-34-20z" fill="#A1AACF"/>
+      <path d="m1120 466 34-20v40l-34 20z" fill="#6C789E"/>
+      <path d="m1086 446 34 20 34-20m-34 20v40" stroke="#4B5A80" stroke-opacity=".35" stroke-width="1.2"/>
+    </g>
+
+    <g class="landscape-arch">
+      <path d="M1039 800V645a252 252 0 0 1 504 0v155" stroke="#D6AFAF" stroke-width="36"/>
+      <path d="M1076 800V645a215 215 0 0 1 430 0v155" stroke="#F4F3EE" stroke-width="28"/>
+      <path d="M1109 800V645a182 182 0 0 1 364 0v155" stroke="#A4A8CE" stroke-width="28"/>
+      <path d="M1142 800V645a149 149 0 0 1 298 0v155" stroke="#3A4566" stroke-width="28"/>
+      <path d="M1175 800V645a116 116 0 0 1 232 0v155" stroke="#F4F3EE" stroke-width="28"/>
+      <path d="M1009 808V645a282 282 0 0 1 564 0v163" stroke="#5D7390" stroke-opacity=".65" stroke-dasharray="2 8" stroke-linecap="round"/>
+    </g>
+
+    <path d="M-100 776c152-63 288-86 420-39s228 71 360 5 223-88 356-59 211 52 340 2 229-44 324 22v293H-100z" fill="#B3CDD7"/>
+    <path d="M-100 848c149-12 284-107 426-86s241 95 384 63 246-108 373-88 230 81 367 38 184-29 250 0v225H-100z" fill="#DCE7E7"/>
+
+    <g class="landscape-spruce" fill="#819FAD">
+      <path d="m1242 736-18 33h10l-17 31h13l-19 32h27v24h7v-24h27l-19-32h13l-17-31h10z"/>
+      <path d="m1195 771-12 22h7l-12 22h9l-13 22h18v17h5v-17h18l-13-22h9l-12-22h7z"/>
+      <path d="m1391 739-13 24h7l-12 23h9l-14 24h20v18h6v-18h20l-14-24h9l-12-23h7z"/>
+    </g>
+
+    <path d="M-100 913c192-55 325-57 494-13s302 31 444-7 274-61 432-37 234 52 430-5v149H-100z" fill="#F4F3EE"/>
+    <path d="M884 1002c91-69 164-99 262-112 55-7 107-8 175-1-104 10-167 28-225 58l-79 55z" fill="#E7E9E4"/>
+    <path d="M-52 949c127-32 241-39 349-16" stroke="#C6CECC" stroke-width="1.2"/>
+    <path d="M1247 931c78 10 155 9 237-9" stroke="#C6CECC" stroke-width="1.2"/>
+
+    <g class="landscape-spruce" fill="#526D7C">
+      <path d="m184 730-18 35h10l-18 33h13l-21 37h29v29h8v-29h29l-21-37h13l-18-33h10z"/>
+      <path d="m140 785-13 25h7l-13 23h10l-15 26h21v22h6v-22h21l-15-26h10l-13-23h7z" fill="#74909C"/>
+      <path d="m1515 773-22 41h12l-21 38h16l-24 42h34v28h10v-28h34l-24-42h16l-21-38h12z"/>
+      <path d="m1463 814-13 24h7l-12 23h9l-14 25h20v19h6v-19h20l-14-25h9l-12-23h7z" fill="#8BA5AE"/>
+    </g>
+
+    <g class="landscape-sculpture">
+      <ellipse cx="419" cy="886" rx="58" ry="9" fill="#D6DFDC"/>
+      <path d="M390 875V771c0-25 13-42 33-42s33 17 33 42v104h-17V772c0-15-5-24-16-24s-16 9-16 24v103z" fill="#A6AACB"/>
+      <path d="M390 875V771c0-25 13-42 33-42 6 0 11 1 15 4-18 0-30 16-30 40v102z" fill="#7C87AA"/>
+      <path d="M407 875h32" stroke="#59647F" stroke-width="1.3"/>
+    </g>
+
+    <g class="landscape-cube">
+      <path d="m701 724 20-11 20 11-20 12z" fill="#F4F3EE"/>
+      <path d="m701 724 20 12v23l-20-12z" fill="#D0AAA8"/>
+      <path d="m721 736 20-12v23l-20 12z" fill="#B58F95"/>
+      <ellipse cx="721" cy="818" rx="24" ry="4" fill="#B4C8CC" fill-opacity=".55"/>
+    </g>
+
+    <g class="landscape-details" stroke="#8DA5AB" stroke-width="1.4" stroke-linecap="round">
+      <path d="m92 924 3-8m2 9 5-4m459 12 3-8m2 8 4-5m630-49 3-8m2 8 5-5m217 75 2-7m3 8 4-4"/>
+      <path d="M812 906h14m-7-7v14" stroke="#AAB9B8" stroke-width="1"/>
+      <circle cx="1343" cy="846" r="3" fill="#8DA5AB" stroke="none"/>
+      <circle cx="311" cy="872" r="2" fill="#8DA5AB" stroke="none"/>
+    </g>
+  </g>
+</svg>

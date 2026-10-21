@@ -1,264 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WANG Binghao Blog</title>
-    
-    <!-- Meta Tags -->
-    <meta name="description" content="Official website of Binghao WANG - AI, Game Development, and Art">
+    <meta name="description" content="Official website of Binghao WANG - World Models, Dangers and Ethics in Virtual Embodied AI">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Binghao WANG - Portfolio">
     <meta property="og:site_name" content="Binghao WANG">
-    <meta name="theme-color" content="#0a0a0b">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!-- Google Fonts -->
+    <meta name="theme-color" content="#c6dfe9">
+    <link rel="icon" href="./image/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/main.css?v=20260905-1">
-    <link rel="stylesheet" href="./css/click.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600&amp;family=Space+Grotesk:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css?v=20261021-3">
+    <script src="./js/main.js?v=20261021-3" defer></script>
 </head>
-
 <body class="page--home">
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu">
-        <nav class="g-nav">
-            <ul class="menu-nav">
-                <li class="sp"><a href="/" onclick="closeMobileMenu()">Home</a></li>
-                <li><a href="./html/News.html">News</a></li>
-                <li><a href="./files/cv-english-until-2026-05.pdf" target="_blank">CV</a></li>
-                <li><a href="./html/Bolg.html">Blog</a></li>
-                <li><a href="./html/About.html">About</a></li>
-                <li><a href="./html/Contacts.html">Contacts</a></li>
-            </ul>
-            
-            <ul class="sns-nav">
-                <li><a href="https://github.com/takashiwangbh" target="_blank"><i class="fa fa-github"></i></a></li>
-                <li><a href="mailto:takashiwangbh@gmail.com"><i class="fa fa-envelope"></i></a></li>
-                <li><a href="https://www.instagram.com/takashisyasinn" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank"><i class="fa fa-youtube"></i></a></li>
-            </ul>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <a class="site-brand" href="./index.html"><span class="brand-mark" aria-hidden="true">✳</span> Binghao WANG</a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="./html/News.html">News</a>
+            <a href="./files/cv-english-until-2026-05.pdf" target="_blank" rel="noopener">CV</a>
+            <a href="./html/Bolg.html">Blog</a>
+            <a href="./html/About.html">About</a>
+            <a href="./html/Contacts.html">Contacts</a>
         </nav>
-    </div>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+    </header>
+    <main id="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-landscape" aria-hidden="true"><svg class="hero-scene" preserveAspectRatio="xMidYMid slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <title>An open landscape</title>
+  <desc>A quiet powder blue sky above sculptural hills, an oversized pastel arch, floating geometric forms, and a few evergreen trees.</desc>
+  <defs>
+    <clipPath id="scene"><path d="M0 0h1600v1000H0z"/></clipPath>
+    <pattern id="ground-dashes" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-16)">
+      <path d="M0 0h5" stroke="#AEBFC0" stroke-width="1.3" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <g clip-path="url(#scene)">
+    <path fill="#C6DFE9" d="M0 0h1600v1000H0z"/>
 
-    <div class="wrap">
-        <!-- Header -->
-        <header>
-            <div class="inner">
-                <h1><a href="./index.html">Binghao WANG</a></h1>
-                
-                <!-- Desktop Navigation -->
-                <div class="drawer">
-                    <nav class="g-nav">
-                        <ul class="menu-nav">
-                            <li><a href="./html/News.html">News</a></li>
-                            <li><a href="./files/cv-english-until-2026-05.pdf" target="_blank">CV</a></li>
-                            <li><a href="./html/Bolg.html">Blog</a></li>
-                            <li><a href="./html/About.html">About</a></li>
-                            <li><a href="./html/Contacts.html">Contacts</a></li>
-                        </ul>
-                        
-                        <ul class="sns-nav">
-                            <li><a href="https://github.com/takashiwangbh" target="_blank"><i class="fa fa-github"></i></a></li>
-                            <li><a href="mailto:takashiwangbh@gmail.com"><i class="fa fa-envelope"></i></a></li>
-                            <li><a href="https://www.instagram.com/takashisyasinn" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                
-                <!-- Mobile Hamburger Button -->
-                <div class="drawer__btn" onclick="toggleMobileMenu()">
-                    <span></span><span></span><span></span>
-                </div>
+    <g class="landscape-sun">
+      <circle cx="1390" cy="174" r="40" fill="#F4F3EE"/>
+      <circle cx="1390" cy="174" r="55" stroke="#F4F3EE" stroke-opacity=".48"/>
+    </g>
+
+    <g class="landscape-cloud" fill="#E7EFF0">
+      <path d="M1138 281c11-13 24-18 40-16 7-18 23-30 43-30 24 0 43 15 49 36 23-3 42 3 56 18h-188z"/>
+      <path d="M1488 427c7-9 17-13 29-12 5-13 18-22 32-22 19 0 34 12 37 29 17-3 32 2 43 13h-141z"/>
+      <path d="M48 576c9-9 20-13 33-12 6-15 20-25 37-25 21 0 38 13 42 31 20-2 37 3 49 15H48z" fill-opacity=".65"/>
+    </g>
+
+    <g class="landscape-orbit" stroke="#5D7390" stroke-width="1.15">
+      <ellipse cx="1123" cy="486" rx="107" ry="38" transform="rotate(-34 1123 486)" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <path d="m1058 532 2-9 8 4" stroke-linejoin="round"/>
+      <circle cx="1190" cy="438" r="5" fill="#5D7390" stroke="none"/>
+    </g>
+
+    <g class="landscape-cube">
+      <path d="m1086 446 34-19 34 19-34 20z" fill="#F4F3EE"/>
+      <path d="m1086 446 34 20v40l-34-20z" fill="#A1AACF"/>
+      <path d="m1120 466 34-20v40l-34 20z" fill="#6C789E"/>
+      <path d="m1086 446 34 20 34-20m-34 20v40" stroke="#4B5A80" stroke-opacity=".35" stroke-width="1.2"/>
+    </g>
+
+    <g class="landscape-arch">
+      <path d="M1039 800V645a252 252 0 0 1 504 0v155" stroke="#D6AFAF" stroke-width="36"/>
+      <path d="M1076 800V645a215 215 0 0 1 430 0v155" stroke="#F4F3EE" stroke-width="28"/>
+      <path d="M1109 800V645a182 182 0 0 1 364 0v155" stroke="#A4A8CE" stroke-width="28"/>
+      <path d="M1142 800V645a149 149 0 0 1 298 0v155" stroke="#3A4566" stroke-width="28"/>
+      <path d="M1175 800V645a116 116 0 0 1 232 0v155" stroke="#F4F3EE" stroke-width="28"/>
+      <path d="M1009 808V645a282 282 0 0 1 564 0v163" stroke="#5D7390" stroke-opacity=".65" stroke-dasharray="2 8" stroke-linecap="round"/>
+    </g>
+
+    <path d="M-100 776c152-63 288-86 420-39s228 71 360 5 223-88 356-59 211 52 340 2 229-44 324 22v293H-100z" fill="#B3CDD7"/>
+    <path d="M-100 848c149-12 284-107 426-86s241 95 384 63 246-108 373-88 230 81 367 38 184-29 250 0v225H-100z" fill="#DCE7E7"/>
+
+    <g class="landscape-spruce" fill="#819FAD">
+      <path d="m1242 736-18 33h10l-17 31h13l-19 32h27v24h7v-24h27l-19-32h13l-17-31h10z"/>
+      <path d="m1195 771-12 22h7l-12 22h9l-13 22h18v17h5v-17h18l-13-22h9l-12-22h7z"/>
+      <path d="m1391 739-13 24h7l-12 23h9l-14 24h20v18h6v-18h20l-14-24h9l-12-23h7z"/>
+    </g>
+
+    <path d="M-100 913c192-55 325-57 494-13s302 31 444-7 274-61 432-37 234 52 430-5v149H-100z" fill="#F4F3EE"/>
+    <path d="M884 1002c91-69 164-99 262-112 55-7 107-8 175-1-104 10-167 28-225 58l-79 55z" fill="#E7E9E4"/>
+    <path d="M-52 949c127-32 241-39 349-16" stroke="#C6CECC" stroke-width="1.2"/>
+    <path d="M1247 931c78 10 155 9 237-9" stroke="#C6CECC" stroke-width="1.2"/>
+
+    <g class="landscape-spruce" fill="#526D7C">
+      <path d="m184 730-18 35h10l-18 33h13l-21 37h29v29h8v-29h29l-21-37h13l-18-33h10z"/>
+      <path d="m140 785-13 25h7l-13 23h10l-15 26h21v22h6v-22h21l-15-26h10l-13-23h7z" fill="#74909C"/>
+      <path d="m1515 773-22 41h12l-21 38h16l-24 42h34v28h10v-28h34l-24-42h16l-21-38h12z"/>
+      <path d="m1463 814-13 24h7l-12 23h9l-14 25h20v19h6v-19h20l-14-25h9l-12-23h7z" fill="#8BA5AE"/>
+    </g>
+
+    <g class="landscape-sculpture">
+      <ellipse cx="419" cy="886" rx="58" ry="9" fill="#D6DFDC"/>
+      <path d="M390 875V771c0-25 13-42 33-42s33 17 33 42v104h-17V772c0-15-5-24-16-24s-16 9-16 24v103z" fill="#A6AACB"/>
+      <path d="M390 875V771c0-25 13-42 33-42 6 0 11 1 15 4-18 0-30 16-30 40v102z" fill="#7C87AA"/>
+      <path d="M407 875h32" stroke="#59647F" stroke-width="1.3"/>
+    </g>
+
+    <g class="landscape-cube">
+      <path d="m701 724 20-11 20 11-20 12z" fill="#F4F3EE"/>
+      <path d="m701 724 20 12v23l-20-12z" fill="#D0AAA8"/>
+      <path d="m721 736 20-12v23l-20 12z" fill="#B58F95"/>
+      <ellipse cx="721" cy="818" rx="24" ry="4" fill="#B4C8CC" fill-opacity=".55"/>
+    </g>
+
+    <g class="landscape-details" stroke="#8DA5AB" stroke-width="1.4" stroke-linecap="round">
+      <path d="m92 924 3-8m2 9 5-4m459 12 3-8m2 8 4-5m630-49 3-8m2 8 5-5m217 75 2-7m3 8 4-4"/>
+      <path d="M812 906h14m-7-7v14" stroke="#AAB9B8" stroke-width="1"/>
+      <circle cx="1343" cy="846" r="3" fill="#8DA5AB" stroke="none"/>
+      <circle cx="311" cy="872" r="2" fill="#8DA5AB" stroke="none"/>
+    </g>
+  </g>
+</svg></div>
+            <div class="hero-intro">
+                <p class="hero-kicker"><span>World Models,</span> <span>Dangers and Ethics in Virtual Embodied AI</span></p>
+                <h1 class="hero-name" id="hero-title"><span>Binghao</span> <span>WANG</span><span class="hero-period" aria-hidden="true">.</span></h1>
             </div>
-        </header>
-
-        <!-- Main Visual -->
-        <div class="Top">
-            <img src="./image/title.png" alt="Binghao WANG" class="top_image">
-            <a class="top_image_section section1" href="./html/AI.html"><span class="section_text">AI</span></a>
-            <a class="top_image_section section2" href="./html/Game.html"><span class="section_text">GAME</span></a>
-            <a class="top_image_section section3" href="./html/Art.html"><span class="section_text">ART</span></a>
-        </div>
-
-        <!-- Latest News & GitHub -->
-        <section class="section--info" aria-label="Latest news, GitHub activity, and personal photography">
-            <div class="home-updates-grid">
-                <div class="block--news">
-                    <h2 class="block-tit">NEWS</h2>
-                    <ul class="list--information" id="news-list">
-                        <!-- 自動從 News.html 載入前三條 -->
-                        <li class="new loading">
-                            <a><p class="t">Loading...</p></a>
-                        </li>
-                    </ul>
-                    <p class="list__more"><a href="./html/News.html">VIEW MORE</a></p>
-                </div>
-
-                <aside class="block--github" aria-labelledby="github-title">
-                    <div class="github-heading">
-                        <h2 class="block-tit" id="github-title">GITHUB</h2>
-                        <a class="github-handle" href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer" aria-label="Open takashiwangbh on GitHub">
-                            <i class="fa fa-github" aria-hidden="true"></i>
-                            <span>@takashiwangbh</span>
-                        </a>
-                    </div>
-
-                    <div class="github-contributions">
-                        <div class="github-contributions__header">
-                            <span>CONTRIBUTION ACTIVITY</span>
-                            <span class="github-contributions__status"><i aria-hidden="true"></i>UPDATED DAILY</span>
-                        </div>
-                        <div class="github-contributions__viewport" tabindex="0" aria-label="Scrollable GitHub contribution graph">
-                            <img
-                                id="github-contribution-graph"
-                                class="github-contributions__graph"
-                                src="./image/github-contributions.svg"
-                                width="524"
-                                height="105"
-                                loading="lazy"
-                                decoding="async"
-                                alt="One year of GitHub contribution activity. Only relative activity levels are shown; repository details are hidden."
-                            >
-                        </div>
-                        <p class="github-contributions__note">
-                            This graph combines contribution activity from both my public and private repositories. My GitHub profile shows public activity only; private repository details remain hidden here.
-                        </p>
-                    </div>
-
-                    <a class="photography-feature" href="./html/Photography.html" aria-labelledby="photography-feature-title">
-                        <img
-                            class="photography-feature__image"
-                            src="./image/news2.jpg"
-                            alt="A waterfront view in Odaiba, Tokyo"
-                            loading="lazy"
-                            decoding="async"
-                        >
-                        <span class="photography-feature__header">
-                            <span>PERSONAL PHOTOGRAPHY</span>
-                            <span>04 PHOTOGRAPHS</span>
-                        </span>
-                        <span class="photography-feature__content">
-                            <span class="photography-feature__eyebrow">VISUAL ARCHIVE · CHINA / JAPAN</span>
-                            <span class="photography-feature__title" id="photography-feature-title" role="heading" aria-level="3">Personal Photography</span>
-                            <span class="photography-feature__description">Places, people, and ordinary days, arranged from the newest moment to the oldest.</span>
-                            <span class="photography-feature__cta">VIEW COLLECTION <span aria-hidden="true">↗</span></span>
-                        </span>
-                    </a>
-
-                    <p class="list__more github-more"><a href="https://github.com/takashiwangbh?tab=repositories" target="_blank" rel="noopener noreferrer">VIEW GITHUB</a></p>
-                </aside>
-            </div>
+            <button class="hero-character" type="button" aria-label="Animate the character">
+                <span class="character-shadow" aria-hidden="true"></span>
+                <span class="character-float"><span class="character-look"><img class="character-image" src="./image/hero-character.png" alt="" width="1254" height="1254" decoding="async" fetchpriority="high"></span></span>
+            </button>
+            <nav class="hero-fields" aria-label="Project categories">
+                <a class="field-link" href="./html/AI.html"><span class="field-number" aria-hidden="true">01</span><span class="field-name">AI</span><span class="field-arrow" aria-hidden="true">↗</span></a>
+                <a class="field-link" href="./html/Game.html"><span class="field-number" aria-hidden="true">02</span><span class="field-name">GAME</span><span class="field-arrow" aria-hidden="true">↗</span></a>
+                <a class="field-link" href="./html/Art.html"><span class="field-number" aria-hidden="true">03</span><span class="field-name">ART</span><span class="field-arrow" aria-hidden="true">↗</span></a>
+            </nav>
         </section>
-
-        <!-- Footer -->
-        <footer>
-            <ul class="sns-nav">
-                <li><a href="https://github.com/takashiwangbh" target="_blank" aria-label="GitHub"><i class="fa fa-github"></i></a></li>
-                <li><a href="mailto:takashiwangbh@gmail.com" aria-label="Email"><i class="fa fa-envelope"></i></a></li>
-                <li><a href="https://www.instagram.com/takashisyasinn" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UCtJ1XhQ-zYYNcHDeSAQ6BNw" target="_blank" aria-label="YouTube"><i class="fa fa-youtube"></i></a></li>
+        <section class="section--info" id="updates" aria-labelledby="news-title">
+            <div class="section-heading" data-reveal><h2 id="news-title">News<span class="heading-dot" aria-hidden="true">.</span></h2><a class="text-link" href="./html/News.html">VIEW MORE <span aria-hidden="true">↗</span></a></div>
+            <ul class="list--information" id="news-list">
+                <li class="new" data-reveal><a href="./html/News.html#news-13"><p class="date"><span class="year">2026</span>08.21</p><div class="news-content"><h3 class="news-title">NII-LLMC Research Assistant</h3><p class="t">I am working as a research assistant for the NII-LLMC consortium. The project name is “Construction of a Benchmark for Evaluating Multiple Hazardous Events Reflecting Diverse Human Values to Improve the Safety of LLM-jp-vl.”</p></div><span class="news-arrow" aria-hidden="true">↗</span></a></li>
+                <li class="new" data-reveal><a href="./html/News.html#news-12"><p class="date"><span class="year">2026</span>08.16</p><div class="news-content"><h3 class="news-title">Live Show at Marquee 24</h3><p class="t">My band and I successfully performed a live show at the Marquee 24 bar in Sapporo's Kita-24 district; we played nine songs.</p></div><span class="news-arrow" aria-hidden="true">↗</span></a></li>
+                <li class="new" data-reveal><a href="./html/News.html#news-11"><p class="date"><span class="year">2026</span>06.01</p><div class="news-content"><h3 class="news-title">D-RED researcher at Hokkaido University</h3><p class="t">I have become a D-RED researcher at Hokkaido University. （北海道大学総合イノベーション創発機構データ駆動型融合研究創発拠点研究員）</p></div><span class="news-arrow" aria-hidden="true">↗</span></a></li>
             </ul>
-            <p class="copyright"><small>&copy; WangBinghao_page</small></p>
-        </footer>
-    </div>
-
-    <!-- Scripts -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"></script>
-    <script src="./js/main.js?v=20260830-2"></script>
-    
-    <!-- Mobile Menu Script -->
-    <script>
-        function toggleMobileMenu() {
-            document.body.classList.toggle('menu-open');
-        }
-        
-        function closeMobileMenu() {
-            document.body.classList.remove('menu-open');
-        }
-        
-        // Close menu when clicking on a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-        
-        // 自動載入 News.html 的前三條新聞
-        (function() {
-            fetch('./html/News.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const newsCards = doc.querySelectorAll('.news-card');
-                    const newsList = document.getElementById('news-list');
-                    
-                    newsList.innerHTML = '';
-                    
-                    const count = Math.min(3, newsCards.length);
-                    for (let i = 0; i < count; i++) {
-                        const card = newsCards[i];
-                        const timestamp = card.querySelector('.timestamp');
-                        const content = card.querySelector('.news-card-content p');
-                        const title = card.dataset.title || '';
-                        
-                        if (timestamp && content) {
-                            const dateRaw = timestamp.textContent;
-                            const dateParts = dateRaw.split('-');
-                            const dateFormatted = dateParts.length === 3 
-                                ? `${dateParts[1]}.${dateParts[2]}` 
-                                : dateRaw.replace(/-/g, '.');
-                            const year = dateParts[0] || '';
-                            const text = content.textContent;
-                            const linkId = card.id || '';
-                            
-                            const li = document.createElement('li');
-                            li.className = 'new';
-                            li.innerHTML = `
-                                <a href="./html/News.html#${linkId}">
-                                    <p class="date"><span class="year">${year}</span>${dateFormatted}</p>
-                                    <div class="news-content">
-                                        <h3 class="news-title">${title}</h3>
-                                        <p class="t">${text}</p>
-                                    </div>
-                                </a>
-                            `;
-                            newsList.appendChild(li);
-                        }
-                    }
-                })
-                .catch(err => {
-                    console.error('Failed to load news:', err);
-                    document.getElementById('news-list').innerHTML = `
-                        <li class="new">
-                            <a href="./html/News.html">
-                                <p class="date">--</p>
-                                <div class="news-content">
-                                    <h3 class="news-title">View All News</h3>
-                                    <p class="t">Click to see the latest updates</p>
-                                </div>
-                            </a>
-                        </li>
-                    `;
-                });
-        })();
-
-        // 每天更換查詢參數，避免瀏覽器長時間保留舊的貢獻圖
-        (function() {
-            const contributionGraph = document.getElementById('github-contribution-graph');
-
-            if (contributionGraph) {
-                contributionGraph.src = './image/github-contributions.svg?v=' + new Date().toISOString().slice(0, 10);
-            }
-        })();
-    </script>
+        </section>
+        <section class="home-explore" aria-label="GitHub activity and personal photography">
+            <aside class="block--github" aria-labelledby="github-title" data-reveal>
+                <div class="github-heading"><h2 id="github-title">GitHub</h2><a class="github-handle" href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer">@takashiwangbh <span aria-hidden="true">↗</span></a></div>
+                <div class="github-contributions">
+                    <div class="github-contributions__header"><span>CONTRIBUTION ACTIVITY</span><span class="github-contributions__status"><i aria-hidden="true"></i><span id="github-sync-label">SAVED SNAPSHOT</span></span></div>
+                    <div class="github-contributions__viewport" tabindex="0" aria-label="Scrollable GitHub contribution graph"><img id="github-contribution-graph" class="github-contributions__graph" src="./image/github-contributions.svg?theme=light-v3" width="524" height="105" loading="lazy" decoding="async" alt="One year of GitHub contribution activity. Only relative activity levels are shown; repository details are hidden."></div>
+                    <p class="github-contributions__note" id="github-coverage-note">This is a saved activity snapshot. Private contribution coverage has not been verified for this snapshot. Only relative activity levels are shown; repository details remain hidden.</p>
+                </div>
+                <a class="text-link" href="https://github.com/takashiwangbh?tab=repositories" target="_blank" rel="noopener noreferrer">VIEW GITHUB <span aria-hidden="true">↗</span></a>
+            </aside>
+            <a class="photography-feature" href="./html/Photography.html" aria-labelledby="photography-feature-title" data-reveal>
+                <div class="photography-feature__visual"><img class="photography-feature__image" src="./image/news2.jpg" alt="A waterfront view in Odaiba, Tokyo" loading="lazy" decoding="async" width="2275" height="1279"><span class="photo-view" aria-hidden="true">↗</span><span class="photography-feature__header"><span>PERSONAL PHOTOGRAPHY</span><span>04 PHOTOGRAPHS</span></span></div>
+                <div class="photography-feature__content"><span class="photography-feature__eyebrow">VISUAL ARCHIVE · CHINA / JAPAN</span><h2 class="photography-feature__title" id="photography-feature-title">Personal Photography</h2><p class="photography-feature__description">Places, people, and ordinary days, arranged from the newest moment to the oldest.</p><span class="text-link photography-feature__cta">VIEW COLLECTION <span aria-hidden="true">↗</span></span></div>
+            </a>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-top"><a class="footer-contact" href="./html/Contacts.html">Contacts<span aria-hidden="true">↗</span></a><a class="circle-link footer-top-link" href="#main" aria-label="Back to top"><span aria-hidden="true">↑</span></a></div>
+        <div class="footer-bottom"><p class="copyright"><small>© WangBinghao_page</small></p><ul class="sns-nav"><li><a href="https://github.com/takashiwangbh" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="mailto:takashiwangbh@gmail.com">Email ↗</a></li></ul></div>
+    </footer>
 </body>
 </html>
