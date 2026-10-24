@@ -1,7 +1,7 @@
 @import url("./base.css");
 
 :root {
-  --page: #f4f3ee;
+  --page: #fff;
   --ink: #252a3d;
   --muted: #76776f;
   --font-body: "DM Sans", Arial, sans-serif;
@@ -169,16 +169,17 @@ body:has(dialog[open]) { overflow: hidden; }
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 20px;
+  gap: clamp(4px, 0.65vw, 8px);
+  width: 100%;
   padding-top: 13px;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: clamp(8px, 0.75vw, 10px);
   letter-spacing: 0.035em;
   line-height: 1.5;
 }
 
-.photo-date { font-size: inherit; }
+.photo-caption-field { white-space: nowrap; }
 
 .empty-archive {
   grid-column: 1 / -1;
@@ -206,12 +207,12 @@ body:has(dialog[open]) { overflow: hidden; }
   max-height: none;
   margin: 0;
   padding: 0;
-  color: #eeeae2;
+  color: var(--ink);
   border: 0;
-  background: #171816;
+  background: var(--page);
 }
 
-.photo-dialog::backdrop { background: #171816; }
+.photo-dialog::backdrop { background: var(--page); }
 
 .dialog-shell {
   display: grid;
@@ -225,7 +226,7 @@ body:has(dialog[open]) { overflow: hidden; }
   justify-self: end;
   min-height: 44px;
   padding: 0;
-  color: #eeeae2a6;
+  color: var(--muted);
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -233,7 +234,7 @@ body:has(dialog[open]) { overflow: hidden; }
   font-size: 11px;
 }
 
-.dialog-close:hover { color: #fff; }
+.dialog-close:hover { color: var(--ink); }
 
 .dialog-shell > img {
   align-self: center;
@@ -255,7 +256,7 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .dialog-caption > p {
   margin: 0;
-  color: #eeeae28c;
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 10px;
 }
@@ -271,7 +272,7 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .photo-meta-label {
   margin-bottom: 5px;
-  color: #eeeae27a;
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: 0.04em;
@@ -280,7 +281,7 @@ body:has(dialog[open]) { overflow: hidden; }
 }
 
 .photo-meta-value {
-  color: #eeeae2d9;
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 10px;
   line-height: 1.5;
@@ -307,7 +308,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .photo-grid .photo-item:nth-child(4n + 2) { grid-column: 3 / -1; }
   .photo-grid .photo-item:nth-child(4n + 3) { grid-column: 1 / span 11; }
   .photo-grid .photo-item:nth-child(4n + 4) { grid-column: 2 / -1; }
-  .photo-caption { padding-top: 10px; font-size: 8px; }
+  .photo-caption { padding-top: 10px; font-size: 9px; letter-spacing: 0; }
   .dialog-caption { align-items: flex-start; flex-direction: column; gap: 18px; }
   .dialog-metadata { justify-content: space-between; width: 100%; gap: 10px; }
   .dialog-shell { gap: 16px; padding-bottom: 24px; }

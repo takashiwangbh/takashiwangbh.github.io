@@ -22,6 +22,19 @@ function toUtcDate(value) {
   return new Date(value + 'T00:00:00Z');
 }
 
+function sixMonthStart(through) {
+  const end = toUtcDate(through);
+  const start = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth() - 6, 1));
+  const lastDayOfMonth = new Date(
+    Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 1, 0)
+  ).getUTCDate();
+
+  // Clamp month ends before advancing a day: retain dates after the same
+  // calendar date six months ago, through the final supplied day inclusive.
+  start.setUTCDate(Math.min(end.getUTCDate(), lastDayOfMonth) + 1);
+  return start.toISOString().slice(0, 10);
+}
+
 function normalizeDays(days) {
   const uniqueDays = new Map();
 
@@ -132,12 +145,15 @@ async function loadPublicPreview() {
 }
 
 function renderSvg(rawDays, source = 'unknown') {
-  const days = normalizeDays(rawDays);
+  const normalizedDays = normalizeDays(rawDays);
   const dataSource = ['authenticated', 'public-preview'].includes(source) ? source : 'unknown';
 
-  if (!days.length) {
+  if (!normalizedDays.length) {
     throw new Error('No contribution days were returned.');
   }
+
+  const from = sixMonthStart(normalizedDays.at(-1).date);
+  const days = normalizedDays.filter(day => day.date >= from);
 
   const cellSize = 7;
   const gap = 2;
@@ -216,9 +232,9 @@ function renderSvg(rawDays, source = 'unknown') {
   );
 
   return [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-labelledby="graph-title graph-description" data-through="' + days.at(-1).date + '" data-source="' + dataSource + '">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-labelledby="graph-title graph-description" data-from="' + days[0].date + '" data-through="' + days.at(-1).date + '" data-source="' + dataSource + '">',
     '  <title id="graph-title">GitHub contribution activity</title>',
-    '  <desc id="graph-description">One year of relative contribution activity. Repository names, commits, and code are not included.</desc>',
+    '  <desc id="graph-description">The most recent six calendar months of relative contribution activity, from ' + days[0].date + ' through ' + days.at(-1).date + '. Repository names, commits, and code are not included.</desc>',
     '  <style>text{fill:#777f7c;font:7px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;letter-spacing:.02em}.day{shape-rendering:geometricPrecision}rect[fill="#e4e8df"]{stroke:#d2d9cc;stroke-width:.5}</style>',
     '  ' + months.join('\n  '),
     '  ' + dayLabels.join('\n  '),

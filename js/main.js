@@ -6,8 +6,6 @@
   const photographyFeature = document.querySelector('.photography-feature');
   if (photographyFeature && Array.isArray(window.PHOTOGRAPHS)) {
     const photographs = window.PHOTOGRAPHS;
-    const count = photographyFeature.querySelector('#photography-feature-count');
-    if (count) count.textContent = `${photographs.length} PHOTOGRAPHS`;
     const cover = photographyFeature.querySelector('.photography-feature__image');
     const newest = photographs[0];
     if (cover && newest && typeof newest.src === 'string' && newest.src) {
@@ -202,7 +200,7 @@
   }
   const graph = document.getElementById('github-contribution-graph');
   if (graph) {
-    const graphURL = `${local('image/github-contributions.svg')}?theme=light-v3&v=${new Date().toISOString().slice(0,10)}`;
+    const graphURL = `${local('image/github-contributions.svg')}?theme=half-year-v1&v=${new Date().toISOString().slice(0,10)}`;
     graph.src = graphURL;
     const syncLabel = document.getElementById('github-sync-label');
     if (syncLabel) fetch(graphURL).then(response => {

@@ -4,7 +4,6 @@
   const photographs = window.PHOTOGRAPHS;
 
   const grid = document.getElementById("photo-grid");
-  const count = document.getElementById("photo-count");
   const dialog = document.getElementById("photo-dialog");
   const dialogImage = document.getElementById("dialog-image");
   const dialogTitle = document.getElementById("dialog-title");
@@ -54,12 +53,11 @@
     dialog.showModal();
   }
 
-  function createPhotoCard(photo, index, total) {
+  function createPhotoCard(photo, index) {
     const item = document.createElement("article");
     const button = document.createElement("button");
     const image = document.createElement("img");
     const caption = document.createElement("div");
-    const number = document.createElement("span");
 
     item.className = "photo-item";
     item.dataset.date = photo.date || "";
@@ -86,16 +84,18 @@
       image.loading = "lazy";
     }
     caption.className = "photo-caption";
-    number.className = "photo-index";
-    number.textContent = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
-    caption.appendChild(number);
-    if (photo.date) {
-      const date = document.createElement("time");
-      date.className = "photo-date";
-      date.dateTime = photo.date;
-      date.textContent = photo.date.replaceAll("-", ".");
-      caption.appendChild(date);
-    }
+    metadataFields(photo).forEach(([label, value]) => {
+      const field = document.createElement(label === "Date" && value ? "time" : "span");
+      field.className = "photo-caption-field";
+      field.setAttribute("aria-label", `${label}: ${displayValue(value)}`);
+      if (label === "Date" && value) {
+        field.dateTime = value;
+        field.textContent = value.replaceAll("-", ".");
+      } else {
+        field.textContent = `${label === "ISO" ? "ISO " : ""}${displayValue(value)}`;
+      }
+      caption.appendChild(field);
+    });
     button.appendChild(image);
     button.addEventListener("click", () => openDialog(photo));
     item.append(button, caption);
@@ -111,7 +111,6 @@
         ? "No photographs in the collection yet."
         : "The photography collection could not be loaded. Please try again later.";
       grid.replaceChildren(message);
-      count.textContent = Array.isArray(photographs) ? "00 photographs" : "Collection unavailable";
       return;
     }
 
@@ -121,11 +120,10 @@
     const fragment = document.createDocumentFragment();
 
     arranged.forEach((photo, index) => {
-      fragment.appendChild(createPhotoCard(photo, index, arranged.length));
+      fragment.appendChild(createPhotoCard(photo, index));
     });
 
     grid.replaceChildren(fragment);
-    count.textContent = `${String(arranged.length).padStart(2, "0")} photographs`;
   }
 
   dialogClose.addEventListener("click", () => dialog.close());
