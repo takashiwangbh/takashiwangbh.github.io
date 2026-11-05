@@ -1,5 +1,16 @@
 # Binghao WANG — Personal Website
 
+## 网站样式
+
+网站保持原生 HTML / CSS / JavaScript，直接使用现有 GitHub Pages Actions 发布，不需要 Node 前端构建、数据库或常驻服务器。2026-11 的视觉改版采用暖白、深墨色和陶土红，使用 Newsreader / Hanken Grotesk 字体；字体不可用时会自动回退到本机字体。
+
+- `css/base.css` 管理全站配色、字体、固定导航、菜单和页脚。
+- `css/main.css`、`css/pages.css`、`css/photography.css` 分别管理首页、内容页和摄影集。
+- `js/main.js` 保留首页新闻、摄影封面、贡献图同步，并统一内页导航和页脚。
+- `assets/taste/motion/` 是 Taste Skill 2.5.0 的原始悬停交互层，授权见同目录上级的 `LICENSE.txt`。没有使用 WebGL、滚动特效、外部图片服务或后端接口。
+
+本次参考 Taste Skill 的 split 首页结构和 Newsreader / Hanken Grotesk 字体组合，并按个人作品集调整：保留长篇项目说明、新闻、照片 EXIF 和原有链接，内容页高度随内容自然增长。所用图片均来自原仓库，没有新增素材占位。兼容性检查使用真实浏览器，覆盖首页 1440 / 1024 / 820 / 768 / 390px 和全部内页的桌面、手机尺寸；检查内部资源链接、菜单键盘操作及摄影大图。没有运行该 skill 针对公司营销页的固定屏高评分脚本。
+
 ## 更新摄影照片
 
 把照片放入 `photograph/` 文件夹（也可以使用子文件夹），提交后推送到 `main`。现有 GitHub Actions 发布流程会自动：

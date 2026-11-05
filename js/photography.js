@@ -8,6 +8,8 @@
   const dialogImage = document.getElementById("dialog-image");
   const dialogTitle = document.getElementById("dialog-title");
   const dialogMetadata = document.getElementById("dialog-metadata");
+  if (!grid || !dialog || !dialogImage || !dialogTitle || !dialogMetadata) return;
+
   const dialogClose = dialog.querySelector(".dialog-close");
   const dialogShell = dialog.querySelector(".dialog-shell");
   let lastFocusedCard = null;
@@ -47,7 +49,7 @@
   function openDialog(photo) {
     lastFocusedCard = document.activeElement;
     dialogImage.src = photo.fullSrc || photo.src;
-    dialogImage.alt = photo.alt;
+    dialogImage.alt = photo.alt || photo.title || "Personal photograph";
     dialogTitle.textContent = photo.title;
     dialogMetadata.replaceChildren(metadataContent(photo));
     dialog.showModal();
@@ -68,21 +70,25 @@
       "aria-label",
       `Open photograph ${index + 1}: ${photo.title}${photo.date ? `, photographed ${photo.date}` : ""}`
     );
-    image.src = index < 3 ? photo.fullSrc || photo.src : photo.src;
+    image.src = index === 0 ? photo.fullSrc || photo.src : photo.src;
     if (photo.fullSrc && Number.isFinite(photo.fullWidth) && photo.fullWidth > photo.width) {
       image.srcset = `${photo.src} ${photo.width}w, ${photo.fullSrc} ${photo.fullWidth}w`;
-      const desktopWidth = [83, 60, 45, 30, 75, 60, 37, 90, 37, 37, 67, 67][index % 12];
-      image.sizes = `(max-width: 700px) 90vw, (min-width: 2200px) ${Math.round(desktopWidth / 90 * 2000)}px, ${desktopWidth}vw`;
+      image.sizes = index === 0
+        ? "(min-width: 1440px) 1280px, (max-width: 700px) calc(100vw - 48px), 89vw"
+        : "(min-width: 1440px) 624px, (max-width: 700px) calc(100vw - 48px), calc(44.5vw - 16px)";
     }
     image.width = photo.width;
     image.height = photo.height;
-    image.alt = photo.alt;
+    image.alt = photo.alt || photo.title || "Personal photograph";
+    image.dataset.source = "client";
+    image.dataset.subject = "personal photography";
     image.decoding = "async";
-    if (index < 3) {
+    if (index === 0) {
       image.fetchPriority = "high";
     } else {
       image.loading = "lazy";
     }
+    button.setAttribute("aria-haspopup", "dialog");
     caption.className = "photo-caption";
     metadataFields(photo).forEach(([label, value]) => {
       const field = document.createElement(label === "Date" && value ? "time" : "span");

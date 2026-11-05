@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-type="service" data-radius="soft" data-motion>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art Projects - Binghao WANG</title>
+    <meta name="theme-color" content="#f5f2ec">
+    <link rel="icon" href="../image/favicon.svg" type="image/svg+xml">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;450;500;600&amp;family=Instrument+Serif:ital@0;1&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../css/pages.css?v=20261023">
+    <link rel="stylesheet" href="../css/pages.css?v=20261106-taste">
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="page-header">
         <div class="page-header-inner">
-            <h1><a href="../index.html">Binghao WANG</a></h1>
+            <p class="page-brand"><a class="site-brand" href="../index.html">Binghao WANG</a></p>
             <a href="../index.html" class="back-link">← Back to Home</a>
         </div>
     </header>
@@ -28,7 +31,7 @@
         </div>
     </nav>
 
-    <main class="page-content">
+    <main id="main" class="page-content">
         <h1 class="page-title">Art Projects</h1>
 
         <div class="project-list">
@@ -39,17 +42,17 @@
                         PBR (Physically Based Rendering) is a rendering method based on physical principles. It generates more realistic visual effects by simulating real-world lighting, reflection, and material properties (such as metalness and roughness). I have made some PBR renderings in Unity, and you can see that the results are quite realistic. The purpose of PBR rendering is to render as realistically as possible.
                     </p>
         </div>
-                <img src="../image/PBR.png" alt="PBR Rendering" width="954" height="414" decoding="async">
+                <img data-source="client" src="../image/PBR.png" alt="PBR Rendering" width="954" height="414" decoding="async">
             </article>
 
             <article class="project-card">
                 <div class="project-card-content">
                     <h2 class="project-card-title">Use shader code in Unity to reproduce art effects</h2>
                     <p class="project-card-description">
-                        According to more than ten different themes, I used shader to reproduce several special art effects. I wrote a blog, and various art effects are displayed at the <a href="../Blog/Use shader code in Unity to reproduce  art effects.html" target="_blank">Display Blog</a>.
+                        According to more than ten different themes, I used shader to reproduce several special art effects. I wrote a blog, and various art effects are displayed at the <a href="../Blog/Use shader code in Unity to reproduce  art effects.html" target="_blank" rel="noopener noreferrer">Display Blog</a>.
                     </p>
     </div>
-                <img src="../image/Art3.png" alt="Shader Art Effects" width="840" height="513" decoding="async">
+                <img data-source="client" src="../image/Art3.png" alt="Shader Art Effects" width="840" height="513" decoding="async" loading="lazy">
             </article>
 
             <article class="project-card">
@@ -59,10 +62,10 @@
                 In 3Dmax, I learned and used the modeling of furniture, lighting of the whole house, cameras, etc., and finally made a model of a living room and bedroom. The rendering results also look more realistic.
             </p>
                 </div>
-                <img src="../image/Art1.png" alt="3D Interior Design" width="859" height="320" decoding="async">
+                <img data-source="client" src="../image/Art1.png" alt="3D Interior Design" width="859" height="320" decoding="async" loading="lazy">
             </article>
         </div>
     </main>
-    <script src="../js/main.js" defer></script>
+    <script src="../js/main.js?v=20261106-taste" defer></script>
 </body>
 </html>
