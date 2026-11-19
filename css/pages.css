@@ -1,4 +1,3 @@
-@import url('./base.css?v=20261106');
 
 /* The portfolio's editorial pages share the home page's colour and type tokens. */
 :root { --page-gutter: var(--gutter); --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace; }

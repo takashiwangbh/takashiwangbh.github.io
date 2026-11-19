@@ -1,4 +1,3 @@
-@import url("./base.css?v=20261106");
 
 /* The photographs keep their own proportions; the surrounding page stays quiet. */
 .page-photography { min-width: 320px; }
