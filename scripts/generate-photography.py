@@ -219,6 +219,7 @@ def build(root: Path, asset_base: str | None = None) -> int:
         ) as temporary:
             temporary_path = Path(temporary.name)
             temporary.write(javascript_data(photos))
+        temporary_path.chmod(0o644)
         temporary_path.replace(manifest_path)
     finally:
         if temporary_path is not None and temporary_path.exists():
