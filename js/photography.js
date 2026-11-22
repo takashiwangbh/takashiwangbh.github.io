@@ -48,11 +48,12 @@
 
   function openDialog(photo) {
     lastFocusedCard = document.activeElement;
-    dialogImage.src = photo.fullSrc || photo.src;
-    dialogImage.alt = photo.alt || photo.title || "Personal photograph";
     dialogTitle.textContent = photo.title;
+    const status = document.createElement("span");
+    dialogTitle.appendChild(status);
     dialogMetadata.replaceChildren(metadataContent(photo));
     dialog.showModal();
+    window.PhotoSource.load(dialogImage, photo, { statusElement: status });
   }
 
   function createPhotoCard(photo, index) {
@@ -70,13 +71,6 @@
       "aria-label",
       `Open photograph ${index + 1}: ${photo.title}${photo.date ? `, photographed ${photo.date}` : ""}`
     );
-    image.src = index === 0 ? photo.fullSrc || photo.src : photo.src;
-    if (photo.fullSrc && Number.isFinite(photo.fullWidth) && photo.fullWidth > photo.width) {
-      image.srcset = `${photo.src} ${photo.width}w, ${photo.fullSrc} ${photo.fullWidth}w`;
-      image.sizes = index === 0
-        ? "(min-width: 1440px) 1280px, (max-width: 700px) calc(100vw - 48px), 89vw"
-        : "(min-width: 1440px) 624px, (max-width: 700px) calc(100vw - 48px), calc(44.5vw - 16px)";
-    }
     image.width = photo.width;
     image.height = photo.height;
     image.alt = photo.alt || photo.title || "Personal photograph";
@@ -105,6 +99,7 @@
     button.appendChild(image);
     button.addEventListener("click", () => openDialog(photo));
     item.append(button, caption);
+    window.PhotoSource.load(image, photo, { lazy: index !== 0 });
 
     return item;
   }
@@ -141,7 +136,7 @@
   });
 
   dialog.addEventListener("close", () => {
-    dialogImage.removeAttribute("src");
+    window.PhotoSource.clear(dialogImage);
 
     if (lastFocusedCard) {
       lastFocusedCard.focus({ preventScroll: true });

@@ -110,3 +110,6 @@
   .photography-feature__title,.github-heading h2 { font-size: 44px; } .github-heading { margin-bottom: 32px; }
 }
 @media(max-width:390px) { .hero-name { font-size: 18.8vw; } .hero-actions { gap: 20px; } }
+
+.photo-load-status:not([hidden]) { display: block; padding: 16px; color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+.photography-feature__visual .photo-load-status:not([hidden]) { position: absolute; inset: 0; display: grid; place-items: center; background: var(--bg-secondary); text-align: center; }

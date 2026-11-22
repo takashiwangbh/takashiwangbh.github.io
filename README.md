@@ -18,7 +18,7 @@
 - `assets/fonts/` 保存 Newsreader / Hanken Grotesk 的 WOFF2 字体和 SIL OFL 授权文件，`css/base.css` 定义字体。页面预加载两个常用拉丁字形文件，其他字形按需加载，保留 `font-display: swap`。
 - 每页直接按顺序引入 `motion.css`、`base.css` 和页面 CSS，让浏览器并行下载；新增页面也应使用这个顺序，避免恢复串行 `@import`。
 - AI 页首图及 Art / Blog 的 Shader 预览使用已有 WebP，原始图片仍保留。AI 预览是原图的等比例 960 × 549 版本。
-- 图片、字体、脚本和样式均由本站提供；GitHub 贡献图在 Actions 生成，访客不需要访问 GitHub API。
+- 项目配图、字体、脚本和样式均由本站提供；摄影集直接读取当前发布版本在仓库中的原照片。GitHub 贡献图在 Actions 生成，访客不需要访问 GitHub API。
 
 当前仍由 GitHub Pages 提供服务。资源优化能减少等待和下载量，但不能保证中国大陆三网的速度。域名目前未备案，使用大陆 CDN 节点前需先完成 ICP 备案；未备案阶段可评估香港节点，并在电信、联通、移动的实际网络与晚高峰验证效果。加速区域的备案要求参见 [阿里云 CDN 官方说明](https://www.alibabacloud.com/help/en/cdn/user-guide/change-the-accelerated-region)。代码修改本身不会切换 DNS 或开通 CDN。
 
@@ -28,12 +28,14 @@
 
 - 扫描文件夹，替换摄影页面的照片列表，并同步首页封面。
 - 按 EXIF 中的真实拍摄日期从新到旧排序；没有拍摄日期的照片排在最后。
-- 生成用于摄影页面和大图预览的 JPEG，保留照片比例并纠正 EXIF 方向。
+- 只生成照片清单和 EXIF 参数，页面直接读取照片，不另存缩略图或大图。
 - 部署到 GitHub Pages。删除照片后再次推送，页面也会同步移除。
 
-支持 JPG / JPEG、PNG、WebP、TIFF 和 Sony ARW（使用内嵌预览）。照片文件名用作标题；ISO、快门、光圈和日期从照片信息读取，缺失的信息显示为 `—`。隐藏文件会被忽略。
+支持 JPG / JPEG、PNG、WebP 和 Sony ARW。JPG 等浏览器支持的格式直接显示原文件；ARW 通过浏览器分段读取文件内已有的 JPEG 预览，在内存中显示，不提取或保存图片文件。照片文件名用作标题；ISO、快门、光圈和日期从照片信息读取，缺失的信息显示为 `—`。隐藏文件会被忽略。
 
-原照片保留在仓库里，网站只发布生成的网页图片，避免访问时下载大体积原片。`photograph/generated/` 和 `js/photographs-data.js` 是自动生成的文件，无需提交，也无需手动修改 HTML 或照片清单。
+原照片只保留在 `photograph/`，不创建 `generated` 文件夹，也不生成重复图片。`js/photographs-data.js` 仅记录照片地址、参数和 RAW 预览的字节范围，由发布流程自动生成，无需提交。
+
+生产环境照片地址指向 GitHub 仓库中本次发布的提交，照片不重复打包进 GitHub Pages，以适应 Pages 的 1 GB 发布限制。本地预览仍直接读取本地 `photograph/`。原图大小决定 JPG 的加载量；RAW 通常只读取内嵌预览，支持分段请求时不下载完整 RAW。
 
 ## 本地预览
 

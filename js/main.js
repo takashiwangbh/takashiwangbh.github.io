@@ -8,15 +8,10 @@
     const photographs = window.PHOTOGRAPHS;
     const cover = photographyFeature.querySelector('.photography-feature__image');
     const newest = photographs[0];
-    if (cover && newest && typeof newest.src === 'string' && newest.src) {
-      try {
-        cover.src = new URL(newest.src, local('html/Photography.html')).href;
-        cover.alt = newest.alt || newest.title || 'Personal photograph';
-        if (Number.isInteger(newest.width) && newest.width > 0) cover.width = newest.width;
-        if (Number.isInteger(newest.height) && newest.height > 0) cover.height = newest.height;
-        cover.addEventListener('error', () => { cover.hidden = true; }, { once: true });
-        cover.hidden = false;
-      } catch { /* Leave the cover hidden when its URL is unavailable. */ }
+    if (cover && newest && typeof newest.src === 'string' && newest.src && window.PhotoSource) {
+      const photo = { ...newest, src: new URL(newest.src, local('html/Photography.html')).href };
+      cover.hidden = false;
+      window.PhotoSource.load(cover, photo, { lazy: true });
     }
   }
   const navigation = [

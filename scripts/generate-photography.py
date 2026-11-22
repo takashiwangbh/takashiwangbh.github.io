@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build the photography collection from source files in photograph/.
+"""Index the photography collection without changing or duplicating photos.
 
 Install scripts/photography-requirements.txt, then run this script from any
-directory. Source files are never changed. ARW files use their camera-rendered
-embedded preview, so their web images may be smaller than the requested limit.
+directory. Only js/photographs-data.js is written. ARW entries describe the
+embedded JPEG byte range, which the browser reads directly from the original.
 """
 
 from __future__ import annotations
@@ -19,13 +19,13 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+from urllib.parse import quote
 
-from PIL import Image, ImageCms, ImageOps
+from PIL import Image
+from PIL.TiffImagePlugin import ImageFileDirectory_v2
 
 
-SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff", ".arw"}
-SRGB_PROFILE = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB"))
-SRGB_BYTES = SRGB_PROFILE.tobytes()
+SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".arw"}
 
 
 def source_photos(directory: Path) -> list[Path]:
@@ -38,6 +38,8 @@ def source_photos(directory: Path) -> list[Path]:
         )
         for name in sorted(filenames):
             path = Path(current) / name
+            if not name.startswith(".") and path.suffix.lower() in {".tif", ".tiff"}:
+                raise ValueError(f"Export TIFF photographs as JPG for browser display: {path}")
             if not name.startswith(".") and path.suffix.lower() in SUPPORTED_EXTENSIONS:
                 if path.is_symlink():
                     raise ValueError(f"Source photographs must be regular files: {path}")
@@ -94,85 +96,73 @@ def exif_fields(exif: Image.Exif) -> dict:
     }
 
 
-def load_photo(path: Path) -> tuple[Image.Image, Image.Exif]:
+def orientation_value(value) -> int:
+    try:
+        orientation = int(value)
+        return orientation if 1 <= orientation <= 8 else 1
+    except (TypeError, ValueError):
+        return 1
+
+
+def display_dimensions(size: tuple[int, int], orientation: int) -> tuple[int, int]:
+    width, height = size
+    return (height, width) if orientation in {5, 6, 7, 8} else (width, height)
+
+
+def read_photo(path: Path) -> dict:
     if path.suffix.lower() != ".arw":
+        # PNG EXIF lookup may finish loading the file. Verify first with its
+        # own handle, because Pillow requires verification immediately on open.
         with Image.open(path) as original:
-            original.load()
-            # TIFF may lazily read EXIF from the source handle. Detach it while
-            # that handle is open so metadata remains available afterwards.
-            exif = Image.Exif()
-            exif.load(original.getexif().tobytes())
-            return original.copy(), exif
+            original.verify()
+        with Image.open(path) as original:
+            exif = original.getexif()
+            width, height = display_dimensions(
+                original.size, orientation_value(exif.get(274, 1))
+            )
+            metadata = exif_fields(exif)
+        return {"width": width, "height": height, **metadata}
 
-    # Pillow can read the TIFF-based EXIF in ARW even though it does not decode
-    # the raw pixels. Let rawpy/LibRaw handle the proprietary preview format.
-    exif = Image.Exif()
-    try:
-        exif.load(path.read_bytes())
-    except (OSError, SyntaxError, TypeError, ValueError):
+    # ARW is a TIFF container. Pillow reads its standard IFD/EXIF entries from
+    # the open file, without loading or decoding the raw sensor data.
+    with path.open("rb") as source:
+        header = source.read(8)
+        directory = ImageFileDirectory_v2(header)
+        source.seek(directory.next)
+        directory.load(source)
+        offset, length = directory.get(513), directory.get(514)
+        file_size = path.stat().st_size
+        if (
+            not isinstance(offset, int) or not isinstance(length, int)
+            or offset < 0 or length < 4 or offset + length > file_size
+        ):
+            raise ValueError("ARW has no valid embedded JPEG byte range")
+
+        source.seek(0)
         exif = Image.Exif()
+        exif.load_from_fp(source)
+        metadata = exif_fields(exif)
+        raw_orientation = orientation_value(exif.get(274, 1))
 
-    try:
-        import rawpy
-    except ImportError as error:
-        raise RuntimeError(
-            "ARW support requires rawpy; install scripts/photography-requirements.txt"
-        ) from error
+        source.seek(offset)
+        jpeg = source.read(length)
+        if len(jpeg) != length:
+            raise ValueError("ARW embedded JPEG is truncated")
+        with Image.open(BytesIO(jpeg)) as preview:
+            if preview.format != "JPEG":
+                raise ValueError("ARW embedded preview is not JPEG")
+            # Browser JPEG decoding applies embedded EXIF first. Use the RAW
+            # orientation only when the embedded JPEG does not specify one.
+            orientation = orientation_value(preview.getexif().get(274, raw_orientation))
+            width, height = display_dimensions(preview.size, orientation)
+            preview.load()
 
-    with rawpy.imread(str(path)) as raw:
-        thumbnail = raw.extract_thumb()
-        if thumbnail.format == rawpy.ThumbFormat.JPEG:
-            with Image.open(BytesIO(thumbnail.data)) as preview:
-                preview.load()
-                image = preview.copy()
-        elif thumbnail.format == rawpy.ThumbFormat.BITMAP:
-            image = Image.fromarray(thumbnail.data.copy())
-        else:
-            raise ValueError("RAW preview is neither JPEG nor bitmap")
-
-    preview_exif = image.getexif()
-    if 274 not in preview_exif and exif.get(274) is not None:
-        preview_exif[274] = exif[274]
-        image.info["exif"] = preview_exif.tobytes()
-    return image, exif
-
-
-def web_rgb(image: Image.Image) -> Image.Image:
-    image = ImageOps.exif_transpose(image)
-    profile = image.info.get("icc_profile")
-    transparent = "A" in image.getbands() or "transparency" in image.info
-    if transparent:
-        image = image.convert("RGBA")
-    elif image.mode not in {"RGB", "CMYK", "L", "LAB"}:
-        image = image.convert("RGB")
-
-    if profile:
-        # An invalid color profile should fail this build, rather than silently
-        # publish colors that differ from the source photograph.
-        source_profile = ImageCms.ImageCmsProfile(BytesIO(profile))
-        output_mode = "RGBA" if transparent else "RGB"
-        image = ImageCms.profileToProfile(
-            image, source_profile, SRGB_PROFILE, outputMode=output_mode
-        )
-
-    if transparent:
-        background = Image.new("RGB", image.size, "white")
-        background.paste(image, mask=image.getchannel("A"))
-        return background
-    return image.convert("RGB")
-
-
-def write_variant(image: Image.Image, path: Path, limit: int, quality: int) -> tuple[int, int]:
-    resized = image.copy()
-    resized.thumbnail((limit, limit), Image.Resampling.LANCZOS)
-    # Supply only the display color profile. In particular, never copy EXIF,
-    # GPS, XMP, camera serial numbers, or source comments to the public JPEGs.
-    resized.info.clear()
-    resized.save(
-        path, "JPEG", quality=quality, optimize=True, progressive=True,
-        icc_profile=SRGB_BYTES, exif=b"",
-    )
-    return resized.size
+    return {
+        "width": width,
+        "height": height,
+        "preview": {"offset": offset, "length": length, "orientation": orientation},
+        **metadata,
+    }
 
 
 def javascript_data(photos: list[dict]) -> str:
@@ -185,63 +175,55 @@ def javascript_data(photos: list[dict]) -> str:
     return "// Generated by scripts/generate-photography.py. Do not edit.\nwindow.PHOTOGRAPHS = " + payload + ";\n"
 
 
-def build(root: Path) -> tuple[int, int]:
+def build(root: Path, asset_base: str | None = None) -> int:
     source_directory = root / "photograph"
-    generated_directory = source_directory / "generated"
     manifest_path = root / "js" / "photographs-data.js"
-    source_directory.mkdir(parents=True, exist_ok=True)
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     photos = []
+    asset_directory = asset_base.rstrip("/") + "/" if asset_base else "../photograph/"
 
-    # Conversion failures leave the previous public collection intact. Only
-    # publish the staged files after every source has converted successfully.
-    with tempfile.TemporaryDirectory(prefix=".photography-build-", dir=root) as temporary:
-        staging = Path(temporary)
-        for path in source_photos(source_directory):
-            filename = path.relative_to(source_directory).as_posix()
-            identity = hashlib.sha256(filename.encode("utf-8")).hexdigest()
-            try:
-                image, exif = load_photo(path)
-                metadata = exif_fields(exif)
-                image = web_rgb(image)
-                width, height = write_variant(image, staging / f"{identity}-thumb.jpg", 1200, 82)
-                full_width, full_height = write_variant(image, staging / f"{identity}-large.jpg", 2560, 88)
-            except Exception as error:
-                raise RuntimeError(f"Cannot build {filename}: {error}") from error
-            photos.append({
-                "id": identity,
-                "filename": filename,
-                "src": f"../photograph/generated/{identity}-thumb.jpg",
-                "fullSrc": f"../photograph/generated/{identity}-large.jpg",
-                "width": width,
-                "height": height,
-                "fullWidth": full_width,
-                "fullHeight": full_height,
-                "alt": path.stem,
-                "title": path.stem,
-                **metadata,
-            })
+    for path in source_photos(source_directory):
+        relative_path = path.relative_to(source_directory)
+        filename = relative_path.as_posix()
+        identity = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+        try:
+            details = read_photo(path)
+        except Exception as error:
+            raise RuntimeError(f"Cannot index {filename}: {error}") from error
+        encoded_path = "/".join(quote(part, safe="") for part in relative_path.parts)
+        src = asset_directory + encoded_path
+        photos.append({
+            "id": identity,
+            "filename": filename,
+            "src": src,
+            "fullSrc": src,
+            "fullWidth": details["width"],
+            "fullHeight": details["height"],
+            "alt": path.stem,
+            "title": path.stem,
+            **details,
+        })
 
-        # Stable filename order breaks ties, then stable date sorting puts the
-        # newest capture first and missing dates at the end. Never use mtime.
-        photos.sort(key=lambda photo: photo["filename"])
-        photos.sort(key=lambda photo: photo["date"] or "", reverse=True)
-        staged_manifest = staging / "photographs-data.js"
-        staged_manifest.write_text(javascript_data(photos), encoding="utf-8")
+    # Stable filename order breaks ties, then stable date sorting puts the
+    # newest capture first and missing dates at the end. Never use mtime.
+    photos.sort(key=lambda photo: photo["filename"])
+    photos.sort(key=lambda photo: photo["date"] or "", reverse=True)
 
-        generated_directory.mkdir(parents=True, exist_ok=True)
-        expected_names = {path.name for path in staging.glob("*.jpg")}
-        for path in sorted(staging.glob("*.jpg")):
-            path.replace(generated_directory / path.name)
-        staged_manifest.replace(manifest_path)
-        # Remove only files owned by this generator; leave unrelated files alone.
-        for path in generated_directory.iterdir():
-            if re.fullmatch(r"[0-9a-f]{64}-(?:thumb|large)\.jpg", path.name):
-                if path.name not in expected_names:
-                    path.unlink()
-
-    size = sum((generated_directory / name).stat().st_size for name in expected_names)
-    return len(photos), size
+    # Read/validation failures leave the previous collection intact. Stage only
+    # the manifest beside its destination, then replace it atomically.
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", prefix=".photographs-data-", suffix=".js",
+            dir=manifest_path.parent, delete=False,
+        ) as temporary:
+            temporary_path = Path(temporary.name)
+            temporary.write(javascript_data(photos))
+        temporary_path.replace(manifest_path)
+    finally:
+        if temporary_path is not None and temporary_path.exists():
+            temporary_path.unlink()
+    return len(photos)
 
 
 def main() -> int:
@@ -250,16 +232,19 @@ def main() -> int:
         "--root", type=Path, default=Path(__file__).resolve().parents[1],
         help="repository root containing photograph/ and js/",
     )
+    parser.add_argument(
+        "--asset-base", help="URL directory containing original photos; default: ../photograph/",
+    )
     arguments = parser.parse_args()
     root = arguments.root.resolve()
     if not root.is_dir():
         parser.error(f"root directory does not exist: {root}")
     try:
-        count, size = build(root)
+        count = build(root, arguments.asset_base)
     except Exception as error:
         print(f"Photography build failed: {error}", file=sys.stderr)
         return 1
-    print(f"Built {count} photographs ({size / 1_000_000:.2f} MB of web images).")
+    print(f"Indexed {count} photographs without writing image files.")
     return 0
 
 

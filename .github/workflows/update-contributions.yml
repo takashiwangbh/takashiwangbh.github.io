@@ -41,7 +41,9 @@ jobs:
         run: python -m pip install -r scripts/photography-requirements.txt
 
       - name: Build photography collection
-        run: python scripts/generate-photography.py
+        run: >-
+          python scripts/generate-photography.py
+          --asset-base "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/photograph/"
 
       # Use an account-owned classic PAT with read:user (or user), stored as an
       # Actions secret. The repository-scoped GITHUB_TOKEN cannot substitute for it.
@@ -63,17 +65,18 @@ jobs:
             --exclude '.DS_Store' \
             --exclude '.gitignore' \
             ./ _site/
-          mkdir -p _site/photograph
-          cp -R photograph/generated _site/photograph/generated
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload website artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
+          name: github-pages
           path: _site
 
       - name: Deploy GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: github-pages

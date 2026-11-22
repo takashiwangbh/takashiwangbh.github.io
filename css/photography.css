@@ -187,3 +187,5 @@ body:has(dialog[open]) { overflow: hidden; }
   .photo-card > img { transition: none; }
   .photo-card:hover > img { transform: none; }
 }
+
+.photo-load-status:not([hidden]) { display: block; padding: 16px; color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
