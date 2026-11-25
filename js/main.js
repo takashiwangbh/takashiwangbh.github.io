@@ -26,12 +26,6 @@
     nav.innerHTML = navMarkup;
     pageHeader.insertBefore(nav, pageHeader.querySelector('.back-link'));
     pageHeader.dataset.navigationReady = '';
-    const brand = pageHeader.querySelector('.page-brand a, a.site-brand');
-    if (brand) {
-      brand.classList.add('site-brand');
-      const mark = document.createElement('span'); mark.className = 'brand-mark';
-      mark.setAttribute('aria-hidden','true'); mark.textContent = 'bw'; brand.prepend(mark);
-    }
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'menu-toggle';
     button.setAttribute('aria-label','Open menu'); button.setAttribute('aria-expanded','false');
