@@ -18,13 +18,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  update:
+  build:
     if: github.repository_owner == 'takashiwangbh'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Check out the website
@@ -75,6 +72,16 @@ jobs:
           name: github-pages
           path: _site
 
+  deploy:
+    if: github.repository_owner == 'takashiwangbh'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
