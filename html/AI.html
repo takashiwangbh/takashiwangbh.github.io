@@ -11,7 +11,7 @@
     <link rel="preload" href="../assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/taste/motion/motion.css">
-    <link rel="stylesheet" href="../css/base.css?v=20261125-avatar">
+    <link rel="stylesheet" href="../css/base.css?v=20261125-profile">
     <link rel="stylesheet" href="../css/pages.css?v=20261119-local">
 </head>
 <body>
@@ -19,7 +19,7 @@
     <header class="page-header">
         <div class="page-header-inner">
             <a class="site-brand" href="../index.html" aria-label="Binghao WANG — Home"><img class="site-avatar" src="../image/github-avatar.jpg" width="40" height="40" alt=""></a>
-            <a href="../index.html" class="back-link">← Back to Home</a>
+            <a href="../index.html" class="back-link">Back to Home</a>
         </div>
     </header>
 
@@ -38,6 +38,16 @@
 
             <article class="project-card">
                 <div class="project-card-content">
+                    <h2 class="project-card-title">SafeSight: Auditing False Alarms in Embodied Hazard Perception</h2>
+                    <p class="project-card-description">
+                        SafeSight introduces a simulation-based benchmark for auditing hazard perception in embodied AI, revealing systematic false alarms and vulnerabilities to sensor noise across 12 language and vision-language models. We further propose a lightweight verification mechanism that reduces false alarms by approximately 50% in two representative VLMs without model retraining. The related work was published at PRICAI 2026. <a href="https://github.com/takashiwangbh/SafeSight" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="../image/prcai.pdf" target="_blank" rel="noopener noreferrer">Results PDF</a>
+                    </p>
+                </div>
+                <img data-source="client" src="../image/safesight-overview.jpg" alt="SafeSight benchmark design and false alarm evaluation results" width="1920" height="1080" decoding="async">
+            </article>
+
+            <article class="project-card">
+                <div class="project-card-content">
                     <h2 class="project-card-title">Practical Local Deployment of a "Stanford AI Town" Model: Multi-Agent Memory, Reasoning, and Social Simulation</h2>
                     <p class="project-card-description">
                         "Stanford AI Town" is a Generative Agents project that explores how multiple AI agents with memory, reasoning, and autonomous decision-making capabilities can operate long-term in a virtual environment with complete infrastructure, and "live" and "socialize" in a human-like manner.Based on the Microverse project, I implemented similar functionality on my local server and observed the development of autonomous relationships among NPCs.
@@ -50,7 +60,7 @@
                 <div class="project-card-content">
                     <h2 class="project-card-title">Integrating Inverse Kinematics and the Facial Action Coding System for Physically Grounded Facial Expression Synthesis</h2>
                     <p class="project-card-description">
-                        I present a physically grounded facial expression synthesis framework that integrates the Facial Action Coding System (FACS) with inverse kinematics (IK) to generate anatomically coherent and semantically controllable facial animations. The proposed "Semantic-Kinematic Loop" reconstructs facial expressions by mapping MediaPipe facial landmarks into Action Units (AUs), applying BlendShape-based deformation, and refining facial motion through a topology-aware IK solver that enforces biomechanical constraints across facial regions. In addition, the framework introduces a physics-aware augmentation strategy by perturbing AU activations, IK damping, stiffness, and regional coupling parameters to synthesize diverse yet anatomically valid expression variations. Extensive experiments on the JAFFE dataset demonstrate that the proposed method improves geometric smoothness, structural consistency, and emotion recognition confidence compared to traditional FACS-only and statistical facial modeling approaches such as FLAME and DECA. This article was published in <em>Electronics</em>. <a href="https://doi.org/10.3390/electronics15030558" target="_blank" rel="noopener noreferrer">Read paper ↗</a>
+                        I present a physically grounded facial expression synthesis framework that integrates the Facial Action Coding System (FACS) with inverse kinematics (IK) to generate anatomically coherent and semantically controllable facial animations. The proposed "Semantic-Kinematic Loop" reconstructs facial expressions by mapping MediaPipe facial landmarks into Action Units (AUs), applying BlendShape-based deformation, and refining facial motion through a topology-aware IK solver that enforces biomechanical constraints across facial regions. In addition, the framework introduces a physics-aware augmentation strategy by perturbing AU activations, IK damping, stiffness, and regional coupling parameters to synthesize diverse yet anatomically valid expression variations. Extensive experiments on the JAFFE dataset demonstrate that the proposed method improves geometric smoothness, structural consistency, and emotion recognition confidence compared to traditional FACS-only and statistical facial modeling approaches such as FLAME and DECA. This article was published in <em>Electronics</em>. <a href="https://doi.org/10.3390/electronics15030558" target="_blank" rel="noopener noreferrer">Read paper</a>
                     </p>
                 </div>
                 <img data-source="client" src="../image/A16.png" alt="Facial Expression Synthesis" width="2038" height="1182" decoding="async" loading="lazy">
@@ -60,7 +70,7 @@
                 <div class="project-card-content">
                     <h2 class="project-card-title">Inverse Kinematics-Augmented Sign Language: A Simulation-Based Framework for Scalable Deep Gesture Recognition</h2>
                     <p class="project-card-description">
-                        I present a kinematics-driven data augmentation framework for sign language recognition that employs inverse kinematics (IK) within a 3D simulation environment to generate anatomically coherent gesture sequences. By reconstructing full-body poses from MediaPipe keypoints and introducing multimodal perturbations (e.g., spatial jitter, depth offset, IK sensitivity), our method enriches gesture variability beyond traditional augmentation. Extensive experiments across five deep learning models demonstrate consistent performance gains, particularly with Transformer-based architectures. This article was published in <em>Algorithms</em>. <a href="https://doi.org/10.3390/a18080463" target="_blank" rel="noopener noreferrer">Read paper ↗</a>
+                        I present a kinematics-driven data augmentation framework for sign language recognition that employs inverse kinematics (IK) within a 3D simulation environment to generate anatomically coherent gesture sequences. By reconstructing full-body poses from MediaPipe keypoints and introducing multimodal perturbations (e.g., spatial jitter, depth offset, IK sensitivity), our method enriches gesture variability beyond traditional augmentation. Extensive experiments across five deep learning models demonstrate consistent performance gains, particularly with Transformer-based architectures. This article was published in <em>Algorithms</em>. <a href="https://doi.org/10.3390/a18080463" target="_blank" rel="noopener noreferrer">Read paper</a>
                     </p>
                 </div>
                 <img data-source="client" src="../image/AI5.png" alt="Sign Language Recognition" width="1248" height="691" decoding="async" loading="lazy">
@@ -107,6 +117,6 @@
             </article>
         </div>
     </main>
-    <script src="../js/main.js?v=20261125-avatar" defer></script>
+    <script src="../js/main.js?v=20261125-profile" defer></script>
 </body>
 </html>

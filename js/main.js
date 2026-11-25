@@ -15,10 +15,10 @@
     }
   }
   const navigation = [
-    ['News', 'html/News.html'], ['CV', 'files/cv-english-until-2026-05.pdf'],
+    ['Publications', 'index.html#publications'], ['News', 'html/News.html'], ['CV', 'files/cv-english-until-2026-05.pdf'],
     ['Blog', 'html/Bolg.html'], ['About', 'html/About.html'], ['Contacts', 'html/Contacts.html']
   ];
-  const navMarkup = navigation.map(([label,path]) => `<a href="${local(path)}"${label === 'CV' ? ' target="_blank" rel="noopener"' : ''}>${label}${label === 'CV' ? ' <span aria-hidden="true">↗</span>' : ''}</a>`).join('');
+  const navMarkup = navigation.map(([label,path]) => `<a href="${local(path)}"${label === 'CV' ? ' target="_blank" rel="noopener"' : ''}>${label}</a>`).join('');
   const pageHeader = document.querySelector('.page-header-inner');
   if (pageHeader) {
     const nav = document.createElement('nav');
@@ -34,7 +34,8 @@
     pageHeader.appendChild(button);
   }
   document.querySelectorAll('.site-nav a').forEach(link => {
-    if (new URL(link.href).pathname === window.location.pathname) link.setAttribute('aria-current','page');
+    const target = new URL(link.href);
+    if (target.pathname === window.location.pathname && (!target.hash || target.hash === window.location.hash)) link.setAttribute('aria-current','page');
   });
   const menuButton = document.querySelector('.menu-toggle');
   if (menuButton) {
@@ -42,7 +43,7 @@
     menu.className = 'mobile-menu'; menu.id = 'site-menu'; menu.hidden = true; menu.inert = true;
     menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true'); menu.setAttribute('aria-label','Navigation');
     const allPages = [['Home','index.html'], ...navigation, ['AI','html/AI.html'], ['Game','html/Game.html'], ['Art','html/Art.html'], ['Photography','html/Photography.html']];
-    menu.innerHTML = `<nav aria-label="All pages"><ul class="menu-nav">${allPages.map(([label,path]) => `<li><a href="${local(path)}"${label === 'CV' ? ' target="_blank" rel="noopener"' : ''}>${label}</a></li>`).join('')}</ul></nav><ul class="sns-nav"><li><a href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li><li><a href="mailto:takashiwangbh@gmail.com">Email ↗</a></li></ul>`;
+    menu.innerHTML = `<nav aria-label="All pages"><ul class="menu-nav">${allPages.map(([label,path]) => `<li><a href="${local(path)}"${label === 'CV' ? ' target="_blank" rel="noopener"' : ''}>${label}</a></li>`).join('')}</ul></nav><ul class="sns-nav"><li><a href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="mailto:takashiwangbh@gmail.com">Email</a></li></ul>`;
     const closeButton = menuButton.cloneNode(true);
     closeButton.classList.add('menu-close'); closeButton.setAttribute('aria-label','Close menu');
     closeButton.removeAttribute('aria-controls'); closeButton.removeAttribute('aria-expanded');
@@ -77,10 +78,21 @@
   }
   if (!document.querySelector('.site-footer')) {
     const footer = document.createElement('footer'); footer.className = 'site-footer site-footer--compact';
-    footer.innerHTML = `<div class="footer-inner"><div class="footer-top"><div><p class="footer-eyebrow">Research, projects, or a conversation.</p><a class="footer-contact" href="${local('html/Contacts.html')}">Get in touch <span aria-hidden="true">↗</span></a></div><nav class="footer-directory" aria-label="More to explore"><a href="${local('html/About.html')}">About</a><a href="${local('html/Bolg.html')}">Blog</a><a href="${local('html/AI.html')}">AI</a><a href="${local('html/Game.html')}">Game</a><a href="${local('html/Art.html')}">Art</a><a href="${local('html/Photography.html')}">Photography</a></nav></div><div class="footer-bottom"><p class="copyright">© 2026 Binghao WANG</p><ul class="sns-nav"><li><a href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li><li><a href="mailto:takashiwangbh@gmail.com">Email ↗</a></li></ul><a class="footer-top-link" href="#main">Back to top ↑</a></div></div>`;
+    footer.innerHTML = `<div class="footer-inner"><div class="footer-top"><div><p class="footer-eyebrow">Research, projects, or a conversation.</p><a class="footer-contact" href="${local('html/Contacts.html')}">Get in touch</a></div><nav class="footer-directory" aria-label="More to explore"><a href="${local('html/About.html')}">About</a><a href="${local('html/Bolg.html')}">Blog</a><a href="${local('html/AI.html')}">AI</a><a href="${local('html/Game.html')}">Game</a><a href="${local('html/Art.html')}">Art</a><a href="${local('html/Photography.html')}">Photography</a></nav></div><div class="footer-bottom"><p class="copyright">© 2026 Binghao WANG</p><ul class="sns-nav"><li><a href="https://github.com/takashiwangbh" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="mailto:takashiwangbh@gmail.com">Email</a></li></ul><a class="footer-top-link" href="#main">Back to top</a></div></div>`;
     document.body.appendChild(footer);
   }
-  // Native CSS handles the hover layer; no framework, WebGL, or scroll effects.
+  if (document.body.classList.contains('page--home') && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const sections = [...document.querySelectorAll('main > section')].slice(1);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    sections.forEach(section => { section.classList.add('section-reveal'); observer.observe(section); });
+  }
+  // Native CSS handles the hover layer; section opacity reveals are registered above.
   const motion = document.createElement('script'); motion.type = 'module';
   motion.src = local('assets/taste/motion/motion.js'); document.head.appendChild(motion);
   const newsList = document.getElementById('news-list');
@@ -104,8 +116,7 @@
         const title = document.createElement('h3'); title.className = 'news-title'; title.textContent = card.dataset.title || '';
         const text = document.createElement('p'); text.className = 't'; text.textContent = content.textContent.trim();
         body.append(title,text);
-        const arrow = document.createElement('span'); arrow.className = 'news-arrow'; arrow.setAttribute('aria-hidden','true'); arrow.textContent = '↗';
-        link.append(date,body,arrow); item.append(link); fragment.append(item);
+        link.append(date,body); item.append(link); fragment.append(item);
       });
       if (fragment.childNodes.length) { newsList.replaceChildren(fragment); }
     }).catch(() => { /* Retain the linked news present in the HTML when offline. */ });

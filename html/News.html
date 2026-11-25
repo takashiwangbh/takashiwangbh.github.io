@@ -11,7 +11,7 @@
     <link rel="preload" href="../assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/taste/motion/motion.css">
-    <link rel="stylesheet" href="../css/base.css?v=20261125-avatar">
+    <link rel="stylesheet" href="../css/base.css?v=20261125-profile">
     <link rel="stylesheet" href="../css/pages.css?v=20261119-local">
 </head>
 <body>
@@ -19,7 +19,7 @@
     <header class="page-header">
         <div class="page-header-inner">
             <a class="site-brand" href="../index.html" aria-label="Binghao WANG — Home"><img class="site-avatar" src="../image/github-avatar.jpg" width="40" height="40" alt=""></a>
-            <a href="../index.html" class="back-link">← Back</a>
+            <a href="../index.html" class="back-link">Back</a>
         </div>
     </header>
 
@@ -42,6 +42,15 @@
                     2. data-title 就是側邊欄顯示的標題
                     3. ID 會自動生成
                 -->
+
+                <article class="news-card" data-title="Presenting SafeSight at PRICAI 2026" id="news-14">
+                    <img data-source="client" src="../image/e851041582e48c70b61a1987ba6fe2e7.jpg" alt="Binghao Wang presenting SafeSight at PRICAI 2026 in Guangzhou" width="1179" height="782" decoding="async">
+                    <div class="news-card-content">
+                        <h2 class="news-entry-title">Presenting SafeSight at PRICAI 2026</h2>
+                        <p>On November 20, I attended PRICAI 2026 in Guangzhou, China, and presented SafeSight, a paper on which I am the first author. I met researchers working in fields related to my own, and the conversations gave me valuable experience presenting and discussing my research.</p>
+                        <span class="timestamp">2026-11-20</span>
+                    </div>
+                </article>
 
                 <article class="news-card" data-title="NII-LLMC Research Assistant" id="news-13">
                     <div class="news-card-content">
@@ -227,6 +236,6 @@
             newsCards.forEach(card => observer.observe(card));
         });
     </script>
-    <script src="../js/main.js?v=20261125-avatar" defer></script>
+    <script src="../js/main.js?v=20261125-profile" defer></script>
 </body>
 </html>
