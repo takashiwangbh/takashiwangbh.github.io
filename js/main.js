@@ -82,14 +82,12 @@
     document.body.appendChild(footer);
   }
   if (document.body.classList.contains('page--home') && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const sections = [...document.querySelectorAll('main > section')].slice(1);
+    const sections = [...document.querySelectorAll('main > section')];
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
     sections.forEach(section => { section.classList.add('section-reveal'); observer.observe(section); });
   }
   // Native CSS handles the hover layer; section opacity reveals are registered above.
